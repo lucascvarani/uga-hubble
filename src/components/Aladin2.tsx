@@ -9,13 +9,7 @@ interface Star {
   name?: string;
 }
 
-export default function AladinNext({
-  scene,
-  setAladinInstance,
-}: {
-  scene: any;
-  setAladinInstance: (aladin: any) => void;
-}) {
+export default function AladinNext() {
   const [aladin, setAladin] = useState<any>(null);
   const [coords, setCoords] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -36,29 +30,24 @@ export default function AladinNext({
           const a = (window as any).A.aladin("#aladin-lite-div", {
             survey: "P/DSS2/color",
             fov: 60,
-            target: "Orion Nebula",
+            target: "Polaris",
             showReticle: true,
             showZoomControl: false,
             showFullscreenControl: false,
           });
 
-          setAladinInstance(a);
-
-          // a.gotoObject("Sirius");
-
-          a.setFoVRange(0.05, 120);
+          a.setFoVRange(2, 120);
 
           let survey = a.getBaseImageLayer();
           survey.setContrast(0.2); // 3. Increase contrast for pop
 
-          // a.on("click", (pos: any) => {
-          //   const ra = pos.ra.toFixed(4);
-          //   const dec = pos.dec.toFixed(4);
-          //   const coordString = `RA: ${ra}, Dec: ${dec}`;
-          //   scene.handleClick(coordString);
-          //   // console.log("Coordenada clicada:", coordString);
-          //   setCoords(coordString);
-          // });
+          a.on("click", (pos: any) => {
+            const ra = pos.ra.toFixed(4);
+            const dec = pos.dec.toFixed(4);
+            const coordString = `RA: ${ra}, Dec: ${dec}`;
+            console.log("Coordenada clicada:", coordString);
+            setCoords(coordString);
+          });
 
           setAladin(a);
         });
@@ -70,22 +59,6 @@ export default function AladinNext({
 
     return () => window.removeEventListener("load", init);
   }, []);
-
-  useEffect(() => {
-    if (!aladin || !scene) return;
-    aladin.on("click", (pos: any) => {
-      const ra = pos.ra.toFixed(4);
-      const dec = pos.dec.toFixed(4);
-      const coordString = `RA: ${ra}, Dec: ${dec}`;
-      scene.handleClick(coordString);
-      // console.log("Coordenada clicada:", coordString);
-      setCoords(coordString);
-    });
-
-    // if (scene) {
-    //   // scene.handleClick("Sirius");
-    // }
-  }, [scene]);
 
   const changeSurvey = (survey: string) => {
     if (aladin) {
@@ -114,15 +87,15 @@ export default function AladinNext({
     });
   };
 
-  const gotoObject = (object: string) => {
-    if (aladin) {
-      aladin.gotoObject(object);
+  const gotoObject = () => {
+    if (aladin && search.trim() !== "") {
+      aladin.gotoObject(search);
     }
   };
 
   return (
     <>
-      <main className="flex flex-col h-[400px] bg-black text-white">
+      <main className="flex flex-col h-screen bg-black text-white">
         <div className="flex flex-1">
           <div id="aladin-lite-div" className="w-full h-full"></div>
         </div>
