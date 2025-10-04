@@ -23,14 +23,14 @@ function App() {
       </div>
       {(() => {
         switch (sceneNumber) {
-          case 1:
+          case 0:
             return (
               <EncontrarNorte
                 aladinInstance={aladinInstance}
                 onComplete={() => setSceneNumber((previous) => previous + 1)}
               />
             );
-          case 0:
+          case 1:
             return <Scene nodes={medievalNodes} onSceneEnd={() => setSceneNumber((previous) => previous + 1)} />;
           default:
             return null;
