@@ -95,7 +95,7 @@ export default function AladinNext({
 
   return (
     <>
-      <main className="flex flex-col h-[400px] bg-black text-white">
+      <main className="flex flex-col h-screen w-screen bg-black text-white">
         <div className="flex flex-1">
           <div id="aladin-lite-div" className="w-full h-full"></div>
         </div>

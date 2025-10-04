@@ -8,25 +8,50 @@ function App() {
   const [sceneNumber, setSceneNumber] = useState<number>(0);
 
   return (
-    <div>
-      <div>
+    <div
+      style={{
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+      }}
+    >
+      {/* Full screen Aladin */}
+      <div style={{ width: "100%", height: "100%" }}>
         <Aladin setAladinInstance={setAladinInstance} />
       </div>
-      {(() => {
-        switch (sceneNumber) {
-          case 0:
-            return (
-              <EncontrarNorte
-                aladinInstance={aladinInstance}
-                onComplete={() => setSceneNumber((previous) => previous + 1)}
-              />
-            );
-          case 1:
-            return <div></div>;
-          default:
-            return null;
-        }
-      })()}
+
+      {/* Chat overlay at the bottom */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+          pointerEvents: "none",
+          zIndex: 10,
+        }}
+      >
+        <div style={{ pointerEvents: "auto" }}>
+          {(() => {
+            switch (sceneNumber) {
+              case 0:
+                return (
+                  <EncontrarNorte
+                    aladinInstance={aladinInstance}
+                    onComplete={() =>
+                      setSceneNumber((previous) => previous + 1)
+                    }
+                  />
+                );
+              case 1:
+                return <div></div>;
+              default:
+                return null;
+            }
+          })()}
+        </div>
+      </div>
     </div>
   );
 }
