@@ -10,10 +10,8 @@ interface Star {
 }
 
 export default function AladinNext({
-  scene,
   setAladinInstance,
 }: {
-  scene: any;
   setAladinInstance: (aladin: any) => void;
 }) {
   const [aladin, setAladin] = useState<any>(null);
@@ -51,15 +49,6 @@ export default function AladinNext({
           let survey = a.getBaseImageLayer();
           survey.setContrast(0.2); // 3. Increase contrast for pop
 
-          // a.on("click", (pos: any) => {
-          //   const ra = pos.ra.toFixed(4);
-          //   const dec = pos.dec.toFixed(4);
-          //   const coordString = `RA: ${ra}, Dec: ${dec}`;
-          //   scene.handleClick(coordString);
-          //   // console.log("Coordenada clicada:", coordString);
-          //   setCoords(coordString);
-          // });
-
           setAladin(a);
         });
       }
@@ -70,22 +59,6 @@ export default function AladinNext({
 
     return () => window.removeEventListener("load", init);
   }, []);
-
-  useEffect(() => {
-    if (!aladin || !scene) return;
-    aladin.on("click", (pos: any) => {
-      const ra = pos.ra.toFixed(4);
-      const dec = pos.dec.toFixed(4);
-      const coordString = `RA: ${ra}, Dec: ${dec}`;
-      scene.handleClick(coordString);
-      // console.log("Coordenada clicada:", coordString);
-      setCoords(coordString);
-    });
-
-    // if (scene) {
-    //   // scene.handleClick("Sirius");
-    // }
-  }, [scene]);
 
   const changeSurvey = (survey: string) => {
     if (aladin) {
