@@ -1,4 +1,9 @@
-export type SceneNodeType = 'dialog' | 'find' | 'constellation' | 'eye' // add more types later
+export type SceneNodeType =
+  | 'dialog'
+  | 'find'
+  | 'constellation'
+  | 'eye'
+  | 'use_telescope' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
@@ -24,6 +29,10 @@ export interface FindPosNode extends SceneNode {
   tolerance: number
   fov: number
   interpolationDuration?: number
+}
+
+export interface UseTelescopeNode extends SceneNode {
+  type: 'use_telescope'
 }
 
 interface Star {

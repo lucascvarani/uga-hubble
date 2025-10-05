@@ -94,7 +94,7 @@ const FireMenu: React.FC<FireMenuProps> = ({ onStart }) => {
   }, [draw])
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+    <div className="w-full h-screen overflow-hidden bg-black">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">

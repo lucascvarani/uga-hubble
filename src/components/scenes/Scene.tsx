@@ -11,6 +11,7 @@ import type {
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
+import UseTelescope from './nodes/UseTelescope'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -114,6 +115,8 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
         />
       )
+    case 'use_telescope':
+      return <UseTelescope onNext={handleNextNode} />
     default:
       return null
   }
