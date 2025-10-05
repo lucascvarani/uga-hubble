@@ -45,11 +45,12 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
     if (!aladinInstance) return
     const checkFov = () => {
       const currentFov = aladinInstance.getFov()
-      if (currentFov && currentFov[0] < 11) {
+      console.log({ currentFov: currentFov && currentFov[0] })
+      if (currentFov && currentFov[0] < 5) {
         setZoomIn(false)
       }
 
-      if (!zoomIn && currentFov && currentFov[0] > 30) {
+      if (!zoomIn && currentFov && currentFov[0] >= 25) {
         console.log('Should call onNext')
         onNext()
       }

@@ -13,6 +13,7 @@ export type SceneNodeType =
 export interface SceneNode {
   type: SceneNodeType
   startingCoords?: { ra: number; dec: number; shouldSnap: boolean; fov: number } // starting position
+  fovRange?: [number, number]
 }
 
 export interface DialogNode extends SceneNode {
@@ -42,7 +43,6 @@ export interface FindPosNode extends SceneNode {
   targetCoords: { ra: number; dec: number } // target to find
   survey?: string // e.g. "P/DSS2/color" or "P/2MASS/color"
   tolerance: number
-  fov: number
   interpolationDuration?: number
 }
 

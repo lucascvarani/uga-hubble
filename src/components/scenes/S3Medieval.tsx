@@ -4,6 +4,7 @@ import type {
   FindPosNode,
   PlayMusicNode,
   SceneNode,
+  ZoomMissionNode,
   ZoomTutorialNode,
 } from './nodes/SceneNode'
 
@@ -17,7 +18,7 @@ export const medievalNodes: SceneNode[] = [
   {
     type: 'zoom_tutorial',
     fov: 60,
-    fovRange: [10, 60],
+    fovRange: [2.9, 25],
   } as ZoomTutorialNode,
   {
     type: 'dialog',
@@ -35,8 +36,11 @@ export const medievalNodes: SceneNode[] = [
     targetCoords: { ra: 271.10431, dec: -23.9710361 }, //271.104310 -23.9710361
     // startingCoords: { ra: 0.87, dec: 88.74, shouldSnap: true },
     tolerance: 10,
-    fov: 3,
   } as FindPosNode,
+  {
+    type: 'zoom_mission',
+    fovThreshold: 2.5,
+  } as ZoomMissionNode,
   {
     type: 'music',
     audio: 'audio/history-piano.mp3',
