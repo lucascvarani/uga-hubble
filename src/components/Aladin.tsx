@@ -52,7 +52,7 @@ export default function AladinNext({
 
           // a.gotoObject("Sirius");
 
-          a.setFoVRange(0.05, 120)
+          a.setFoVRange(25, 25)
 
           let survey = a.getBaseImageLayer()
           survey.setContrast(0.2) // 3. Increase contrast for pop

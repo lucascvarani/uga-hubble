@@ -16,6 +16,15 @@ const ZoomMission: React.FC<ZoomMissionProps> = ({
   onNext,
 }) => {
   useEffect(() => {
+    if (aladinInstance && node.fovRange) {
+      aladinInstance.setFoVRange(node.fovRange[0], node.fovRange[1])
+    }
+    if (aladinInstance && node.startingCoords) {
+      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec)
+    }
+  }, [aladinInstance, node.startingCoords])
+
+  useEffect(() => {
     // cria o <link> para o CSS
     const link = document.createElement('link')
     link.rel = 'stylesheet'

@@ -24,6 +24,7 @@ export const galaxiesNodes: SceneNode[] = [
     misionTitle: 'Zoom In',
     missionDescription: 'Use the scroll or the buttons to zoom in',
     fovThreshold: 1,
+    fovRange: [0.5, 120],
   } as ZoomMissionNode,
   {
     type: 'dialog',

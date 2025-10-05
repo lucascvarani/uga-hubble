@@ -13,6 +13,7 @@ export type SceneNodeType =
 export interface SceneNode {
   type: SceneNodeType
   startingCoords?: { ra: number; dec: number; shouldSnap: boolean; fov: number } // starting position
+  fovRange?: [number, number]
 }
 
 export interface DialogNode extends SceneNode {
