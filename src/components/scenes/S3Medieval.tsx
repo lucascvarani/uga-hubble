@@ -40,7 +40,11 @@ export const medievalNodes: SceneNode[] = [
   } as FindPosNode,
   {
     type: 'zoom_mission',
-    fovThreshold: 2.5,
+    fovThreshold: 5,
+    fovRange: [4.9, 120],
+    misionTitle: 'Zoom into the Milky Way',
+    missionDescription:
+      'Use the zoom feature to get a closer look at the Milky Way',
   } as ZoomMissionNode,
   {
     type: 'music',
