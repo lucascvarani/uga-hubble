@@ -64,7 +64,6 @@ function animateToTarget(
 
 const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-
   const handleNextNode = () => {
     if (currentIndex < nodes.length - 1) {
       setCurrentIndex(currentIndex + 1)

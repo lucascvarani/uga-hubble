@@ -43,6 +43,7 @@ export default function AladinNext({
       if (window && (window as any).A) {
         ;(window as any).A.init.then(() => {
           const a = (window as any).A.aladin('#aladin-lite-div', {
+            projection: 'SIN',
             cooFrame: 'ICRSd',
             survey: 'P/DSS2/color',
             fov: 60,
@@ -51,7 +52,6 @@ export default function AladinNext({
             showZoomControl: true,
             showFullscreenControl: false,
             showControl: true,
-            cooFrame: 'ICRSd',
             showFrame: false,
             showProjectionControl: false,
             showStatusBar: false,
