@@ -67,6 +67,7 @@ const Dialog: React.FC<DialogUIProps> = ({
     if (isTypingComplete) {
       // Move to next text
       if (currentTextIndex < text.length - 1) {
+        console.log('moving to next text. CurrentIndex:', currentTextIndex)
         setCurrentTextIndex((prev) => prev + 1)
         setDisplayedText('')
         setIsTypingComplete(false)
@@ -112,7 +113,6 @@ const Dialog: React.FC<DialogUIProps> = ({
           z-[1000]
           box-border
         "
-        onClick={handleClick}
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible
