@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import './Aladin.css'
+import AladinViewer from './AladinViewer'
 
 interface Star {
   ra: number
@@ -9,13 +11,12 @@ interface Star {
   name?: string
 }
 
-
 export interface AladinInstance {
-  on: (event: string, callback: (...args: unknown[]) => void) => void;
-  gotoRaDec: (ra: number, dec: number) => void;
-  getRaDec: () => [number, number] | null;
-  setImageSurvey: (survey: string) => void;
-  setFov: (degrees: number) => void;
+  on: (event: string, callback: (...args: unknown[]) => void) => void
+  gotoRaDec: (ra: number, dec: number) => void
+  getRaDec: () => [number, number] | null
+  setImageSurvey: (survey: string) => void
+  setFov: (degrees: number) => void
   // Add other methods as needed
 }
 
@@ -46,11 +47,18 @@ export default function AladinNext({
             fov: 60,
             target: 'Orion Nebula',
             showReticle: true,
-            showZoomControl: false,
+            showZoomControl: true,
             showFullscreenControl: false,
+            showControl: true,
+            cooFrame: 'ICRSd',
+            showFrame: false,
+            showProjectionControl: false,
+            showStatusBar: false,
+            showLayersControl: false,
+            showFov: false,
           })
 
-          a.on('click', (e) => console.log(e))
+          // a.on('click', (e) => console.log(e))
 
           setAladinInstance(a)
 
@@ -109,7 +117,9 @@ export default function AladinNext({
     <>
       <main className="flex flex-col h-screen w-screen bg-black text-white">
         <div className="flex flex-1">
-          <div id="aladin-lite-div" className="w-full h-full"></div>
+          <div id="aladin-lite-div" className="w-full h-full">
+            <AladinViewer aladin={aladin} />
+          </div>
         </div>
       </main>
     </>
