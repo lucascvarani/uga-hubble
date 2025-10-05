@@ -19,6 +19,7 @@ export interface AladinInstance {
   setFov: (degrees: number) => void
   getFov: () => [number, number] | null
   setFoVRange: (min: number, max: number) => void
+  world2pix: (ra: number, dec: number) => [number, number]
   // Add other methods as needed
 }
 
