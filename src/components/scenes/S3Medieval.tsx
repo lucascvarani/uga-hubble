@@ -4,6 +4,7 @@ import type {
   FindPosNode,
   PlayMusicNode,
   SceneNode,
+  ZoomMissionNode,
   ZoomTutorialNode,
 } from './nodes/SceneNode'
 
@@ -37,6 +38,10 @@ export const medievalNodes: SceneNode[] = [
     tolerance: 10,
     fov: 3,
   } as FindPosNode,
+  {
+    type: 'zoom_mission',
+    fovThreshold: 2.5,
+  } as ZoomMissionNode,
   {
     type: 'music',
     audio: 'audio/history-piano.mp3',

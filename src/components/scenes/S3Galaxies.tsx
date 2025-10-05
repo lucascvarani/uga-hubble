@@ -21,6 +21,8 @@ export const galaxiesNodes: SceneNode[] = [
   } as DialogNode,
   {
     type: 'zoom_mission',
+    misionTitle: 'Zoom In',
+    missionDescription: 'Use the scroll or the buttons to zoom in',
     fovThreshold: 1,
     fovRange: [0.5, 120],
   } as ZoomMissionNode,
@@ -29,6 +31,7 @@ export const galaxiesNodes: SceneNode[] = [
     text: [
       'This unique point of light is in fact an entire galaxy, with millions of stars!',
       'This is Andromeda...',
+      'A spiral galaxy is a type of galaxy shaped like a flat, rotating disk with a bright center and arms that spiral outward.\nThese arms are made of stars, gas, and dust, where new stars are often born.',
     ],
   } as DialogNode,
   {
