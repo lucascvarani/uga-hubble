@@ -19,6 +19,7 @@ export interface SceneNode {
 export interface DialogNode extends SceneNode {
   type: 'dialog'
   text: string[]
+  audios?: string[]
 }
 
 export interface EyeNode extends SceneNode {

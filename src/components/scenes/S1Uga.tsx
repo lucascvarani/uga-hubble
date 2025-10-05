@@ -15,7 +15,12 @@ export const ugaNodes: SceneNode[] = [
   } as PlayMusicNode,
   {
     type: 'eye',
-    startingCoords: { ra: 306.376181, dec: 41.6192349, fov: 25, shouldSnap: true },
+    startingCoords: {
+      ra: 306.376181,
+      dec: 41.6192349,
+      fov: 25,
+      shouldSnap: true,
+    },
   } as EyeNode,
   {
     type: 'dialog',
@@ -25,6 +30,12 @@ export const ugaNodes: SceneNode[] = [
       'Your people are waiting. The wind grows colder, and the herds have already moved on.\nIt’s time to lead them - across unknown lands, through nights filled with stories and stars.',
       'Somewhere above, a white flame shines steady, never fading, never wandering.\nThey say it watches over those who seek their path. Let’s try to find it. It might just lead us where we need to go.',
     ],
+    audios: [
+      'audio/memos/uga/1.m4a',
+      'audio/memos/uga/2.m4a',
+      'audio/memos/uga/3.m4a',
+      'audio/memos/uga/4.m4a',
+    ],
   } as DialogNode,
   {
     type: 'find',
@@ -32,7 +43,12 @@ export const ugaNodes: SceneNode[] = [
     description:
       '- Drag the screen to search for a bright star\n- The light will guide you to the star',
     targetCoords: { ra: 37.9545607, dec: 89.264109 },
-    startingCoords: { ra: 332.809397, dec: 83.3547890, fov: 25, shouldSnap: false },
+    startingCoords: {
+      ra: 332.809397,
+      dec: 83.354789,
+      fov: 25,
+      shouldSnap: false,
+    },
     tolerance: 1.5,
   } as FindPosNode,
   {
