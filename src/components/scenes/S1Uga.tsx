@@ -1,6 +1,7 @@
 import type {
   DialogNode,
   EyeNode,
+  FadeOutNode,
   FindPosNode,
   PlayMusicNode,
   SceneNode,
@@ -42,9 +43,13 @@ export const ugaNodes: SceneNode[] = [
   {
     type: 'dialog',
     text: [
-      'You found it — that steady light in the dark. While the others drift, this one never moves. Your guide. Your star.',
+      'You found it — that steady light in the dark, always pointing to the North. While the others drift, this one never moves. Your guide. Your star.',
       'One day, people will call it Polaris — the North Star. It’ll lead sailors, travelers, and dreamers for thousands of years.',
       'Your people are safe. Rest — the stars will take it from here.',
     ],
   } as DialogNode,
+  {
+    type: 'fade_out',
+    duration: 3,
+  } as FadeOutNode,
 ]
