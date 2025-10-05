@@ -4,10 +4,24 @@ import Aladin from './components/Aladin'
 import EncontrarNorte from './components/scenes/EncontrarNorte'
 import Scene from './components/scenes/Scene'
 import { medievalNodes } from './NodesConfig'
+import FireMenu from './screens/Intro'
+import SoundWarning from './screens/SoundWarning'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
   const [sceneNumber, setSceneNumber] = useState<number>(0)
+  const [showSoundWarning, setShowSoundWarning] = useState(true)
+  const [showIntro, setShowIntro] = useState(true)
+
+  // Show sound warning first
+  if (showSoundWarning) {
+    return <SoundWarning onProceed={() => setShowSoundWarning(false)} />
+  }
+
+  // Then show intro
+  if (showIntro) {
+    return <FireMenu onStart={() => setShowIntro(false)} />
+  }
 
   return (
     <div
