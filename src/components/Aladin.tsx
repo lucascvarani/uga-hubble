@@ -18,6 +18,7 @@ export interface AladinInstance {
   setImageSurvey: (survey: string) => void
   setFov: (degrees: number) => void
   getFov: () => [number, number] | null
+  setFoVRange: (min: number, max: number) => void
   // Add other methods as needed
 }
 

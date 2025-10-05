@@ -33,6 +33,9 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
   }, [])
 
   useEffect(() => {
+    if (aladinInstance && node.fovRange) {
+      aladinInstance.setFoVRange(node.fovRange[0], node.fovRange[1])
+    }
     if (aladinInstance && node.startingCoords) {
       aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec)
     }
@@ -42,7 +45,7 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
     if (!aladinInstance) return
     const checkFov = () => {
       const currentFov = aladinInstance.getFov()
-      if (currentFov && currentFov[0] < 10) {
+      if (currentFov && currentFov[0] < 11) {
         setZoomIn(false)
       }
 

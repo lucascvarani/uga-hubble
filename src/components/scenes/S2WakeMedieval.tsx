@@ -15,6 +15,7 @@ export const wakeMedievalNodes: SceneNode[] = [
   {
     type: 'zoom_tutorial',
     startingCoords: { ra: 106.362115, dec: -10.7413274 },
+    fovRange: [10, 60],
   } as ZoomTutorialNode,
   // {
   //   type: 'zoom_tutorial',

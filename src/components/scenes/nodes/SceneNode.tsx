@@ -57,6 +57,7 @@ export interface UseTelescopeNode extends SceneNode {
 export interface ZoomTutorialNode extends SceneNode {
   type: 'zoom_tutorial'
   fov: number
+  fovRange: [number, number]
 }
 
 interface Star {

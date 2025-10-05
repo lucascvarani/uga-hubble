@@ -1,14 +1,14 @@
 /* UI do Zoom */
 #aladin-lite-div .aladin-fov {
-  visibility: visible !important;
+  visibility: hidden !important;
 }
 
 /* UI do viewer */
 #aladin-viewer {
-  visibility: visible !important;
+  visibility: hidden !important;
 }
 
 /* UI da localização RaDec */
 #aladin-lite-div .aladin-location {
-  visibility: visible !important;
+  visibility: hidden !important;
 }
