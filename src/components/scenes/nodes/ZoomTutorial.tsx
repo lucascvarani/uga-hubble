@@ -20,6 +20,14 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
   const [missionCompleted] = useState(false)
   useEffect(() => {
     // cria o <link> para o CSS
+    
+    const container = document.getElementById('aladin-lite-div');
+
+    const blockDrag = (e: any) => e.stopPropagation();
+    container?.addEventListener('mousedown', blockDrag, true);
+    container?.addEventListener('mousemove', blockDrag, true);
+    container?.addEventListener('mouseup', blockDrag, true);
+
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = '/ZoomTutorial.css' // caminho para o seu arquivo CSS
@@ -29,6 +37,10 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
     // cleanup: remove o CSS quando o componente desmonta
     return () => {
       document.head.removeChild(link)
+
+      container?.removeEventListener('mousedown', blockDrag, true);
+      container?.removeEventListener('mousemove', blockDrag, true);
+      container?.removeEventListener('mouseup', blockDrag, true);
     }
   }, [])
 
