@@ -4,6 +4,7 @@ import Aladin from "./components/Aladin";
 import EncontrarNorte from "./components/scenes/EncontrarNorte";
 import Scene from "./components/Scene";
 import type { SceneNode, DialogNode } from "./components/SceneNode";
+import Galaxies from "./components/scenes/Galaxies";
 
 const medievalNodes: SceneNode[] = [
   { type: "dialog", text: "Welcome to the adventure!" } as DialogNode,
@@ -16,7 +17,7 @@ const medievalNodes: SceneNode[] = [
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null);
-  const [sceneNumber, setSceneNumber] = useState<number>(0);
+  const [sceneNumber, setSceneNumber] = useState<number>(9);
 
   return (
     <div
@@ -60,6 +61,15 @@ function App() {
                   <Scene
                     nodes={medievalNodes}
                     onSceneEnd={() =>
+                      setSceneNumber((previous) => previous + 1)
+                    }
+                  />
+                );
+              case 9:
+                return (
+                  <Galaxies
+                    aladinInstance={aladinInstance}
+                    onComplete={() =>
                       setSceneNumber((previous) => previous + 1)
                     }
                   />
