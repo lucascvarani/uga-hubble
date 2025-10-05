@@ -2,9 +2,15 @@ import type {
   SceneNode,
   DialogNode,
   FindPosNode,
+  CompleteConstellationNode,
+  EyeNode,
 } from './components/scenes/nodes/SceneNode'
 
 export const medievalNodes: SceneNode[] = [
+  {
+    type: 'eye',
+    coords: { ra: 5.37735322, dec: 63.7906211 },
+  } as EyeNode,
   {
     type: 'dialog',
     text: [

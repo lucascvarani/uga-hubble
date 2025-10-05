@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Dialog from '../Dialog'
+import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
 import CompleteConstellationMission from './nodes/CompleteConstellationMission'
 import type {
@@ -7,8 +7,10 @@ import type {
   DialogNode,
   FindPosNode,
   CompleteConstellationNode,
+  EyeNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
+import Eye from './nodes/Eye'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -49,6 +51,14 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return (
         <CompleteConstellationMission
           node={currentNode as CompleteConstellationNode}
+          aladinInstance={aladinInstance}
+          onNext={handleNextNode}
+        />
+      )
+    case 'eye':
+      return (
+        <Eye
+          node={currentNode as EyeNode}
           aladinInstance={aladinInstance}
           onNext={handleNextNode}
         />

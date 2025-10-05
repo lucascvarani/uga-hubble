@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import DiamondLine from './structure/DiamondLine'
+import DiamondLine from '../../structure/DiamondLine'
 
 interface DialogUIProps {
   text: string[]
@@ -77,6 +77,20 @@ const Dialog: React.FC<DialogUIProps> = ({
       setIsTypingComplete(true)
     }
   }
+
+  useEffect(() => {
+    // cria o <link> para o CSS
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/Dialog.css' // caminho para o seu arquivo CSS
+    link.id = 'dialog-css' // opcional, para identificar depois
+    document.head.appendChild(link)
+
+    // cleanup: remove o CSS quando o componente desmonta
+    return () => {
+      document.head.removeChild(link)
+    }
+  }, [])
 
   return (
     // We add a className to target this element reliably with CSS

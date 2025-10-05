@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import MissionTracker from '../MissionTracker'
-import Dialog from '../Dialog'
+import Dialog from './nodes/Dialog'
 
 interface GalaxiesProps {
   aladinInstance: any | null

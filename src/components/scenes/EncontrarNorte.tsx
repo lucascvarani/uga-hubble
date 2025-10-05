@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import Dialog from '../Dialog'
+import Dialog from './nodes/Dialog'
 import MissionTracker from '../MissionTracker'
 import MusicManager from '../../utils/MusicManager'
 
