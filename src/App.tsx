@@ -6,6 +6,7 @@ import Scene from './components/scenes/Scene'
 import { medievalNodes } from './NodesConfig'
 import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
+import Galaxies from './components/scenes/Galaxies'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -67,6 +68,15 @@ function App() {
                     aladinInstance={aladinInstance}
                     nodes={medievalNodes}
                     onSceneEnd={() =>
+                      setSceneNumber((previous) => previous + 1)
+                    }
+                  />
+                )
+              case 9:
+                return (
+                  <Galaxies
+                    aladinInstance={aladinInstance}
+                    onComplete={() =>
                       setSceneNumber((previous) => previous + 1)
                     }
                   />

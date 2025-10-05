@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { FindPosNode } from "./SceneNode";
 import type { AladinInstance } from "../../Aladin";
+import MissionTracker from "../../MissionTracker";
 
 interface FindMissionProps {
   node: FindPosNode;
@@ -25,14 +26,14 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
   useEffect(() => {
     if (!aladinInstance) return;
 
-    // 🔹 Optional: change survey if defined
     if (node.survey) {
-      console.log(`[FindMission] Setting survey to ${node.survey}`);
       aladinInstance.setImageSurvey(node.survey);
     }
 
-    // Center the map
-    aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+    if (node.startingCoords) {
+      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+    }
+
     aladinInstance.setFov(node.fov);
 
     const tolerance = node.tolerance;
@@ -68,7 +69,12 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
     return () => {};
   }, [aladinInstance, node, listenerAdded, onNext]);
 
-  return null;
+  return (
+      <MissionTracker
+        title={node.title}
+        description={node.description}
+      />
+    );;
 };
 
 export default FindMission;
