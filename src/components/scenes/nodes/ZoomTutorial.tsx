@@ -4,6 +4,7 @@ import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MissionTracker from '../../MissionTracker'
 import Fireworks from '../../Fireworks/Fireworks'
+import MusicManager from '../../../utils/MusicManager'
 
 interface ZoomTutorialProps {
   node: ZoomTutorialNode
@@ -20,6 +21,14 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
   const [missionCompleted] = useState(false)
   useEffect(() => {
     // cria o <link> para o CSS
+    
+    const container = document.getElementById('aladin-lite-div');
+
+    const blockDrag = (e: any) => e.stopPropagation();
+    container?.addEventListener('mousedown', blockDrag, true);
+    container?.addEventListener('mousemove', blockDrag, true);
+    container?.addEventListener('mouseup', blockDrag, true);
+
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = '/ZoomTutorial.css' // caminho para o seu arquivo CSS
@@ -29,6 +38,10 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
     // cleanup: remove o CSS quando o componente desmonta
     return () => {
       document.head.removeChild(link)
+
+      container?.removeEventListener('mousedown', blockDrag, true);
+      container?.removeEventListener('mousemove', blockDrag, true);
+      container?.removeEventListener('mouseup', blockDrag, true);
     }
   }, [])
 
@@ -47,11 +60,18 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
       const currentFov = aladinInstance.getFov()
       console.log({ currentFov: currentFov && currentFov[0] })
       if (currentFov && currentFov[0] < 5) {
+        if (zoomIn) {
+          MusicManager.getInstance().playSoundEffect(
+            '/audio/correct-zoom.mp3',
+            0.8
+          )
+        }
         setZoomIn(false)
       }
 
       if (!zoomIn && currentFov && currentFov[0] >= 25) {
         console.log('Should call onNext')
+        MusicManager.getInstance().playSoundEffect('/audio/correct.mp3', 0.8)
         onNext()
       }
     }

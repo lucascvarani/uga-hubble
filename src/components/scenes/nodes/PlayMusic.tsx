@@ -11,6 +11,13 @@ const PlayMusic: React.FC<PlayMusicProps> = ({ node, onNext }) => {
   const hasExecuted = useRef(false)
   useEffect(() => {
     if (hasExecuted.current) return
+    if (node.soundEffect) {
+      const musicManager = MusicManager.getInstance()
+      musicManager.playSoundEffect(node.audio, node.volume)
+      hasExecuted.current = true
+      onNext()
+      return
+    }
     const musicManager = MusicManager.getInstance()
     if (musicManager.getCurrentTrack() != node.audio) {
       if (musicManager.isPlaying()) {
@@ -24,7 +31,7 @@ const PlayMusic: React.FC<PlayMusicProps> = ({ node, onNext }) => {
     }
     hasExecuted.current = true
     onNext()
-  }, [node.audio, node.volume, onNext])
+  }, [node.audio, node.soundEffect, node.volume, onNext])
   return null
 }
 

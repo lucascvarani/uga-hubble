@@ -1,0 +1,111 @@
+import type {
+  QuizzNode,
+  SceneNode,
+  DialogNode,
+  ZoomMissionNode,
+  PlayMusicNode,
+  FadeOutNode,
+} from './nodes/SceneNode'
+
+export const galaxiesNodes: SceneNode[] = [
+  {
+    type: 'dialog',
+    text: [
+      'You’re awake — finally, in your own time.',
+      'Now you hold machines that can see galaxies, and tools that can listen to the birth of stars.',
+      'Let’s explore some galaxies together!',
+    ],
+    startingCoords: {
+      ra: 10.6847083,
+      dec: 41.26875,
+      shouldSnap: false,
+      fov: 10,
+    },
+  } as DialogNode,
+  {
+    type: 'zoom_mission',
+    fovThreshold: 1,
+  } as ZoomMissionNode,
+  {
+    type: 'dialog',
+    text: [
+      'This unique point of light is in fact an entire galaxy, with millions of stars!',
+      'This is Andromeda...',
+    ],
+  } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Esta á A Grande Galáxia Barrada.',
+      'Como o próprio nome já diz, ela é uma galáxia do tipo Espiral Barrada.',
+    ],
+    startingCoords: {
+      ra: 53.4019083,
+      dec: -36.1406582,
+      shouldSnap: false,
+      fov: 10,
+    },
+  } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Galáxia gigante elíptica no aglomerado de Virgem',
+      'É uma galáxia elíptica',
+    ],
+    startingCoords: {
+      ra: 187.705931,
+      dec: 12.3911232,
+      shouldSnap: false,
+      fov: 10,
+    },
+  } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Esta é Bode’s Galaxy',
+      'Você poderia nos ajuda a definir qual é o tipo desta galáxia?',
+    ],
+    startingCoords: {
+      ra: 53.4019083,
+      dec: -36.1406582,
+      shouldSnap: false,
+      fov: 10,
+    },
+  } as DialogNode,
+  {
+    type: 'quizz',
+    title: 'Desvendando galáxias',
+    description:
+      'Ajude Aladim a descobrir qual é o tipo da galáxia de Andrômeda!',
+    question: 'Qual tipo de galáxia é este?',
+    options: [
+      'Galáxia Espiral',
+      'Galáxia Espiral Barrada',
+      'Galáxia Elíptica',
+      'Galáxia Irregular',
+      'Galáxia Lenticular',
+    ],
+    rightOption: 0,
+    textRightOption: ['Resposta correta!'],
+    textWrongOption: ['Resposta errada!'],
+  } as QuizzNode,
+  {
+    type: 'dialog',
+    text: [
+      'We’ve mapped the stars, reached the Moon, and peered into the heart of distant galaxies…',
+      'but there’s still so much we don’t know...',
+      'Somewhere out there waits the next great discovery',
+      'the one that will change how we see everything.',
+      'So take the tools of this age, aim them toward the unknown, and make it yours.',
+      'The next chapter of humanity is waiting for you to write it.',
+    ],
+  },
+  {
+    type: 'music',
+    audio: 'audio/ending-music.mp3',
+  } as PlayMusicNode,
+  {
+    type: 'fade_out',
+    duration: 4,
+  } as FadeOutNode,
+]
