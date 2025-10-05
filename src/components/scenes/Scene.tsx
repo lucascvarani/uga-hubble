@@ -64,6 +64,39 @@ function animateToTarget(
   }, intervalMs)
 }
 
+function animateToTargetFov(
+  aladin: AladinInstance,
+  fromFov: number,
+  targetFov: number,
+  duration = 1000, // total duration in ms
+  onComplete?: () => void
+) {
+  if (!aladin) return
+
+  const container = document.getElementById('aladin-lite-div')
+  if (container) container.style.pointerEvents = 'none' // disable interaction
+
+  const startTime = Date.now()
+  const intervalMs = 30
+
+  const timer = setInterval(() => {
+    const elapsed = Date.now() - startTime
+    let t = Math.max(0, Math.min(elapsed / duration, 1))
+
+    // ease-in-out
+    const ease = 0.5 - 0.5 * Math.cos(Math.PI * t)
+
+    const fov = fromFov + (targetFov - fromFov) * ease
+    aladin.setFov(fov)
+
+    if (t >= 1) {
+      clearInterval(timer)
+      if (container) container.style.pointerEvents = 'auto' // re-enable interaction
+      onComplete?.()
+    }
+  }, intervalMs)
+}
+
 const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -93,15 +126,22 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
     if (currentIndex < nodes.length - 1) {
       setCurrentIndex(currentIndex + 1)
       const currentRaDec = aladinInstance?.getRaDec()
+      const currentFov = aladinInstance?.getFov()
 
       const nextIndex = currentIndex + 1
-      if (nodes[nextIndex].startingCoords && currentRaDec) {
+      if (nodes[nextIndex].startingCoords && currentRaDec && currentFov) {
         if (nodes[nextIndex].startingCoords.shouldSnap) {
           aladinInstance?.gotoRaDec(
             nodes[nextIndex].startingCoords.ra,
             nodes[nextIndex].startingCoords.dec
           )
         } else {
+          animateToTargetFov(
+            aladinInstance!,
+            currentFov[0],
+            nodes[nextIndex].startingCoords.fov,
+            1000
+          )
           // aladinInstance?.gotoRaDec(nodes[currentIndex].startingCoords.ra, nodes[currentIndex].startingCoords.dec);
           animateToTarget(
             aladinInstance!,
