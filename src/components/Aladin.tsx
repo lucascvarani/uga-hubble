@@ -17,6 +17,7 @@ export interface AladinInstance {
   getRaDec: () => [number, number] | null
   setImageSurvey: (survey: string) => void
   setFov: (degrees: number) => void
+  getFov: () => [number, number] | null
   // Add other methods as needed
 }
 

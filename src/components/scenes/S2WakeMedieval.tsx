@@ -9,7 +9,7 @@ import type {
 export const wakeMedievalNodes: SceneNode[] = [
   {
     type: 'zoom_tutorial',
-    startingCoords: { ra: 83.7335437, dec: -5.46792621 },
+    startingCoords: { ra: 106.362115, dec: -10.7413274 },
   } as ZoomTutorialNode,
   // {
   //   type: 'eye',

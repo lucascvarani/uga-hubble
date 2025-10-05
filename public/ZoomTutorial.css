@@ -23,15 +23,19 @@
 /* Efeito de brilho expandido */
 @keyframes aladinGlow {
   0% {
-    box-shadow: 0 0 20px 5px rgba(0, 200, 255, 0.3); /* blur maior e spread */
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3); /* blur maior e spread */
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 50px 15px rgba(0, 200, 255, 0.7);
+    box-shadow: 0 0 50px 15px rgba(255, 255, 255, 0.7);
     transform: scale(1.05);
   }
   100% {
-    box-shadow: 0 0 20px 5px rgba(0, 200, 255, 0.3);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
     transform: scale(1);
   }
+}
+
+.scroll-hint img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
 }
