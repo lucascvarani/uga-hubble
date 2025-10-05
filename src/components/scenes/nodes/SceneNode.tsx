@@ -3,7 +3,8 @@ export type SceneNodeType =
   | 'find'
   | 'constellation'
   | 'eye'
-  | 'use_telescope' // add more types later
+  | 'use_telescope'
+  | 'music'
 
 export interface SceneNode {
   type: SceneNodeType
@@ -29,6 +30,12 @@ export interface FindPosNode extends SceneNode {
   tolerance: number
   fov: number
   interpolationDuration?: number
+}
+
+export interface PlayMusicNode extends SceneNode {
+  type: 'music'
+  audio: string
+  volume: number
 }
 
 export interface UseTelescopeNode extends SceneNode {

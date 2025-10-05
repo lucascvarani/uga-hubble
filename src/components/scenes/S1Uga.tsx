@@ -1,6 +1,16 @@
-import type { DialogNode, FindPosNode, SceneNode } from './nodes/SceneNode'
+import type {
+  DialogNode,
+  FindPosNode,
+  PlayMusicNode,
+  SceneNode,
+} from './nodes/SceneNode'
 
 export const ugaNodes: SceneNode[] = [
+  {
+    type: 'music',
+    audio: 'audio/evening-sound-effect-in-village-348670.mp3',
+    volume: 0.3,
+  } as PlayMusicNode,
   {
     type: 'dialog',
     text: [
