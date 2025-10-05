@@ -11,6 +11,8 @@ export interface DialogNode extends SceneNode {
 
 export interface FindPosNode extends SceneNode {
   type: "find" | "constellation",
+  title: string,
+  description: string,
   startingCoords?: { ra: number; dec: number }; // starting position
   targetCoords: { ra: number; dec: number };   // target to find
   survey?: string; // e.g. "P/DSS2/color" or "P/2MASS/color"

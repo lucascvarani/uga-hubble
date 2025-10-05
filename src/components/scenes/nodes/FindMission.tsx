@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { FindPosNode } from "./SceneNode";
 import type { AladinInstance } from "../../Aladin";
+import MissionTracker from "../../MissionTracker";
 
 interface FindMissionProps {
   node: FindPosNode;
@@ -68,7 +69,12 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
     return () => {};
   }, [aladinInstance, node, listenerAdded, onNext]);
 
-  return null;
+  return (
+      <MissionTracker
+        title={node.title}
+        description={node.description}
+      />
+    );;
 };
 
 export default FindMission;
