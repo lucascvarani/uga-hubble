@@ -14,6 +14,11 @@ export const wakeMedievalNodes: SceneNode[] = [
   } as PlayMusicNode,
   {
     type: 'eye',
+    startingCoords: {
+      ra: 56.8966340,
+      dec: +24.1448011,
+      shouldSnap: true
+    }
   } as EyeNode,
   {
     type: 'dialog',

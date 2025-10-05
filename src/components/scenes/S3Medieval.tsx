@@ -36,7 +36,6 @@ export const medievalNodes: SceneNode[] = [
     targetCoords: { ra: 271.10431, dec: -23.9710361 }, //271.104310 -23.9710361
     // startingCoords: { ra: 0.87, dec: 88.74, shouldSnap: true },
     tolerance: 10,
-    fov: 3,
   } as FindPosNode,
   {
     type: 'zoom_mission',
