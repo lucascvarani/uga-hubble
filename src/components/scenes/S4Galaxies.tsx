@@ -33,7 +33,6 @@ export const galaxiesNodes: SceneNode[] = [
   {
     type: 'dialog',
     text: [
-      'This unique point of light is in fact an entire galaxy, with millions of stars!',
       'This is Andromeda, our neighbour spiral galaxy located about 2.5 million light-years away from us.',
       'A spiral galaxy is a type of galaxy shaped like a flat, rotating disk with a bright center and arms that spiral outward.',
       'These arms are made of stars, gas, and dust, where new stars are often born.',
