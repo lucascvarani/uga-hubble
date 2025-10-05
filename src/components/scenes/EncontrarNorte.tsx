@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import Dialog from '../Dialog'
+import Dialog from './nodes/Dialog'
 import MissionTracker from '../MissionTracker'
 import MusicManager from '../../utils/MusicManager'
 
@@ -18,7 +18,6 @@ export default function EncontrarNorte({
 }: EncontrarNorteProps) {
   const [sceneState, setSceneState] = React.useState(0)
   const clickHandlerRef = useRef<((...args: unknown[]) => void) | null>(null)
-  const [currentDialogIndex, setCurrentDialogIndex] = React.useState(0)
   const dialogs1 = ['Onde está o norte?', 'O norte está ali!']
   const dialogs2 = ['O que você vê?', 'Eu vejo uma árvore.']
 
@@ -56,19 +55,11 @@ export default function EncontrarNorte({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function onClick() {
-    if (currentDialogIndex < dialogs1.length - 1) {
-      return
-    }
-    setCurrentDialogIndex(0)
-    setSceneState((prevState) => {
-      return prevState + 1
-    })
-    if (sceneState === 2) {
-      onComplete()
-    }
+    // Dialog will handle its own progression, we just handle scene transitions
+    // This will be called by the Aladin map clicks if needed
   }
 
-  const handleNextDialog = () => {
+  const handleDialogFinish = () => {
     const musicManager = MusicManager.getInstance()
 
     // Ensure music is playing after user interaction (for browser autoplay restrictions)
@@ -87,12 +78,14 @@ export default function EncontrarNorte({
       }
     }
 
-    if (
-      currentDialogIndex <
-      (sceneState === 0 ? dialogs1 : dialogs2).length - 1
-    ) {
-      setCurrentDialogIndex(currentDialogIndex + 1)
-    }
+    // Move to next scene state
+    setSceneState((prevState) => {
+      const nextState = prevState + 1
+      if (nextState > 1) {
+        onComplete()
+      }
+      return nextState
+    })
   }
 
   return (
@@ -115,20 +108,12 @@ export default function EncontrarNorte({
       {/* Dialog positioned in center bottom */}
       {sceneState === 0 && (
         <div>
-          <Dialog
-            text={dialogs1[currentDialogIndex]}
-            onNext={handleNextDialog}
-            newDialog={currentDialogIndex === 0}
-          />
+          <Dialog text={dialogs1} onFinish={handleDialogFinish} />
         </div>
       )}
       {sceneState === 1 && (
         <div>
-          <Dialog
-            text={dialogs2[currentDialogIndex]}
-            onNext={handleNextDialog}
-            newDialog={currentDialogIndex === 0}
-          />
+          <Dialog text={dialogs2} onFinish={handleDialogFinish} />
         </div>
       )}
     </div>

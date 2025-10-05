@@ -43,6 +43,7 @@ export default function AladinViewer({ aladin }: { aladin: any }) {
 
       {/* Direcional */}
       <div
+        id="aladin-viewer"
         style={{
           position: 'absolute',
           bottom: 120,

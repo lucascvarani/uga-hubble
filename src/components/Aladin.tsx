@@ -17,8 +17,8 @@ export interface AladinInstance {
   getRaDec: () => [number, number] | null
   setImageSurvey: (survey: string) => void
   setFov: (degrees: number) => void
-  addOverlay: (overlay: any) => void;
-  removeOverlay: (overlay: any) => void;
+  addOverlay: (overlay: any) => void
+  removeOverlay: (overlay: any) => void
   // Add other methods as needed
 }
 

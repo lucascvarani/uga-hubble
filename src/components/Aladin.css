@@ -25,3 +25,18 @@
 .aladin-location-copy {
   display: none !important;
 }
+
+/* UI do Zoom */
+#aladin-lite-div .aladin-fov {
+  visibility: hidden !important;
+}
+
+/* UI do viewer */
+#aladin-viewer {
+  visibility: hidden !important;
+}
+
+/* UI da localização RaDec */
+#aladin-lite-div .aladin-location {
+  visibility: hidden !important;
+}

@@ -3,12 +3,19 @@ import type {
   DialogNode,
   FindPosNode,
   CompleteConstellationNode,
+  EyeNode,
 } from './components/scenes/nodes/SceneNode'
 
 export const medievalNodes: SceneNode[] = [
   {
+    type: 'eye',
+    coords: { ra: 5.37735322, dec: 63.7906211 },
+  } as EyeNode,
+  {
     type: 'dialog',
-    text: 'Greetings, traveler of the stars. Tonight, we journey back to the year 1572 — when the heavens themselves changed forever.',
+    text: [
+      'Greetings, traveler of the stars. Tonight, we journey back to the year 1572 — when the heavens themselves changed forever.',
+    ],
   } as DialogNode,
 
   // {
@@ -89,16 +96,10 @@ export const medievalNodes: SceneNode[] = [
 
   {
     type: 'dialog',
-    text: 'You’ve found it — the ghost of a star that once burned brighter than Venus. Tycho’s Supernova.',
-  } as DialogNode,
-
-  {
-    type: 'dialog',
-    text: 'From this light, astronomy was reborn. The belief in perfect, unchanging heavens shattered — and the path to modern science began.',
-  } as DialogNode,
-
-  {
-    type: 'dialog',
-    text: 'Well done, explorer. The stars remember — and now, so do you.',
+    text: [
+      'You’ve found it — the ghost of a star that once burned brighter than Venus. Tycho’s Supernova.',
+      'From this light, astronomy was reborn. The belief in perfect, unchanging heavens shattered — and the path to modern science began.',
+      'Well done, explorer. The stars remember — and now, so do you.',
+    ],
   } as DialogNode,
 ]
