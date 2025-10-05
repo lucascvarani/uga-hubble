@@ -39,10 +39,10 @@ const Eye: React.FC<EyeProps> = ({ node, aladinInstance, onNext }) => {
       {!animationFinished && (
         <>
           <div
-            className="absolute top-0 left-0 w-full h-1/2 bg-gray-900/95 backdrop-blur-sm rounded-b-none animate-top-lid z-50"
+            className="absolute top-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-b-none animate-top-lid z-50"
             onAnimationEnd={() => onNext()}
           ></div>
-          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gray-900/95 backdrop-blur-sm rounded-tr-none animate-bottom-lid z-50"></div>
+          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-tr-none animate-bottom-lid z-50"></div>
         </>
       )}
     </div>

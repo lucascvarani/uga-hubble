@@ -3,11 +3,12 @@ export type SceneNodeType =
   | 'find'
   | 'constellation'
   | 'eye'
+  | 'quizz' // add more types later
   | 'use_telescope' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
-  startingCoords?: { ra: number; dec: number, shouldSnap: boolean } // starting position
+  startingCoords?: { ra: number; dec: number; shouldSnap: boolean } // starting position
 }
 
 export interface DialogNode extends SceneNode {
@@ -18,6 +19,17 @@ export interface DialogNode extends SceneNode {
 export interface EyeNode extends SceneNode {
   type: 'eye'
   coords: { ra: number; dec: number }
+}
+
+export interface QuizzNode extends SceneNode {
+  type: 'quizz'
+  title: string
+  description: string
+  question: string
+  options: string[]
+  rightOption: number
+  textRightOption: string[]
+  textWrongOption: string[]
 }
 
 export interface FindPosNode extends SceneNode {
