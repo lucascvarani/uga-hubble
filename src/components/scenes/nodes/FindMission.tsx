@@ -35,10 +35,12 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
     aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
     aladinInstance.setFov(node.fov);
 
-    const tolerance = 1;
+    const tolerance = node.tolerance;
 
     const handleClick = (evt: any) => {
-      const coords = aladinInstance.getRaDec();
+      if (evt.isDragging) return;
+
+      const coords = [evt.ra, evt.dec];
       if (!coords) return;
 
       const raDiff = coords[0] - node.targetCoords.ra;
