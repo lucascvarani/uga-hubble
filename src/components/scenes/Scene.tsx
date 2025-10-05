@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
+import Quizz from './nodes/Quizz'
 import CompleteConstellationMission from './nodes/CompleteConstellationMission'
 import type {
   SceneNode,
@@ -9,6 +10,7 @@ import type {
   CompleteConstellationNode,
   EyeNode,
   PlayMusicNode,
+  QuizzNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
@@ -68,15 +70,21 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
 
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec) {
-        // aladinInstance?.gotoRaDec(nodes[currentIndex].startingCoords.ra, nodes[currentIndex].startingCoords.dec);
-        animateToTarget(
-          aladinInstance!,
-          currentRaDec[0],
-          currentRaDec[1],
-          nodes[nextIndex].startingCoords.ra,
-          nodes[nextIndex].startingCoords.dec,
-          1000
-        )
+        if (nodes[nextIndex].startingCoords.shouldSnap) {
+          aladinInstance?.gotoRaDec(
+            nodes[nextIndex].startingCoords.ra,
+            nodes[nextIndex].startingCoords.dec
+          )
+        } else {
+          animateToTarget(
+            aladinInstance!,
+            currentRaDec[0],
+            currentRaDec[1],
+            nodes[nextIndex].startingCoords.ra,
+            nodes[nextIndex].startingCoords.dec,
+            1000
+          )
+        }
       }
     } else {
       onSceneEnd?.()
@@ -117,6 +125,8 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
         />
       )
+    case 'quizz':
+      return <Quizz node={currentNode as QuizzNode} onNext={handleNextNode} />
     case 'use_telescope':
       return <UseTelescope onNext={handleNextNode} />
     case 'music':
