@@ -17,7 +17,7 @@ export const medievalNodes: SceneNode[] = [
   {
     type: 'zoom_tutorial',
     fov: 60,
-    fovRange: [10, 60],
+    fovRange: [2.9, 25],
   } as ZoomTutorialNode,
   {
     type: 'dialog',

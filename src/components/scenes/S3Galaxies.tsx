@@ -22,6 +22,7 @@ export const galaxiesNodes: SceneNode[] = [
   {
     type: 'zoom_mission',
     fovThreshold: 1,
+    fovRange: [0.5, 120],
   } as ZoomMissionNode,
   {
     type: 'dialog',
