@@ -1,0 +1,37 @@
+/* UI do Zoom */
+#aladin-lite-div .aladin-fov {
+  visibility: visible !important;
+}
+
+/* UI do viewer */
+#aladin-viewer {
+  visibility: hidden !important;
+}
+
+/* UI da localização RaDec */
+#aladin-lite-div .aladin-location {
+  visibility: hidden !important;
+}
+
+/* Destaca o controle de zoom do Aladin */
+.aladin-horizontal-list.aladin-fov.aladin-dark-theme {
+  position: relative;
+  animation: aladinGlow 2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Efeito de brilho expandido */
+@keyframes aladinGlow {
+  0% {
+    box-shadow: 0 0 20px 5px rgba(0, 200, 255, 0.3); /* blur maior e spread */
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 50px 15px rgba(0, 200, 255, 0.7);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 20px 5px rgba(0, 200, 255, 0.3);
+    transform: scale(1);
+  }
+}

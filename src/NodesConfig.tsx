@@ -4,6 +4,7 @@ import type {
   FindPosNode,
   CompleteConstellationNode,
   EyeNode,
+  ZoomTutorialNode,
 } from './components/scenes/nodes/SceneNode'
 
 export const medievalNodes: SceneNode[] = [

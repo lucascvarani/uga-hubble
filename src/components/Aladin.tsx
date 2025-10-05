@@ -58,6 +58,7 @@ export default function AladinNext({
             showStatusBar: false,
             showLayersControl: false,
             showFov: false,
+            zoomSpeed: 2,
           })
 
           // a.on('click', (e) => console.log(e))

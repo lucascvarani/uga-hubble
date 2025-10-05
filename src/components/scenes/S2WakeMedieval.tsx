@@ -1,6 +1,20 @@
-import type { DialogNode, SceneNode, UseTelescopeNode } from './nodes/SceneNode'
+import type {
+  DialogNode,
+  EyeNode,
+  SceneNode,
+  UseTelescopeNode,
+  ZoomTutorialNode,
+} from './nodes/SceneNode'
 
 export const wakeMedievalNodes: SceneNode[] = [
+  {
+    type: 'zoom_tutorial',
+    startingCoords: { ra: 83.7335437, dec: -5.46792621 },
+  } as ZoomTutorialNode,
+  // {
+  //   type: 'eye',
+  //   startingCoords: { ra: 83.7335437, dec: -5.46792621 },
+  // } as EyeNode,
   {
     type: 'dialog',
     text: [
