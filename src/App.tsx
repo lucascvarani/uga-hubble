@@ -56,7 +56,7 @@ function App() {
           >
             <Telescope ref={telescopeRef} />
           </div>
-          /* Scene overlay - Full Screen */
+          {/* Scene overlay - Full Screen */}
           <div
             style={{
               position: 'absolute',
