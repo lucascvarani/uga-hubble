@@ -112,6 +112,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         }
       }
     } else {
+      setCurrentIndex(0)
       onSceneEnd?.()
     }
   }
