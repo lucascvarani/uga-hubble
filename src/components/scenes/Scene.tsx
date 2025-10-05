@@ -67,6 +67,28 @@ function animateToTarget(
 const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  useEffect(() => {
+    const currentRaDec = aladinInstance?.getRaDec()
+    const nextIndex = 0
+    if (nodes[nextIndex].startingCoords && currentRaDec) {
+      if (nodes[nextIndex].startingCoords.shouldSnap) {
+        aladinInstance?.gotoRaDec(
+          nodes[nextIndex].startingCoords.ra,
+          nodes[nextIndex].startingCoords.dec
+        )
+      } else {
+        animateToTarget(
+          aladinInstance!,
+          currentRaDec[0],
+          currentRaDec[1],
+          nodes[nextIndex].startingCoords.ra,
+          nodes[nextIndex].startingCoords.dec,
+          1000
+        )
+      }
+    }
+  }, [])
+
   const handleNextNode = () => {
     if (currentIndex < nodes.length - 1) {
       setCurrentIndex(currentIndex + 1)

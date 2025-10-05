@@ -20,11 +20,11 @@ const Telescope = forwardRef<TelescopeHandle>((_, ref) => {
   if (!isActive) return null
 
   return (
-    <div className="telescope-overlay fixed top-0 left-0 w-[120vw] h-screen pointer-events-none flex items-center justify-center">
+  <div className="telescope-overlay fixed inset-0 w-screen h-screen pointer-events-none flex items-center justify-center">
       <img
         src="/lunetaPNG.png"
         alt="Telescope view"
-        className="max-w-full max-h-full object-cover"
+      className="w-[150vw] h-[150vw] object-cover"
       />
     </div>
   )
