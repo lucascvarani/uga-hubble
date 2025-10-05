@@ -100,7 +100,7 @@ const Dialog: React.FC<DialogUIProps> = ({
   }, [])
 
   return (
-    <div className="dialog-wrapper">
+    <div className="dialog-wrapper w-full h-screen" onClick={handleClick}>
       <div
         className="
           dialog-container
