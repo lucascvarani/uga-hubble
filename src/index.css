@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Custom Font Faces - Add your local fonts here */
+@font-face {
+  font-family: "YourCustomFont";
+  src: url("/fonts/YourCustomFont-Regular.woff2") format("woff2"),
+    url("/fonts/YourCustomFont-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "YourCustomFont";
+  src: url("/fonts/YourCustomFont-Bold.woff2") format("woff2"),
+    url("/fonts/YourCustomFont-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Ensure full screen coverage */
 html,
 body {
@@ -8,6 +27,8 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  /* Apply Source Sans 3 as the primary font */
+  font-family: "Source Sans 3", "Inter", system-ui, -apple-system, sans-serif;
 }
 
 #root {
