@@ -58,6 +58,7 @@ function App() {
               case 1:
                 return (
                   <Scene
+                    aladinInstance={aladinInstance}
                     nodes={medievalNodes}
                     onSceneEnd={() =>
                       setSceneNumber((previous) => previous + 1)

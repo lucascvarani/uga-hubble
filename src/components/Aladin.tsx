@@ -9,6 +9,16 @@ interface Star {
   name?: string;
 }
 
+
+export interface AladinInstance {
+  on: (event: string, callback: (...args: unknown[]) => void) => void;
+  gotoRaDec: (ra: number, dec: number) => void;
+  getRaDec: () => [number, number] | null;
+  setImageSurvey: (survey: string) => void;
+  setFov: (degrees: number) => void;
+  // Add other methods as needed
+}
+
 export default function AladinNext({
   setAladinInstance,
 }: {

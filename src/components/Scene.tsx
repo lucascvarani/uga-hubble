@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import type { SceneNode, DialogNode } from "./SceneNode";
 import Dialog from "./Dialog";
+import FindMission from "./FindMission";
+import type { SceneNode, DialogNode, FindPosNode } from "./SceneNode";
+import type { AladinInstance } from "./Aladin";
 
 interface SceneProps {
   nodes: SceneNode[];
-  onSceneEnd?: () => void; // optional callback when scene ends
+  aladinInstance: AladinInstance | null;
+  onSceneEnd?: () => void;
 }
 
-const Scene: React.FC<SceneProps> = ({ nodes, onSceneEnd }) => {
+const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNextDialog = () => {
+  const handleNextNode = () => {
     if (currentIndex < nodes.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -20,12 +23,17 @@ const Scene: React.FC<SceneProps> = ({ nodes, onSceneEnd }) => {
 
   const currentNode = nodes[currentIndex];
 
-  // Render component based on node type
   switch (currentNode.type) {
     case "dialog":
-      const dialogNode = currentNode as DialogNode;
-      return <Dialog text={dialogNode.text} onNext={handleNextDialog} />;
-
+      return <Dialog text={(currentNode as DialogNode).text} onNext={handleNextNode} />;
+    case "find":
+      return (
+        <FindMission
+          node={currentNode as FindPosNode}
+          aladinInstance={aladinInstance}
+          onNext={handleNextNode}
+        />
+      );
     default:
       return null;
   }
