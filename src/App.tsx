@@ -106,7 +106,6 @@ function App() {
                       />
                     )
                   case 3:
-                    telescopeRef.current?.show()
                     return (
                       <Scene
                         aladinInstance={aladinInstance}

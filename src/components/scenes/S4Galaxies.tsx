@@ -24,9 +24,10 @@ export const galaxiesNodes: SceneNode[] = [
   } as DialogNode,
   {
     type: 'zoom_mission',
-    misionTitle: 'Zoom In',
-    missionDescription: 'Use the scroll or the buttons to zoom in',
     fovThreshold: 1,
+    misionTitle: 'Zoom into Andromeda',
+    missionDescription:
+      'Use the zoom feature to get a closer look at the Andromeda',
     fovRange: [0.5, 120],
   } as ZoomMissionNode,
   {
@@ -124,7 +125,7 @@ export const galaxiesNodes: SceneNode[] = [
   },
   {
     type: 'music',
-    audio: 'audio/ending-music.mp3',
+    audio: 'audio/andromeda-space-adventure-403080.mp3',
   } as PlayMusicNode,
   {
     type: 'fade_out',
