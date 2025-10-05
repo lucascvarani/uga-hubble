@@ -13,7 +13,7 @@ import { galaxiesNodes } from './components/scenes/S4Galaxies'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
-  const [sceneNumber, setSceneNumber] = useState<number>(0)
+  const [sceneNumber, setSceneNumber] = useState<number>(3)
   const [showSoundWarning, setShowSoundWarning] = useState(true)
   const [showIntro, setShowIntro] = useState(true)
   const telescopeRef = useRef<TelescopeHandle>(null)

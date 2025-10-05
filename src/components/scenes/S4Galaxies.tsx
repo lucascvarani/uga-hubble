@@ -19,7 +19,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 10.6847083,
       dec: 41.26875,
       shouldSnap: false,
-      fov: 30,
+      fov: 100,
     },
   } as DialogNode,
   {
@@ -77,7 +77,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 187.705931,
       dec: 12.3911232,
       shouldSnap: false,
-      fov: 1,
+      fov: 0.01,
     },
   } as DialogNode,
   {
