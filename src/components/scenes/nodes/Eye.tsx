@@ -9,8 +9,8 @@ interface EyeProps {
   onNext: () => void
 }
 
-const Eye: React.FC<EyeProps> = ({ node, aladinInstance, onNext }) => {
-  const [animationFinished, setAnimationFinished] = useState(false)
+const Eye: React.FC<EyeProps> = ({ onNext }) => {
+  const [animationFinished] = useState(false)
 
   useEffect(() => {
     // cria o <link> para o CSS

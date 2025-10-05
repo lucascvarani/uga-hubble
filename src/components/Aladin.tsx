@@ -1,15 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useEffect, useState } from 'react'
 import './Aladin.css'
 import AladinViewer from './AladinViewer'
-
-interface Star {
-  ra: number
-  dec: number
-  mag: number
-  name?: string
-}
 
 export interface AladinInstance {
   on: (event: string, callback: (...args: unknown[]) => void) => void
@@ -29,17 +23,6 @@ export default function AladinNext({
   setAladinInstance: (aladin: any) => void
 }) {
   const [aladin, setAladin] = useState<any>(null)
-  const [coords, setCoords] = useState<string | null>(null)
-  const [search, setSearch] = useState('')
-  const [magLimit, setMagLimit] = useState<number>(10)
-
-  // Exemplo de catálogo de teste
-  const exampleStars: Star[] = [
-    { ra: 83.8221, dec: -5.3911, mag: 4.0, name: 'Rigel' },
-    { ra: 88.7929, dec: 7.4071, mag: 0.5, name: 'Betelgeuse' },
-    { ra: 79.1723, dec: 45.9979, mag: 5.0, name: 'Capella' },
-    { ra: 101.287, dec: -16.7161, mag: 6.5, name: 'Sirius' },
-  ]
 
   useEffect(() => {
     const init = () => {
@@ -64,7 +47,8 @@ export default function AladinNext({
           })
 
           setAladinInstance(a)
-          a.on('click', (e) => console.log(e, 'hello'))
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          a.on('click', (e: any) => console.log(e, 'hello'))
 
           // a.gotoObject("Sirius");
 
@@ -83,39 +67,6 @@ export default function AladinNext({
 
     return () => window.removeEventListener('load', init)
   }, [])
-
-  const changeSurvey = (survey: string) => {
-    if (aladin) {
-      aladin.setImageSurvey(survey)
-    }
-  }
-
-  const addMarker = () => {
-    if (!aladin) return
-
-    const center = aladin.getRaDec()
-    const markerLayer = (window as any).A.catalog({ name: 'Marcadores' })
-    aladin.addCatalog(markerLayer)
-
-    // Apenas adiciona se estiver dentro do limite de magnitude
-    const filteredStars = exampleStars.filter((s) => s.mag <= magLimit)
-
-    filteredStars.forEach((star) => {
-      const marker = (window as any).A.marker(star.ra, star.dec, {
-        popupTitle: star.name || 'Estrela',
-        popupDesc: `Mag: ${star.mag}, RA: ${star.ra.toFixed(
-          4
-        )}, Dec: ${star.dec.toFixed(4)}`,
-      })
-      markerLayer.addSources([marker])
-    })
-  }
-
-  const gotoObject = (object: string) => {
-    if (aladin) {
-      aladin.gotoObject(object)
-    }
-  }
 
   return (
     <>

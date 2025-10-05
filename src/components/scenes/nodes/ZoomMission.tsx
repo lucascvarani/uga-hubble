@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import type { ZoomTutorialNode } from './SceneNode'
+import React, { useEffect } from 'react'
+import type { ZoomMissionNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MissionTracker from '../../MissionTracker'
-import Fireworks from '../../Fireworks/Fireworks'
 
-interface ZoomTutorialProps {
-  node: ZoomTutorialNode
+interface ZoomMissionProps {
+  node: ZoomMissionNode
   aladinInstance: AladinInstance | null
   onNext: () => void
 }
 
-const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
+const ZoomMission: React.FC<ZoomMissionProps> = ({
   node,
   aladinInstance,
   onNext,
 }) => {
-  const [zoomIn, setZoomIn] = useState(true)
-  const [missionCompleted] = useState(false)
   useEffect(() => {
     // cria o <link> para o CSS
     const link = document.createElement('link')
@@ -33,24 +30,12 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
   }, [])
 
   useEffect(() => {
-    if (aladinInstance && node.fovRange) {
-      aladinInstance.setFoVRange(node.fovRange[0], node.fovRange[1])
-    }
-    if (aladinInstance && node.startingCoords) {
-      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec)
-    }
-  }, [aladinInstance, node.startingCoords])
-
-  useEffect(() => {
     if (!aladinInstance) return
+
     const checkFov = () => {
       const currentFov = aladinInstance.getFov()
-      if (currentFov && currentFov[0] < 11) {
-        setZoomIn(false)
-      }
 
-      if (!zoomIn && currentFov && currentFov[0] > 30) {
-        console.log('Should call onNext')
+      if (currentFov && currentFov[0] < node.fovThreshold) {
         onNext()
       }
     }
@@ -58,7 +43,7 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
     const interval = setInterval(checkFov, 500)
 
     return () => clearInterval(interval)
-  }, [aladinInstance, zoomIn])
+  }, [aladinInstance])
 
   return (
     <div>
@@ -74,14 +59,11 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
       </div>
 
       <MissionTracker
-        title={zoomIn ? 'Zoom In' : 'Zoom Out'}
-        description={`Use the scroll or the buttons to ${
-          zoomIn ? 'zoom in' : 'zoom out'
-        }`}
+        title={'Zoom In'}
+        description={'Use the scroll or the buttons to zoom in'}
       />
-      {missionCompleted && <Fireworks />}
     </div>
   )
 }
 
-export default ZoomTutorial
+export default ZoomMission

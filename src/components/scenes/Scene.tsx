@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
 import Quizz from './nodes/Quizz'
-import CompleteConstellationMission from './nodes/CompleteConstellationMission'
 import type {
   SceneNode,
   DialogNode,
   FindPosNode,
-  CompleteConstellationNode,
   EyeNode,
   ZoomTutorialNode,
   PlayMusicNode,
   QuizzNode,
   FadeOutNode,
+  ZoomMissionNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
 import UseTelescope from './nodes/UseTelescope'
 import ZoomTutorial from './nodes/ZoomTutorial'
+import ZoomMission from './nodes/ZoomMission'
 import PlayMusic from './nodes/PlayMusic'
 import FadeOut from './nodes/FadeOut'
 
@@ -177,14 +177,6 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
         />
       )
-    case 'constellation':
-      return (
-        <CompleteConstellationMission
-          node={currentNode as CompleteConstellationNode}
-          aladinInstance={aladinInstance}
-          onNext={handleNextNode}
-        />
-      )
     case 'eye':
       return (
         <Eye
@@ -202,6 +194,14 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return (
         <ZoomTutorial
           node={currentNode as ZoomTutorialNode}
+          aladinInstance={aladinInstance}
+          onNext={handleNextNode}
+        />
+      )
+    case 'zoom_mission':
+      return (
+        <ZoomMission
+          node={currentNode as ZoomMissionNode}
           aladinInstance={aladinInstance}
           onNext={handleNextNode}
         />
