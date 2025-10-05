@@ -33,7 +33,7 @@ export default function AladinNext({
             cooFrame: 'ICRSd',
             survey: 'P/DSS2/color',
             fov: 60,
-            target: 'Orion Nebula',
+            // target: 'Orion Nebula',
             showReticle: true,
             showZoomControl: true,
             showFullscreenControl: false,
