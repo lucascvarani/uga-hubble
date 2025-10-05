@@ -1,6 +1,30 @@
-import type { DialogNode, SceneNode, UseTelescopeNode } from './nodes/SceneNode'
+import type {
+  DialogNode,
+  EyeNode,
+  PlayMusicNode,
+  SceneNode,
+  UseTelescopeNode,
+  ZoomTutorialNode,
+  // ZoomTutorialNode,
+} from './nodes/SceneNode'
 
 export const wakeMedievalNodes: SceneNode[] = [
+  {
+    type: 'music',
+    audio: 'audio/medieval.mp3',
+  } as PlayMusicNode,
+  {
+    type: 'eye',
+  } as EyeNode,
+  {
+    type: 'zoom_tutorial',
+    startingCoords: { ra: 106.362115, dec: -10.7413274 },
+    fovRange: [10, 60],
+  } as ZoomTutorialNode,
+  // {
+  //   type: 'zoom_tutorial',
+  //   startingCoords: { ra: 83.7335437, dec: -5.46792621 },
+  // } as ZoomTutorialNode,
   {
     type: 'dialog',
     text: [

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
 import Quizz from './nodes/Quizz'
@@ -9,11 +9,17 @@ import type {
   FindPosNode,
   CompleteConstellationNode,
   EyeNode,
+  ZoomTutorialNode,
+  PlayMusicNode,
   QuizzNode,
+  FadeOutNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
 import UseTelescope from './nodes/UseTelescope'
+import ZoomTutorial from './nodes/ZoomTutorial'
+import PlayMusic from './nodes/PlayMusic'
+import FadeOut from './nodes/FadeOut'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -94,12 +100,33 @@ function animateToTargetFov(
 const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  useEffect(() => {
+    const currentRaDec = aladinInstance?.getRaDec()
+    const nextIndex = 0
+    if (nodes[nextIndex].startingCoords && currentRaDec) {
+      if (nodes[nextIndex].startingCoords.shouldSnap) {
+        aladinInstance?.gotoRaDec(
+          nodes[nextIndex].startingCoords.ra,
+          nodes[nextIndex].startingCoords.dec
+        )
+      } else {
+        animateToTarget(
+          aladinInstance!,
+          currentRaDec[0],
+          currentRaDec[1],
+          nodes[nextIndex].startingCoords.ra,
+          nodes[nextIndex].startingCoords.dec,
+          1000
+        )
+      }
+    }
+  }, [])
+
   const handleNextNode = () => {
     if (currentIndex < nodes.length - 1) {
       setCurrentIndex(currentIndex + 1)
       const currentRaDec = aladinInstance?.getRaDec()
       const currentFov = aladinInstance?.getFov()
-      console.log(currentFov)
 
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec && currentFov) {
@@ -127,6 +154,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         }
       }
     } else {
+      setCurrentIndex(0)
       onSceneEnd?.()
     }
   }
@@ -169,6 +197,29 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return <Quizz node={currentNode as QuizzNode} onNext={handleNextNode} />
     case 'use_telescope':
       return <UseTelescope onNext={handleNextNode} />
+
+    case 'zoom_tutorial':
+      return (
+        <ZoomTutorial
+          node={currentNode as ZoomTutorialNode}
+          aladinInstance={aladinInstance}
+          onNext={handleNextNode}
+        />
+      )
+    case 'music':
+      return (
+        <PlayMusic
+          node={currentNode as PlayMusicNode}
+          onNext={handleNextNode}
+        />
+      )
+    case 'fade_out':
+      return (
+        <FadeOut
+          onNext={handleNextNode}
+          duration={(currentNode as FadeOutNode).duration}
+        />
+      )
     default:
       return null
   }

@@ -3,8 +3,11 @@ export type SceneNodeType =
   | 'find'
   | 'constellation'
   | 'eye'
+  | 'use_telescope'
+  | 'zoom_tutorial' // add more types later
+  | 'music'
   | 'quizz' // add more types later
-  | 'use_telescope' // add more types later
+  | 'fade_out'
 
 export interface SceneNode {
   type: SceneNodeType
@@ -18,7 +21,6 @@ export interface DialogNode extends SceneNode {
 
 export interface EyeNode extends SceneNode {
   type: 'eye'
-  coords: { ra: number; dec: number }
 }
 
 export interface QuizzNode extends SceneNode {
@@ -43,8 +45,25 @@ export interface FindPosNode extends SceneNode {
   interpolationDuration?: number
 }
 
+export interface PlayMusicNode extends SceneNode {
+  type: 'music'
+  audio: string
+  volume: number
+}
+
 export interface UseTelescopeNode extends SceneNode {
   type: 'use_telescope'
+}
+
+export interface ZoomTutorialNode extends SceneNode {
+  type: 'zoom_tutorial'
+  fov: number
+  fovRange: [number, number]
+}
+
+export interface FadeOutNode extends SceneNode {
+  type: 'fade_out'
+  duration: number // in seconds
 }
 
 interface Star {

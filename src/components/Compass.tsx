@@ -8,13 +8,16 @@ type Props = {
 }
 
 const getMapAngle = (x1: number, y1: number, x2: number, y2: number) => {
-  const dx = x2 - x1 // positive to the right
+  const dx = x1 - x2 // positive to the right
   const dy = y2 - y1 // positive downward (screen coordinates!)
 
-  const angle = (Math.atan2(dy, dx) * 180) / Math.PI
+  let angle = (Math.atan2(dx, dy) * 180) / Math.PI
 
-  // Triangle points down, so add 90° to align it correctly
-  return (angle + 90) % 360
+  if (angle < 0) {
+    angle += 360
+  }
+
+  return angle
 }
 
 const Compass = (props: Props) => {
@@ -26,12 +29,11 @@ const Compass = (props: Props) => {
     props.target_y
   )
 
-  console.log(direction)
-
   return (
-    <div className="w-32 h-32 rounded-full border-2 border-gray-400 flex items-center justify-center relative bg-white">
+    <div className="w-64 h-64 relative">
       {/* Rotating Arrow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <img src="down-compass.png" className="absolute h-full w-full" />
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none absolute">
         <motion.div
           animate={{ rotate: direction }}
           transition={{ type: 'spring', stiffness: 200, damping: 30 }}
@@ -40,15 +42,15 @@ const Compass = (props: Props) => {
         >
           <div
             className="flex flex-col items-center"
-            style={{ transform: 'translateY(-34px)' }}
+            style={{ transform: 'translateY(-72px)' }}
           >
-            {/* Triangle */}
-            <div className="w-0 h-0 border-l-[16px] border-r-[16px] border-b-[30px] border-l-transparent border-r-transparent border-b-red-600" />
-            {/* Small base line */}
-            <div className="w-2 h-5 bg-red-600 mt-1 rounded" />
+            <svg width="64" height="64" viewBox="0 0 64 64">
+              <path d="M32 0 L68 50 Q32 30 0 50 Z" fill="black" />
+            </svg>{' '}
           </div>
         </motion.div>
       </div>
+      <img src="up-compass.png" className="absolute h-full w-full" />
     </div>
   )
 }
