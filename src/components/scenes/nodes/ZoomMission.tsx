@@ -59,8 +59,8 @@ const ZoomMission: React.FC<ZoomMissionProps> = ({
       </div>
 
       <MissionTracker
-        title={'Zoom In'}
-        description={'Use the scroll or the buttons to zoom in'}
+        title={node.misionTitle}
+        description={node.missionDescription}
       />
     </div>
   )

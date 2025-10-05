@@ -64,6 +64,8 @@ export interface ZoomTutorialNode extends SceneNode {
 
 export interface ZoomMissionNode extends SceneNode {
   type: 'zoom_mission'
+  misionTitle: string
+  missionDescription: string
   fovThreshold: number
 }
 
