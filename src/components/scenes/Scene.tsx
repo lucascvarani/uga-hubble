@@ -12,12 +12,14 @@ import type {
   ZoomTutorialNode,
   PlayMusicNode,
   QuizzNode,
+  FadeOutNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
 import UseTelescope from './nodes/UseTelescope'
 import ZoomTutorial from './nodes/ZoomTutorial'
 import PlayMusic from './nodes/PlayMusic'
+import FadeOut from './nodes/FadeOut'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -90,7 +92,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         }
       }
     } else {
-      setCurrentIndex(0); 
+      setCurrentIndex(0)
       onSceneEnd?.()
     }
   }
@@ -147,6 +149,13 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         <PlayMusic
           node={currentNode as PlayMusicNode}
           onNext={handleNextNode}
+        />
+      )
+    case 'fade_out':
+      return (
+        <FadeOut
+          onNext={handleNextNode}
+          duration={(currentNode as FadeOutNode).duration}
         />
       )
     default:
