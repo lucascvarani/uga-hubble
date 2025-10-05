@@ -2,51 +2,43 @@ import React, { useState, useEffect } from 'react'
 import DiamondLine from './structure/DiamondLine'
 
 interface DialogUIProps {
-  text: string
-  onNext: () => void
+  text: string[]
+  onFinish: () => void
   typingSpeed?: number
-  newDialog?: boolean
 }
 
 const Dialog: React.FC<DialogUIProps> = ({
   text,
-  onNext,
+  onFinish,
   typingSpeed = 50,
-  newDialog = false,
 }) => {
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [showDiamond, setShowDiamond] = useState(false)
   const [startTyping, setStartTyping] = useState(false)
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
 
   useEffect(() => {
     // Reset all states when text changes
     setDisplayedText('')
     setIsTypingComplete(false)
 
-    if (newDialog) {
-      // Animation sequence for new dialogs
-      setIsVisible(false)
-      setShowDiamond(false)
-      setStartTyping(false)
+    // Animation sequence for new dialogs
+    setIsVisible(false)
+    setShowDiamond(false)
+    setStartTyping(false)
 
-      const visibilityTimer = setTimeout(() => setIsVisible(true), 50)
-      const diamondTimer = setTimeout(() => setShowDiamond(true), 350)
-      const typingStartTimer = setTimeout(() => setStartTyping(true), 650)
+    const visibilityTimer = setTimeout(() => setIsVisible(true), 50)
+    const diamondTimer = setTimeout(() => setShowDiamond(true), 350)
+    const typingStartTimer = setTimeout(() => setStartTyping(true), 650)
 
-      return () => {
-        clearTimeout(visibilityTimer)
-        clearTimeout(diamondTimer)
-        clearTimeout(typingStartTimer)
-      }
-    } else {
-      // No animation - show everything immediately
-      setIsVisible(true)
-      setShowDiamond(true)
-      setStartTyping(true)
+    return () => {
+      clearTimeout(visibilityTimer)
+      clearTimeout(diamondTimer)
+      clearTimeout(typingStartTimer)
     }
-  }, [text, newDialog])
+  }, [text])
 
   // Separate effect for typing animation
   useEffect(() => {
@@ -54,8 +46,8 @@ const Dialog: React.FC<DialogUIProps> = ({
 
     let currentIndex = 0
     const timer = setInterval(() => {
-      if (currentIndex <= text.length) {
-        setDisplayedText(text.slice(0, currentIndex))
+      if (currentIndex <= text[currentTextIndex].length) {
+        setDisplayedText(text[currentTextIndex].slice(0, currentIndex))
         currentIndex++
       } else {
         setIsTypingComplete(true)
@@ -64,14 +56,24 @@ const Dialog: React.FC<DialogUIProps> = ({
     }, typingSpeed)
 
     return () => clearInterval(timer)
-  }, [startTyping, text, typingSpeed])
+  }, [currentTextIndex, startTyping, text, typingSpeed])
 
   const handleClick = () => {
     if (isTypingComplete) {
-      onNext()
+      if (currentTextIndex < text.length - 1) {
+        setCurrentTextIndex(currentTextIndex + 1)
+        setDisplayedText('')
+        setIsTypingComplete(false)
+        setStartTyping(false)
+
+        // Restart the typing animation for the next text
+        setTimeout(() => setStartTyping(true), 100) // Small delay before starting next text
+      } else {
+        onFinish()
+      }
     } else if (startTyping) {
       // Instantly complete the text if clicked during typing
-      setDisplayedText(text)
+      setDisplayedText(text[currentTextIndex])
       setIsTypingComplete(true)
     }
   }
@@ -100,9 +102,7 @@ const Dialog: React.FC<DialogUIProps> = ({
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
           transformOrigin: 'center',
-          transition: newDialog
-            ? 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            : 'none',
+          transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           clipPath: isVisible
             ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
             : 'polygon(45% 0, 55% 0, 55% 100%, 45% 100%)',
@@ -112,9 +112,7 @@ const Dialog: React.FC<DialogUIProps> = ({
           style={{
             opacity: showDiamond ? 1 : 0,
             transform: showDiamond ? 'scaleX(1)' : 'scaleX(0)',
-            transition: newDialog
-              ? 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
-              : 'none',
+            transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
             transformOrigin: 'center',
           }}
         >
@@ -127,9 +125,7 @@ const Dialog: React.FC<DialogUIProps> = ({
             transform: startTyping
               ? 'scaleX(1) scaleY(1)'
               : 'scaleX(0.3) scaleY(0.8)',
-            transition: newDialog
-              ? 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
-              : 'none',
+            transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             transformOrigin: 'center',
           }}
         >
