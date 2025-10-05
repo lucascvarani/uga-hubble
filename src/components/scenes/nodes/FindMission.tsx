@@ -57,15 +57,38 @@ const FindMission: React.FC<FindMissionProps> = ({
     dec: number
   }>({ ra: 0, dec: 0 })
 
+  function degToRad(deg: number) {
+    return deg * (Math.PI / 180);
+  }
+
+  function angularDistanceInArcSeconds(ra1: number, dec1: number, ra2: number, dec2: number): number {
+    // Convert to radians
+    const ra1Rad = degToRad(ra1);
+    const dec1Rad = degToRad(dec1);
+    const ra2Rad = degToRad(ra2);
+    const dec2Rad = degToRad(dec2);
+
+    // Spherical distance formula
+    const sinDec1 = Math.sin(dec1Rad);
+    const sinDec2 = Math.sin(dec2Rad);
+    const cosDec1 = Math.cos(dec1Rad);
+    const cosDec2 = Math.cos(dec2Rad);
+    const deltaRA = ra2Rad - ra1Rad;
+    const cosDeltaRA = Math.cos(deltaRA);
+
+    const angle = Math.acos(sinDec1 * sinDec2 + cosDec1 * cosDec2 * cosDeltaRA);
+
+    // Convert back to degrees
+    return angle * (180 / Math.PI);
+  }
+
   const isNearTarget = (
     raClick: number,
     decClick: number,
     target: { ra: number; dec: number },
     toleranceDeg: number
   ) => {
-    const raDiff = Math.abs(raClick - target.ra)
-    const decDiff = Math.abs(decClick - target.dec)
-    return raDiff <= toleranceDeg && decDiff <= toleranceDeg
+    return angularDistanceInArcSeconds(raClick, decClick, target.ra, target.dec) <= toleranceDeg;
   }
 
   useEffect(() => {
@@ -115,6 +138,7 @@ const FindMission: React.FC<FindMissionProps> = ({
     <>
       <div className="absolute right-0 bottom-0">
         <Compass
+          aladinInstance={aladinInstance}
           current_x={currentCoords.ra}
           current_y={currentCoords.dec}
           target_x={node.targetCoords.ra}
