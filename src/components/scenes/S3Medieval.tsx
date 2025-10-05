@@ -8,7 +8,7 @@ export const medievalNodes: SceneNode[] = [
   {
     type: 'zoom_tutorial',
     fov: 60,
-    fovRange: [0.5, 60],
+    fovRange: [10, 60],
   } as ZoomTutorialNode,
   {
     type: 'fade_out',
