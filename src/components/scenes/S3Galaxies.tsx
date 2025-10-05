@@ -1,4 +1,9 @@
-import type { QuizzNode, SceneNode, DialogNode } from './nodes/SceneNode'
+import type {
+  QuizzNode,
+  SceneNode,
+  DialogNode,
+  ZoomMissionNode,
+} from './nodes/SceneNode'
 
 export const galaxiesNodes: SceneNode[] = [
   {
@@ -13,6 +18,17 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 10,
     },
+  } as DialogNode,
+  {
+    type: 'zoom_mission',
+    fovThreshold: 1,
+  } as ZoomMissionNode,
+  {
+    type: 'dialog',
+    text: [
+      'This unique point of light is in fact an entire galaxy, with millions of stars!',
+      'This is Andromeda...',
+    ],
   } as DialogNode,
   {
     type: 'dialog',

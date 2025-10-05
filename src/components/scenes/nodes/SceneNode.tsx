@@ -8,6 +8,7 @@ export type SceneNodeType =
   | 'music'
   | 'quizz' // add more types later
   | 'fade_out'
+  | 'zoom_mission'
 
 export interface SceneNode {
   type: SceneNodeType
@@ -59,6 +60,11 @@ export interface ZoomTutorialNode extends SceneNode {
   type: 'zoom_tutorial'
   fov: number
   fovRange: [number, number]
+}
+
+export interface ZoomMissionNode extends SceneNode {
+  type: 'zoom_mission'
+  fovThreshold: number
 }
 
 export interface FadeOutNode extends SceneNode {
