@@ -42,7 +42,6 @@ export interface FindPosNode extends SceneNode {
   targetCoords: { ra: number; dec: number } // target to find
   survey?: string // e.g. "P/DSS2/color" or "P/2MASS/color"
   tolerance: number
-  fov: number
   interpolationDuration?: number
 }
 

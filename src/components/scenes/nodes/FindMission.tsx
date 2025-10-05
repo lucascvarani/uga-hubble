@@ -102,8 +102,6 @@ const FindMission: React.FC<FindMissionProps> = ({
       // aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
     }
 
-    aladinInstance.setFov(node.fov)
-
     let completed = false
     aladinInstance.on('positionChanged', (e: any) => {
       if (completed) return // flag prevents multiple triggers
