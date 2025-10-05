@@ -63,12 +63,12 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
   useEffect(() => {
     if (!aladinInstance) return;
 
-    if (node.survey) {
-      aladinInstance.setImageSurvey(node.survey);
-    }
+    // if (node.survey) {
+    //   aladinInstance.setImageSurvey(node.survey);
+    // }
 
     if (node.startingCoords) {
-      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+      // aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
     }
 
     aladinInstance.setFov(node.fov);
