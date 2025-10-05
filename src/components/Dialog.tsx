@@ -32,8 +32,8 @@ const Dialog: React.FC<DialogUIProps> = ({
       setStartTyping(false)
 
       const visibilityTimer = setTimeout(() => setIsVisible(true), 50)
-      const diamondTimer = setTimeout(() => setShowDiamond(true), 200)
-      const typingStartTimer = setTimeout(() => setStartTyping(true), 400)
+      const diamondTimer = setTimeout(() => setShowDiamond(true), 350)
+      const typingStartTimer = setTimeout(() => setStartTyping(true), 650)
 
       return () => {
         clearTimeout(visibilityTimer)
@@ -98,26 +98,22 @@ const Dialog: React.FC<DialogUIProps> = ({
           boxSizing: 'border-box',
           // Opening animation styles
           opacity: isVisible ? 1 : 0,
-          transform: isVisible
-            ? 'scaleY(1) scaleX(1)'
-            : 'scaleY(0.1) scaleX(0.8)',
-          transformOrigin: 'bottom center',
+          transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
+          transformOrigin: 'center',
           transition: newDialog
-            ? 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            ? 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
             : 'none',
           clipPath: isVisible
             ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-            : 'polygon(0 90%, 100% 90%, 100% 100%, 0 100%)',
+            : 'polygon(45% 0, 55% 0, 55% 100%, 45% 100%)',
         }}
       >
         <div
           style={{
             opacity: showDiamond ? 1 : 0,
-            transform: showDiamond
-              ? 'scaleX(1) translateY(0)'
-              : 'scaleX(0) translateY(-10px)',
+            transform: showDiamond ? 'scaleX(1)' : 'scaleX(0)',
             transition: newDialog
-              ? 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+              ? 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
               : 'none',
             transformOrigin: 'center',
           }}
@@ -128,10 +124,13 @@ const Dialog: React.FC<DialogUIProps> = ({
           style={{
             display: 'inline-block',
             opacity: startTyping ? 1 : 0,
-            transform: startTyping ? 'scale(1)' : 'scale(0.9)',
+            transform: startTyping
+              ? 'scaleX(1) scaleY(1)'
+              : 'scaleX(0.3) scaleY(0.8)',
             transition: newDialog
-              ? 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+              ? 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
               : 'none',
+            transformOrigin: 'center',
           }}
         >
           {displayedText}
