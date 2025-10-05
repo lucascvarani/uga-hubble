@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { FindPosNode } from "./SceneNode";
-import type { AladinInstance } from "./Aladin";
-import Dialog from "./Dialog";
+import type { AladinInstance } from "../../Aladin";
 
 interface FindMissionProps {
   node: FindPosNode;
