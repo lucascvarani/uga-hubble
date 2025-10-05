@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './App.css'
 import Aladin from './components/Aladin'
 import Scene from './components/scenes/Scene'
@@ -7,12 +7,14 @@ import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
 import Galaxies from './components/scenes/Galaxies'
 import { ugaNodes } from './components/scenes/S1Uga'
+import Telescope, { type TelescopeHandle } from './components/Telescope'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
   const [sceneNumber, setSceneNumber] = useState<number>(0)
   const [showSoundWarning, setShowSoundWarning] = useState(true)
   const [showIntro, setShowIntro] = useState(true)
+  const telescopeRef = useRef<TelescopeHandle>(null)
 
   // Show sound warning first
   if (showSoundWarning) {
@@ -36,6 +38,21 @@ function App() {
       {/* Full screen Aladin */}
       <div style={{ width: '100%', height: '100%' }}>
         <Aladin setAladinInstance={setAladinInstance} />
+      </div>
+
+      {/* Telescope Overlay - positioned above Aladin but below UI */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none', // Allow clicks to pass through to elements behind
+          zIndex: 5, // Below UI but above Aladin
+        }}
+      >
+        <Telescope ref={telescopeRef} />
       </div>
 
       {/* Scene overlay - Full Screen */}
