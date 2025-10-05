@@ -1,48 +1,49 @@
-import React, { useEffect, useRef } from "react";
-import Dialog from "../Dialog";
+import React, { useEffect, useRef } from 'react'
+import Dialog from '../Dialog'
+import MissionTracker from '../MissionTracker'
 
 interface AladinInstance {
-  on: (event: string, callback: (...args: unknown[]) => void) => void;
+  on: (event: string, callback: (...args: unknown[]) => void) => void
   // Add other methods as needed
 }
 
 interface EncontrarNorteProps {
-  aladinInstance: AladinInstance | null;
-  onComplete: () => void;
+  aladinInstance: AladinInstance | null
+  onComplete: () => void
 }
 
 export default function EncontrarNorte({
   aladinInstance,
   onComplete,
 }: EncontrarNorteProps) {
-  const [sceneState, setSceneState] = React.useState(0);
-  const clickHandlerRef = useRef<((...args: unknown[]) => void) | null>(null);
-  const [currentDialogIndex, setCurrentDialogIndex] = React.useState(0);
-  const dialogs1 = ["Onde está o norte?", "O norte está ali!"];
-  const dialogs2 = ["O que você vê?", "Eu vejo uma árvore."];
+  const [sceneState, setSceneState] = React.useState(0)
+  const clickHandlerRef = useRef<((...args: unknown[]) => void) | null>(null)
+  const [currentDialogIndex, setCurrentDialogIndex] = React.useState(0)
+  const dialogs1 = ['Onde está o norte?', 'O norte está ali!']
+  const dialogs2 = ['O que você vê?', 'Eu vejo uma árvore.']
 
   useEffect(() => {
     if (aladinInstance) {
       const clickHandler = () => {
-        onClick();
-      };
+        onClick()
+      }
 
-      clickHandlerRef.current = clickHandler;
-      aladinInstance.on("click", clickHandler);
+      clickHandlerRef.current = clickHandler
+      aladinInstance.on('click', clickHandler)
     }
-  }, [aladinInstance, onClick]);
+  }, [aladinInstance, onClick])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function onClick() {
     if (currentDialogIndex < dialogs1.length - 1) {
-      return;
+      return
     }
-    setCurrentDialogIndex(0);
+    setCurrentDialogIndex(0)
     setSceneState((prevState) => {
-      return prevState + 1;
-    });
+      return prevState + 1
+    })
     if (sceneState === 2) {
-      onComplete();
+      onComplete()
     }
   }
 
@@ -51,12 +52,28 @@ export default function EncontrarNorte({
       currentDialogIndex <
       (sceneState === 0 ? dialogs1 : dialogs2).length - 1
     ) {
-      setCurrentDialogIndex(currentDialogIndex + 1);
+      setCurrentDialogIndex(currentDialogIndex + 1)
     }
-  };
+  }
 
   return (
     <div>
+      {/* Mission Tracker positioned in top left */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          zIndex: 1000,
+        }}
+      >
+        <MissionTracker
+          title={'Encontrar o Norte'}
+          description={'Ajude Aladim a encontrar o norte!'}
+        />
+      </div>
+
+      {/* Dialog positioned in center bottom */}
       {sceneState === 0 && (
         <div>
           <Dialog
@@ -74,5 +91,5 @@ export default function EncontrarNorte({
         </div>
       )}
     </div>
-  );
+  )
 }
