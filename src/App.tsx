@@ -5,9 +5,10 @@ import Scene from './components/scenes/Scene'
 import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
 import { ugaNodes } from './components/scenes/S1Uga'
-import { galaxiesNodes } from './components/scenes/S3Galaxies'
+// import { galaxiesNodes } from './components/scenes/S3Galaxies'
 import Telescope, { type TelescopeHandle } from './components/Telescope'
 import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
+import { medievalNodes } from './components/scenes/S3Medieval'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -93,10 +94,11 @@ function App() {
                       />
                     )
                   case 2:
+                    telescopeRef.current?.show()
                     return (
                       <Scene
                         aladinInstance={aladinInstance}
-                        nodes={galaxiesNodes}
+                        nodes={medievalNodes}
                         onSceneEnd={() =>
                           setSceneNumber((previous) => previous + 1)
                         }
