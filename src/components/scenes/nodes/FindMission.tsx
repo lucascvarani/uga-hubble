@@ -9,9 +9,46 @@ interface FindMissionProps {
   onNext: () => void;
 }
 
-const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext }) => {
-  const [listenerAdded, setListenerAdded] = useState(false);
+function animateToTarget(
+  aladin: AladinInstance,
+  fromRa: number,
+  fromDec: number,
+  targetRa: number,
+  targetDec: number,
+  duration = 1000, // total duration in ms
+  onComplete?: () => void
+) {
+  if (!aladin) return;
 
+  const container = document.getElementById("aladin-lite-div");
+  if (container) container.style.pointerEvents = "none"; // disable interaction
+
+  const startTime = Date.now();
+  const intervalMs = 30;
+
+  const timer = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    let t = Math.max(0, Math.min(elapsed / duration, 1));
+
+    // ease-in-out
+    const ease = 0.5 - 0.5 * Math.cos(Math.PI * t);
+
+    const ra = fromRa + (targetRa - fromRa) * ease;
+    const dec = fromDec + (targetDec - fromDec) * ease;
+
+    aladin.gotoRaDec(ra, dec);
+
+    if (t >= 1) {
+      clearInterval(timer);
+      if (container) container.style.pointerEvents = "auto"; // re-enable interaction
+      onComplete?.();
+    }
+  }, intervalMs);
+}
+
+
+
+const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext }) => {
   const isNearTarget = (
     raClick: number,
     decClick: number,
@@ -26,48 +63,43 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
   useEffect(() => {
     if (!aladinInstance) return;
 
-    if (node.survey) {
-      aladinInstance.setImageSurvey(node.survey);
-    }
+    // if (node.survey) {
+    //   aladinInstance.setImageSurvey(node.survey);
+    // }
 
     if (node.startingCoords) {
-      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+      // aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
     }
 
     aladinInstance.setFov(node.fov);
 
-    const tolerance = node.tolerance;
+    let completed = false;
+    aladinInstance.on("positionChanged", (e: any) => {
+      if (completed) return; // flag prevents multiple triggers
 
-    const handleClick = (evt: any) => {
-      if (evt.isDragging) return;
+      const ra = e.ra;
+      const dec = e.dec;
+      if (isNearTarget(ra, dec, node.targetCoords, node.tolerance)) {
+        completed = true;
 
-      const coords = [evt.ra, evt.dec];
-      if (!coords) return;
-
-      const raDiff = coords[0] - node.targetCoords.ra;
-      const decDiff = coords[1] - node.targetCoords.dec;
-
-      // Log the click info
-      console.log(
-        `[FindMission] Click at RA: ${coords[0].toFixed(2)}, Dec: ${coords[1].toFixed(
-          2
-        )} | Target RA: ${node.targetCoords.ra}, Dec: ${node.targetCoords.dec} | Delta RA: ${raDiff.toFixed(
-          2
-        )}, Delta Dec: ${decDiff.toFixed(2)}`
-      );
-
-      if (isNearTarget(coords[0], coords[1], node.targetCoords, tolerance)) {
-        alert("Target found!");
-        onNext();
-      } else {
-        alert("Try again!");
+        animateToTarget(
+          aladinInstance!,
+          ra,
+          dec,
+          node.targetCoords.ra,
+          node.targetCoords.dec,
+          node.interpolationDuration ?? 1000, // duration in ms
+          () => {
+            // Finally call onNext after animation completes
+            onNext();
+          }
+        );
       }
-    };
-
-    aladinInstance.on("click", handleClick);
+      console.log("positionChanged", ra, dec)
+    });
 
     return () => {};
-  }, [aladinInstance, node, listenerAdded, onNext]);
+  }, []);
 
   return (
       <MissionTracker

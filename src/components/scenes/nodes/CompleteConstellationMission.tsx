@@ -31,8 +31,8 @@ const CompleteConstellationMission: React.FC<CompleteConstellationMissionProps> 
     });
 
     // Optionally mark stars
-    node.constellation.stars.forEach((star) => {
-      overlay.add(A.circle([star.ra, star.dec], 0.3, { color: "yellow" }));
+    // node.constellation.stars.forEach((star) => {
+    //   overlay.add(A.circle([star.ra, star.dec], 0.3, { color: "yellow" }));
     //   if (star.name) {
     //     overlay.add(A.label([star.ra, star.dec], star.name, {
     //       color: "white",
@@ -40,7 +40,7 @@ const CompleteConstellationMission: React.FC<CompleteConstellationMissionProps> 
     //       anchor: "left",
     //     }));
     //   }
-    });
+    // });
 
     // Cleanup on unmount
     return () => {

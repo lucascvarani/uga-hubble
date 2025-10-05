@@ -1,7 +1,13 @@
-export type SceneNodeType = 'dialog' | 'find' | 'constellation' | 'eye' // add more types later
+export type SceneNodeType =
+  | 'dialog'
+  | 'find'
+  | 'constellation'
+  | 'eye'
+  | 'use_telescope' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
+  startingCoords?: { ra: number; dec: number, shouldSnap: boolean } // starting position
 }
 
 export interface DialogNode extends SceneNode {
@@ -18,11 +24,15 @@ export interface FindPosNode extends SceneNode {
   type: 'find' | 'constellation'
   title: string
   description: string
-  startingCoords?: { ra: number; dec: number } // starting position
   targetCoords: { ra: number; dec: number } // target to find
   survey?: string // e.g. "P/DSS2/color" or "P/2MASS/color"
   tolerance: number
   fov: number
+  interpolationDuration?: number
+}
+
+export interface UseTelescopeNode extends SceneNode {
+  type: 'use_telescope'
 }
 
 interface Star {
