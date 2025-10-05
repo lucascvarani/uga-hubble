@@ -15,7 +15,6 @@ export interface AladinInstance {
   on: (event: string, callback: (...args: unknown[]) => void) => void
   gotoRaDec: (ra: number, dec: number) => void
   getRaDec: () => [number, number] | null
-  getFov: () => [number, number] | null
   setImageSurvey: (survey: string) => void
   setFov: (degrees: number) => void
   getFov: () => [number, number] | null
