@@ -26,6 +26,13 @@ const ZoomMission: React.FC<ZoomMissionProps> = ({
   }, [aladinInstance, node.startingCoords])
 
   useEffect(() => {
+    const container = document.getElementById('aladin-lite-div');
+
+    const blockDrag = (e: any) => e.stopPropagation();
+    container?.addEventListener('mousedown', blockDrag, true);
+    container?.addEventListener('mousemove', blockDrag, true);
+    container?.addEventListener('mouseup', blockDrag, true);
+
     // cria o <link> para o CSS
     const link = document.createElement('link')
     link.rel = 'stylesheet'
@@ -36,6 +43,10 @@ const ZoomMission: React.FC<ZoomMissionProps> = ({
     // cleanup: remove o CSS quando o componente desmonta
     return () => {
       document.head.removeChild(link)
+
+      container?.removeEventListener('mousedown', blockDrag, true);
+      container?.removeEventListener('mousemove', blockDrag, true);
+      container?.removeEventListener('mouseup', blockDrag, true);
     }
   }, [])
 

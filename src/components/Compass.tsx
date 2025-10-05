@@ -27,29 +27,37 @@ function radToDeg(rad: number) {
     return rad * (180 / Math.PI);
 }
 
-const getMapAngle = (aladin: AladinInstance, x1: number, y1: number, x2: number, y2: number) => {
-  const screenCurrent = aladin.world2pix(x1, y1);
-  const screenTarget = aladin.world2pix(x2, y2);
-  console.log(screenCurrent, screenTarget);
+const getMapAngle = (aladin: AladinInstance, x1: number, y1: number, x2: number, y2: number): number | null => {
+    const screenCurrent = aladin.world2pix(x1, y1);
+    const screenTarget = aladin.world2pix(x2, y2);
 
-  if (screenCurrent && screenTarget) {
-        // Use screen coordinates if available
-        const dx = screenTarget[0] - screenCurrent[0]; 
-        const dy = screenCurrent[1] - screenTarget[1]; 
+    if (screenCurrent && screenTarget) {
+        // Use screen coordinates
+        const dx = screenTarget[0] - screenCurrent[0];
+        const dy = screenCurrent[1] - screenTarget[1];
         return radToDeg(Math.atan2(dx, dy));
     }
 
-    // Fallback: use RA/Dec directly
+    // Fallback: full spherical formula
     const ra1 = degToRad(x1);
     const dec1 = degToRad(y1);
     const ra2 = degToRad(x2);
     const dec2 = degToRad(y2);
 
-    // Small-angle approximation for tangent-plane projection
-    const dx = (ra2 - ra1) * Math.cos((dec1 + dec2) / 2);
-    const dy = dec2 - dec1;
+    const deltaRA = ra2 - ra1;
 
-    return radToDeg(Math.atan2(dx, dy));
+    // Formula for initial bearing (angle east of north)
+    const y = Math.sin(deltaRA) * Math.cos(dec2);
+    const x = Math.cos(dec1) * Math.sin(dec2) - Math.sin(dec1) * Math.cos(dec2) * Math.cos(deltaRA);
+    const angle = Math.atan2(-y, x);
+
+    // Convert to degrees
+    let angleDeg = radToDeg(angle);
+
+    // Normalize to [0, 360)
+    if (angleDeg < 0) angleDeg += 360;
+
+    return angleDeg;
 };
 
 const Compass = (props: Props) => {
