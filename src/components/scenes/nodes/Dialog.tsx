@@ -97,25 +97,22 @@ const Dialog: React.FC<DialogUIProps> = ({
     // We add a className to target this element reliably with CSS
     <div className="dialog-wrapper">
       <div
-        className="dialog-container"
+        className="
+      dialog-container
+      fixed bottom-0 left-1/2 -translate-x-1/2 
+      w-1/2
+      p-10 pt-8
+      bg-black/75 text-white text-center text-lg
+      cursor-pointer
+      z-[1000]
+      box-border
+    "
         onClick={handleClick}
         style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          padding: '40px',
-          paddingTop: '30px', // Less padding on top to make room for the line
-          backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          color: 'white',
-          textAlign: 'center',
-          fontSize: '1.1rem',
-          zIndex: 1000,
-          cursor: 'pointer',
-          boxSizing: 'border-box',
-          // Opening animation styles
           opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
+          transform: isVisible
+            ? 'translateX(0%) scaleX(1)'
+            : 'translateX(-50%) scaleX(0)',
           transformOrigin: 'center',
           transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           clipPath: isVisible
@@ -133,6 +130,7 @@ const Dialog: React.FC<DialogUIProps> = ({
         >
           <DiamondLine />
         </div>
+
         <span
           style={{
             display: 'inline-block',
@@ -142,6 +140,7 @@ const Dialog: React.FC<DialogUIProps> = ({
               : 'scaleX(0.3) scaleY(0.8)',
             transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             transformOrigin: 'center',
+            fontSize: '24px',
           }}
         >
           {displayedText}
@@ -150,6 +149,7 @@ const Dialog: React.FC<DialogUIProps> = ({
               style={{
                 animation: 'blink 1s infinite',
                 marginLeft: '2px',
+                fontSize: '24px',
               }}
             >
               |
@@ -163,12 +163,7 @@ const Dialog: React.FC<DialogUIProps> = ({
           0%, 50% { opacity: 1; }
           51%, 100% { opacity: 0; }
         }
-        
-        /* The dialog needs a relative position for its pseudo-elements */
-        .dialog-container {
-          position: relative;
-        }
-        `}
+      `}
         </style>
       </div>
     </div>
