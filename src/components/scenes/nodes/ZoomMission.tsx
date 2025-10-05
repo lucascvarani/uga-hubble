@@ -3,6 +3,7 @@ import type { ZoomMissionNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MissionTracker from '../../MissionTracker'
+import MusicManager from '../../../utils/MusicManager'
 
 interface ZoomMissionProps {
   node: ZoomMissionNode
@@ -56,6 +57,10 @@ const ZoomMission: React.FC<ZoomMissionProps> = ({
       const currentFov = aladinInstance.getFov()
 
       if (currentFov && currentFov[0] < node.fovThreshold) {
+        MusicManager.getInstance().playSoundEffect(
+          '/audio/correct-zoom.mp3',
+          0.8
+        )
         onNext()
       }
     }

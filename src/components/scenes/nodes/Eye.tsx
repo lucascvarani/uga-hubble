@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import type { EyeNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
+import MusicManager from '../../../utils/MusicManager'
 
 interface EyeProps {
   node: EyeNode
@@ -19,6 +20,8 @@ const Eye: React.FC<EyeProps> = ({ onNext }) => {
     link.href = '/Eye.css' // caminho para o seu arquivo CSS
     link.id = 'eye-css' // opcional, para identificar depois
     document.head.appendChild(link)
+
+    MusicManager.getInstance().playSoundEffect('/audio/yawn.mp3', 0.7)
 
     // cleanup: remove o CSS quando o componente desmonta
     return () => {

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import MusicManager from '../../../utils/MusicManager'
 
 interface UseTelescopeUIProps {
   onNext: () => void
@@ -21,7 +22,10 @@ const UseTelescope: React.FC<UseTelescopeUIProps> = ({ onNext }) => {
 
   return (
     <div
-      onClick={() => onNext()}
+      onClick={() => {
+        MusicManager.getInstance().playSoundEffect('/audio/equip.mp3', 1.0)
+        onNext()
+      }}
       className="absolute inset-0 m-auto w-32 h-12 bg-white rounded-lg flex items-center justify-center cursor-pointer shadow-md"
     >
       Use Telescope
