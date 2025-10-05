@@ -66,6 +66,10 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
 
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec) {
+        if (nodes[nextIndex].startingCoords.shouldSnap) {
+          aladinInstance?.gotoRaDec(nodes[nextIndex].startingCoords.ra, nodes[nextIndex].startingCoords.dec);
+        }
+        else {
         // aladinInstance?.gotoRaDec(nodes[currentIndex].startingCoords.ra, nodes[currentIndex].startingCoords.dec);
         animateToTarget(
           aladinInstance!,
@@ -75,6 +79,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           nodes[nextIndex].startingCoords.dec,
           1000
         );
+      }
       }
     } else {
       onSceneEnd?.()
