@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Chat from "../Chat";
+import Dialog from "../Dialog";
 
 interface AladinInstance {
   on: (event: string, callback: (...args: unknown[]) => void) => void;
@@ -17,6 +17,9 @@ export default function EncontrarNorte({
 }: EncontrarNorteProps) {
   const [sceneState, setSceneState] = React.useState(0);
   const clickHandlerRef = useRef<((...args: unknown[]) => void) | null>(null);
+  const [currentDialogIndex, setCurrentDialogIndex] = React.useState(0);
+  const dialogs1 = ["Onde está o norte?", "O norte está ali!"];
+  const dialogs2 = ["O que você vê?", "Eu vejo uma árvore."];
 
   useEffect(() => {
     if (aladinInstance) {
@@ -31,11 +34,11 @@ export default function EncontrarNorte({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function onClick() {
+    if (currentDialogIndex < dialogs1.length - 1) {
+      return;
+    }
+    setCurrentDialogIndex(0);
     setSceneState((prevState) => {
-      console.log(
-        "EncontrarNorte click detected, advancing from state",
-        prevState
-      );
       return prevState + 1;
     });
     if (sceneState === 2) {
@@ -43,16 +46,31 @@ export default function EncontrarNorte({
     }
   }
 
+  const handleNextDialog = () => {
+    if (
+      currentDialogIndex <
+      (sceneState === 0 ? dialogs1 : dialogs2).length - 1
+    ) {
+      setCurrentDialogIndex(currentDialogIndex + 1);
+    }
+  };
+
   return (
     <div>
       {sceneState === 0 && (
         <div>
-          <Chat text="Onde está o norte?" />
+          <Dialog
+            text={dialogs1[currentDialogIndex]}
+            onNext={handleNextDialog}
+          />
         </div>
       )}
       {sceneState === 1 && (
         <div>
-          <Chat text="O norte está ali!" />
+          <Dialog
+            text={dialogs2[currentDialogIndex]}
+            onNext={handleNextDialog}
+          />
         </div>
       )}
     </div>
