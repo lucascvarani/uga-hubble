@@ -25,14 +25,14 @@ const FindMission: React.FC<FindMissionProps> = ({ node, aladinInstance, onNext 
   useEffect(() => {
     if (!aladinInstance) return;
 
-    // 🔹 Optional: change survey if defined
     if (node.survey) {
-      console.log(`[FindMission] Setting survey to ${node.survey}`);
       aladinInstance.setImageSurvey(node.survey);
     }
 
-    // Center the map
-    aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+    if (node.startingCoords) {
+      aladinInstance.gotoRaDec(node.startingCoords.ra, node.startingCoords.dec);
+    }
+
     aladinInstance.setFov(node.fov);
 
     const tolerance = node.tolerance;
