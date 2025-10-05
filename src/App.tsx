@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import Aladin from './components/Aladin'
-import EncontrarNorte from './components/scenes/EncontrarNorte'
 import Scene from './components/scenes/Scene'
 import { medievalNodes } from './NodesConfig'
 import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
 import Galaxies from './components/scenes/Galaxies'
+import { ugaNodes } from './components/scenes/S1Uga'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -55,9 +55,10 @@ function App() {
             switch (sceneNumber) {
               case 0:
                 return (
-                  <EncontrarNorte
+                  <Scene
                     aladinInstance={aladinInstance}
-                    onComplete={() =>
+                    nodes={ugaNodes}
+                    onSceneEnd={() =>
                       setSceneNumber((previous) => previous + 1)
                     }
                   />
