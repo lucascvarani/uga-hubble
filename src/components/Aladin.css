@@ -1,0 +1,27 @@
+#aladin-lite-div .aladin-fov {
+  position: absolute !important;
+  top: auto;
+  left: 73px;
+  bottom: 50px;
+  right: auto;
+}
+
+#aladin-lite-div .aladin-location {
+  position: absolute !important;
+  bottom: auto;
+  left: auto;
+  right: 10px;
+  top: 10px;
+}
+
+.aladin-tooltip-container.bottom {
+  display: none !important;
+}
+
+.aladin-input-text.search {
+  border: none !important;
+}
+
+.aladin-location-copy {
+  display: none !important;
+}
