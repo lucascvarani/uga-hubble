@@ -1,4 +1,9 @@
-export type SceneNodeType = 'dialog' | 'find' | 'constellation' | 'eye' // add more types later
+export type SceneNodeType =
+  | 'dialog'
+  | 'find'
+  | 'constellation'
+  | 'eye'
+  | 'quizz' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
@@ -12,6 +17,17 @@ export interface DialogNode extends SceneNode {
 export interface EyeNode extends SceneNode {
   type: 'eye'
   coords: { ra: number; dec: number }
+}
+
+export interface QuizzNode extends SceneNode {
+  type: 'quizz'
+  title: string
+  description: string
+  question: string
+  options: string[]
+  rightOption: number
+  textRightOption: string[]
+  textWrongOption: string[]
 }
 
 export interface FindPosNode extends SceneNode {
