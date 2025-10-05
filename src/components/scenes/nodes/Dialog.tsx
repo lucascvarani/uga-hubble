@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import DiamondLine from '../../structure/DiamondLine'
 
 interface DialogUIProps {
@@ -19,12 +19,15 @@ const Dialog: React.FC<DialogUIProps> = ({
   const [startTyping, setStartTyping] = useState(false)
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const typingIntervalRef = useRef<any>(null)
+
   useEffect(() => {
     // Reset all states when text changes
     setDisplayedText('')
     setIsTypingComplete(false)
 
-    // Animation sequence for new dialogs
+    // Reset animations
     setIsVisible(false)
     setShowDiamond(false)
     setStartTyping(false)
@@ -40,73 +43,75 @@ const Dialog: React.FC<DialogUIProps> = ({
     }
   }, [text])
 
-  // Separate effect for typing animation
+  // Typing animation
   useEffect(() => {
     if (!startTyping) return
 
     let currentIndex = 0
-    const timer = setInterval(() => {
+    typingIntervalRef.current = setInterval(() => {
       if (currentIndex <= text[currentTextIndex].length) {
         setDisplayedText(text[currentTextIndex].slice(0, currentIndex))
         currentIndex++
       } else {
         setIsTypingComplete(true)
-        clearInterval(timer)
+        if (typingIntervalRef.current) clearInterval(typingIntervalRef.current)
       }
     }, typingSpeed)
 
-    return () => clearInterval(timer)
+    return () => {
+      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current)
+    }
   }, [currentTextIndex, startTyping, text, typingSpeed])
 
   const handleClick = () => {
     if (isTypingComplete) {
+      // Move to next text
       if (currentTextIndex < text.length - 1) {
-        setCurrentTextIndex(currentTextIndex + 1)
+        setCurrentTextIndex((prev) => prev + 1)
         setDisplayedText('')
         setIsTypingComplete(false)
         setStartTyping(false)
 
-        // Restart the typing animation for the next text
-        setTimeout(() => setStartTyping(true), 100) // Small delay before starting next text
+        // Restart typing after a small delay
+        setTimeout(() => setStartTyping(true), 100)
       } else {
         onFinish()
         setCurrentTextIndex(0)
       }
     } else if (startTyping) {
-      // Instantly complete the text if clicked during typing
+      // Instantly complete text if clicked during typing
+      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current)
       setDisplayedText(text[currentTextIndex])
       setIsTypingComplete(true)
     }
   }
 
   useEffect(() => {
-    // cria o <link> para o CSS
+    // Dynamically inject CSS
     const link = document.createElement('link')
     link.rel = 'stylesheet'
-    link.href = '/Dialog.css' // caminho para o seu arquivo CSS
-    link.id = 'dialog-css' // opcional, para identificar depois
+    link.href = '/Dialog.css'
+    link.id = 'dialog-css'
     document.head.appendChild(link)
 
-    // cleanup: remove o CSS quando o componente desmonta
     return () => {
       document.head.removeChild(link)
     }
   }, [])
 
   return (
-    // We add a className to target this element reliably with CSS
     <div className="dialog-wrapper">
       <div
         className="
-      dialog-container
-      fixed bottom-0 left-1/2 -translate-x-1/2 
-      w-1/2
-      p-10 pt-8
-      bg-black/75 text-white text-center text-lg
-      cursor-pointer
-      z-[1000]
-      box-border
-    "
+          dialog-container
+          fixed bottom-0 left-1/2 -translate-x-1/2 
+          w-1/2
+          p-10 pt-8
+          bg-black/75 text-white text-center text-lg
+          cursor-pointer
+          z-[1000]
+          box-border
+        "
         onClick={handleClick}
         style={{
           opacity: isVisible ? 1 : 0,
@@ -159,11 +164,11 @@ const Dialog: React.FC<DialogUIProps> = ({
 
         <style>
           {`
-        @keyframes blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-      `}
+            @keyframes blink {
+              0%, 50% { opacity: 1; }
+              51%, 100% { opacity: 0; }
+            }
+          `}
         </style>
       </div>
     </div>
