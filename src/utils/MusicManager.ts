@@ -15,8 +15,6 @@ class MusicManager {
       return
     }
 
-    this.stop()
-
     this.audio = new Audio(src)
     this.audio.loop = loop
     this.audio.volume = volume
@@ -48,20 +46,23 @@ class MusicManager {
     return this.currentTrack
   }
 
-  fadeOut(duration: number = 1000) {
+  async fadeOut(duration: number = 1000): Promise<void> {
     if (!this.audio) return
 
     const startVolume = this.audio.volume
     const fadeStep = startVolume / (duration / 50)
 
-    const fadeInterval = setInterval(() => {
-      if (this.audio && this.audio.volume > 0) {
-        this.audio.volume = Math.max(0, this.audio.volume - fadeStep)
-      } else {
-        clearInterval(fadeInterval)
-        this.stop()
-      }
-    }, 50)
+    return new Promise((resolve) => {
+      const fadeInterval = setInterval(() => {
+        if (this.audio && this.audio.volume > 0) {
+          this.audio.volume = Math.max(0, this.audio.volume - fadeStep)
+        } else {
+          clearInterval(fadeInterval)
+          this.stop()
+          resolve()
+        }
+      }, 50)
+    })
   }
 }
 

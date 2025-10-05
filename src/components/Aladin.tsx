@@ -17,8 +17,6 @@ export interface AladinInstance {
   getRaDec: () => [number, number] | null
   setImageSurvey: (survey: string) => void
   setFov: (degrees: number) => void
-  addOverlay: (overlay: any) => void
-  removeOverlay: (overlay: any) => void
   // Add other methods as needed
 }
 
@@ -45,6 +43,7 @@ export default function AladinNext({
       if (window && (window as any).A) {
         ;(window as any).A.init.then(() => {
           const a = (window as any).A.aladin('#aladin-lite-div', {
+            cooFrame: 'ICRSd',
             survey: 'P/DSS2/color',
             fov: 60,
             target: 'Orion Nebula',
@@ -61,9 +60,8 @@ export default function AladinNext({
             zoomSpeed: 2,
           })
 
-          // a.on('click', (e) => console.log(e))
-
           setAladinInstance(a)
+          a.on('click', (e) => console.log(e, 'hello'))
 
           // a.gotoObject("Sirius");
 

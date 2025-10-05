@@ -5,6 +5,8 @@ export type SceneNodeType =
   | 'eye'
   | 'use_telescope'
   | 'zoom_tutorial' // add more types later
+  | 'music'
+  | 'quizz' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
@@ -20,6 +22,17 @@ export interface EyeNode extends SceneNode {
   type: 'eye'
 }
 
+export interface QuizzNode extends SceneNode {
+  type: 'quizz'
+  title: string
+  description: string
+  question: string
+  options: string[]
+  rightOption: number
+  textRightOption: string[]
+  textWrongOption: string[]
+}
+
 export interface FindPosNode extends SceneNode {
   type: 'find' | 'constellation'
   title: string
@@ -29,6 +42,12 @@ export interface FindPosNode extends SceneNode {
   tolerance: number
   fov: number
   interpolationDuration?: number
+}
+
+export interface PlayMusicNode extends SceneNode {
+  type: 'music'
+  audio: string
+  volume: number
 }
 
 export interface UseTelescopeNode extends SceneNode {

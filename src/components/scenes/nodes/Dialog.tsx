@@ -70,6 +70,7 @@ const Dialog: React.FC<DialogUIProps> = ({
         setTimeout(() => setStartTyping(true), 100) // Small delay before starting next text
       } else {
         onFinish()
+        setCurrentTextIndex(0)
       }
     } else if (startTyping) {
       // Instantly complete the text if clicked during typing

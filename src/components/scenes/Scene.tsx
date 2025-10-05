@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
+import Quizz from './nodes/Quizz'
 import CompleteConstellationMission from './nodes/CompleteConstellationMission'
 import type {
   SceneNode,
@@ -9,11 +10,14 @@ import type {
   CompleteConstellationNode,
   EyeNode,
   ZoomTutorialNode,
+  PlayMusicNode,
+  QuizzNode,
 } from './nodes/SceneNode'
 import type { AladinInstance } from '../Aladin'
 import Eye from './nodes/Eye'
 import UseTelescope from './nodes/UseTelescope'
 import ZoomTutorial from './nodes/ZoomTutorial'
+import PlayMusic from './nodes/PlayMusic'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -124,6 +128,8 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
         />
       )
+    case 'quizz':
+      return <Quizz node={currentNode as QuizzNode} onNext={handleNextNode} />
     case 'use_telescope':
       return <UseTelescope onNext={handleNextNode} />
 
@@ -132,6 +138,13 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         <ZoomTutorial
           node={currentNode as ZoomTutorialNode}
           aladinInstance={aladinInstance}
+          onNext={handleNextNode}
+        />
+      )
+    case 'music':
+      return (
+        <PlayMusic
+          node={currentNode as PlayMusicNode}
           onNext={handleNextNode}
         />
       )

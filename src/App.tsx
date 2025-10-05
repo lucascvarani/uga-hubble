@@ -4,8 +4,8 @@ import Aladin from './components/Aladin'
 import Scene from './components/scenes/Scene'
 import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
-import Galaxies from './components/scenes/Galaxies'
 import { ugaNodes } from './components/scenes/S1Uga'
+import { galaxiesNodes } from './components/scenes/S3Galaxies'
 import Telescope, { type TelescopeHandle } from './components/Telescope'
 import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
 
@@ -91,11 +91,12 @@ function App() {
                         }
                       />
                     )
-                  case 9:
+                  case 2:
                     return (
-                      <Galaxies
+                      <Scene
                         aladinInstance={aladinInstance}
-                        onComplete={() =>
+                        nodes={galaxiesNodes}
+                        onSceneEnd={() =>
                           setSceneNumber((previous) => previous + 1)
                         }
                       />
