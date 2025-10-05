@@ -8,7 +8,7 @@ export type SceneNodeType =
 
 export interface SceneNode {
   type: SceneNodeType
-  startingCoords?: { ra: number; dec: number; shouldSnap: boolean } // starting position
+  startingCoords?: { ra: number; dec: number; shouldSnap: boolean; fov: number } // starting position
 }
 
 export interface DialogNode extends SceneNode {
