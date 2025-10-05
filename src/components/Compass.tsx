@@ -19,12 +19,37 @@ function closestAngle(x: number, y: number): number {
     return x + d;
 }
 
+function degToRad(deg: number) {
+    return deg * (Math.PI / 180);
+}
+
+function radToDeg(rad: number) {
+    return rad * (180 / Math.PI);
+}
+
 const getMapAngle = (aladin: AladinInstance, x1: number, y1: number, x2: number, y2: number) => {
   const screenCurrent = aladin.world2pix(x1, y1);
   const screenTarget = aladin.world2pix(x2, y2);
-  const dx = screenTarget[0] - screenCurrent[0]; 
-  const dy = screenCurrent[1] - screenTarget[1]; 
-  return (Math.atan2(dx, dy) * 180) / Math.PI;
+  console.log(screenCurrent, screenTarget);
+
+  if (screenCurrent && screenTarget) {
+        // Use screen coordinates if available
+        const dx = screenTarget[0] - screenCurrent[0]; 
+        const dy = screenCurrent[1] - screenTarget[1]; 
+        return radToDeg(Math.atan2(dx, dy));
+    }
+
+    // Fallback: use RA/Dec directly
+    const ra1 = degToRad(x1);
+    const dec1 = degToRad(y1);
+    const ra2 = degToRad(x2);
+    const dec2 = degToRad(y2);
+
+    // Small-angle approximation for tangent-plane projection
+    const dx = (ra2 - ra1) * Math.cos((dec1 + dec2) / 2);
+    const dy = dec2 - dec1;
+
+    return radToDeg(Math.atan2(dx, dy));
 };
 
 const Compass = (props: Props) => {
