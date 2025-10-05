@@ -1,0 +1,37 @@
+@keyframes topLidOpen {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-30%);
+  } /* abre um pouco */
+  50% {
+    transform: translateY(0%);
+  } /* fecha */
+  100% {
+    transform: translateY(-100%);
+  } /* abre totalmente */
+}
+
+@keyframes bottomLidOpen {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(30%);
+  } /* abre um pouco */
+  50% {
+    transform: translateY(0%);
+  } /* fecha */
+  100% {
+    transform: translateY(100%);
+  } /* abre totalmente */
+}
+
+.animate-top-lid {
+  animation: topLidOpen 2s ease-in-out forwards;
+}
+
+.animate-bottom-lid {
+  animation: bottomLidOpen 2s ease-in-out forwards;
+}
