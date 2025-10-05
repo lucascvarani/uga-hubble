@@ -50,6 +50,7 @@ export interface PlayMusicNode extends SceneNode {
   type: 'music'
   audio: string
   volume: number
+  soundEffect: boolean
 }
 
 export interface UseTelescopeNode extends SceneNode {

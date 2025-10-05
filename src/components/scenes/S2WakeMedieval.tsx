@@ -15,10 +15,10 @@ export const wakeMedievalNodes: SceneNode[] = [
   {
     type: 'eye',
     startingCoords: {
-      ra: 56.8966340,
+      ra: 56.896634,
       dec: +24.1448011,
-      shouldSnap: true
-    }
+      shouldSnap: true,
+    },
   } as EyeNode,
   {
     type: 'dialog',
@@ -34,6 +34,6 @@ export const wakeMedievalNodes: SceneNode[] = [
   } as UseTelescopeNode,
   {
     type: 'fade_out',
-    duration: 1,
+    duration: 0.6,
   } as FadeOutNode,
 ]

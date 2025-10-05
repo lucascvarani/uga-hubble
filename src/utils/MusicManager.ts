@@ -2,6 +2,7 @@ class MusicManager {
   private static instance: MusicManager
   private audio: HTMLAudioElement | null = null
   private currentTrack: string | null = null
+  private activeSoundEffects: Set<HTMLAudioElement> = new Set()
 
   static getInstance(): MusicManager {
     if (!MusicManager.instance) {
@@ -63,6 +64,41 @@ class MusicManager {
         }
       }, 50)
     })
+  }
+
+  playSoundEffect(
+    src: string,
+    volume: number = 0.5,
+    loop: boolean = false
+  ): HTMLAudioElement {
+    // Create new audio instance for this sound effect
+    const soundEffect = new Audio(src)
+    soundEffect.volume = Math.max(0, Math.min(1, volume))
+    soundEffect.loop = loop
+
+    // Track active sound effects
+    this.activeSoundEffects.add(soundEffect)
+
+    // Auto-cleanup when sound finishes (if not looping)
+    if (!loop) {
+      soundEffect.addEventListener('ended', () => {
+        this.activeSoundEffects.delete(soundEffect)
+      })
+    }
+
+    // Error handling
+    soundEffect.addEventListener('error', (e) => {
+      console.error('Sound effect failed to load:', src, e)
+      this.activeSoundEffects.delete(soundEffect)
+    })
+
+    // Play the sound effect
+    soundEffect.play().catch((error) => {
+      console.error('Failed to play sound effect:', src, error)
+      this.activeSoundEffects.delete(soundEffect)
+    })
+
+    return soundEffect
   }
 }
 
