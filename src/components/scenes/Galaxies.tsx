@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import MissionTracker from '../MissionTracker'
 import Dialog from '../Dialog'
+import Quizz from '../Quizz'
 
 interface GalaxiesProps {
   aladinInstance: any | null
@@ -52,6 +53,18 @@ export default function Galaxies({
   const [currentDialogIndex, setCurrentDialogIndex] = React.useState(0)
   const [currentAladinProps, setCurrentAladinProps] = React.useState(0)
   const [wasRightAnswer, setWasRightAnswer] = React.useState(false)
+  const clickHandlerRef = useRef<((...args: unknown[]) => void) | null>(null)
+
+  useEffect(() => {
+    if (aladinInstance) {
+      const clickHandler = () => {
+        onClickScreen()
+      }
+
+      clickHandlerRef.current = clickHandler
+      aladinInstance.on('click', clickHandler)
+    }
+  }, [aladinInstance, onClickScreen])
 
   useEffect(() => {
     if (aladinInstance) {
@@ -68,7 +81,7 @@ export default function Galaxies({
     }
   }, [aladinInstance, sceneState])
 
-  function onClickNext() {
+  function goToNextObject() {
     setCurrentDialogIndex(0)
     console.log(currentAladinProps)
     if (currentAladinProps <= 2) {
@@ -91,9 +104,9 @@ export default function Galaxies({
     setSceneState(2)
   }
 
-  function handleNextDialog() {
+  function onClickScreen() {
     if (currentDialogIndex == dialogs[currentAladinProps].length - 1) {
-      onClickNext()
+      goToNextObject()
     } else {
       setCurrentDialogIndex((prev) => prev + 1)
     }
@@ -114,96 +127,43 @@ export default function Galaxies({
           <div>
             <Dialog
               text={dialogs[currentAladinProps][currentDialogIndex]}
-              onNext={handleNextDialog}
+              onNext={onClickScreen}
               newDialog={currentDialogIndex === 0}
             />
           </div>
-          <button type="button" onClick={() => onClickNext()}>
-            Clique para continuar
-          </button>
         </div>
       )}
       {sceneState == 1 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <h2 style={{ marginBottom: '10px', backgroundColor: 'white' }}>
-            Qual tipo de galáxia é este?
-          </h2>
-          <button
-            type="button"
-            onClick={() => onClickWrongAnswer()}
-            style={{ backgroundColor: 'white' }}
-          >
-            Galáxia Espiral
-          </button>
-          <button
-            type="button"
-            onClick={() => onClickRightAnswer()}
-            style={{ backgroundColor: 'white' }}
-          >
-            Galáxia Espiral Barrada
-          </button>
-          <button
-            type="button"
-            onClick={() => onClickWrongAnswer()}
-            style={{ backgroundColor: 'white' }}
-          >
-            Galáxia Elíptica
-          </button>
-          <button
-            type="button"
-            onClick={() => onClickWrongAnswer()}
-            style={{ backgroundColor: 'white' }}
-          >
-            Galáxia Irregulare
-          </button>
-          <button
-            type="button"
-            onClick={() => onClickWrongAnswer()}
-            style={{ backgroundColor: 'white' }}
-          >
-            Galáxia Lenticular
-          </button>
-        </div>
-      )}
-      {sceneState == 2 && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '20px',
-            left: '20px',
-            zIndex: 1000,
-          }}
-        >
+        <div>
           <MissionTracker
             title={'Desvendando galáxias'}
             description={
               'Ajude Aladim a descobrir qual é o tipo da galáxia de Andrômeda!'
             }
           />
+          <Quizz
+            title={'Qual tipo de galáxia é este?'}
+            options={[
+              'Galáxia Espiral',
+              'Galáxia Espiral Barrada',
+              'Galáxia Elíptica',
+              'Galáxia Irregular',
+              'Galáxia Lenticular',
+            ]}
+            onClickOption={(option: number) => {
+              if (option == 2) onClickRightAnswer()
+              else onClickWrongAnswer()
+            }}
+          />
         </div>
       )}
-      {sceneState == 2 && wasRightAnswer && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <h2 style={{ marginBottom: '10px', backgroundColor: 'white' }}>
-            Resposta correta!
-          </h2>
-          <div className="bg-white w-fit">
-            <button type="button" onClick={() => onClickNext()}>
-              Clique para continuar
-            </button>
-          </div>
-        </div>
-      )}
-      {sceneState == 2 && !wasRightAnswer && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <h2 style={{ marginBottom: '10px', backgroundColor: 'white' }}>
-            Resposta errada!
-          </h2>
-          <div className="bg-white w-fit">
-            <button type="button" onClick={() => onClickNext()}>
-              Clique para continuar
-            </button>
-          </div>
+      {sceneState == 2 && (
+        <div>
+          <Dialog
+            text={wasRightAnswer ? 'Resposta correta!' : 'Resposta errada!'}
+            onNext={onComplete}
+            newDialog={currentDialogIndex === 0}
+          />
         </div>
       )}
     </>
