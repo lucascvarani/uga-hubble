@@ -17,7 +17,7 @@ const medievalNodes: SceneNode[] = [
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null);
-  const [sceneNumber, setSceneNumber] = useState<number>(9);
+  const [sceneNumber, setSceneNumber] = useState<number>(0);
 
   return (
     <div

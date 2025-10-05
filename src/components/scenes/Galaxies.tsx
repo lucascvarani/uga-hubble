@@ -32,51 +32,120 @@ export default function Galaxies({
 }: GalaxiesProps) {
   const [sceneState, setSceneState] = React.useState(0);
   const [currentAladinProps, setCurrentAladinProps] = React.useState(0);
-
-  useEffect(() => {
-    if (aladinInstance) {
-      const clickHandler = () => {
-        onClick();
-      };
-
-      aladinInstance.on("click", clickHandler);
-    }
-  }, [aladinInstance, onClick]);
+  const [wasRightAnswer, setWasRightAnswer] = React.useState(false);
 
   useEffect(() => {
     if (aladinInstance) {
       aladinInstance.gotoObject(aladinProps[currentAladinProps].objectName);
-      // console.log(aladinProps[currentAladinProps].icrsdx);
-      // aladinInstance.gotoRaDec(
-      //   aladinProps[currentAladinProps].icrsdx,
-      //   aladinProps[currentAladinProps].icrsdy
-      // );
       aladinInstance.setFov(aladinProps[currentAladinProps].fov);
     }
   }, [aladinInstance, currentAladinProps]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function onClick() {
-    setSceneState((prevState) => {
-      console.log(
-        "EncontrarNorte click detected, advancing from state",
-        prevState
-      );
-      return prevState + 1;
-    });
-    if (sceneState === 2) {
+  useEffect(() => {
+    console.log("comecou quizz");
+    if (sceneState == 1) {
+    } else if (sceneState === 3) {
       onComplete();
+    }
+  }, [aladinInstance, sceneState]);
+
+  function onClickNext() {
+    console.log(currentAladinProps);
+    if (currentAladinProps <= 2) {
+      setCurrentAladinProps((prev) => prev + 1);
+    } else {
+      setSceneState((prevState) => {
+        console.log("Advancing to quizz", prevState);
+        return prevState + 1;
+      });
     }
   }
 
+  function onClickRightAnswer() {
+    setWasRightAnswer(true);
+    setSceneState(2);
+  }
+
+  function onClickWrongAnswer() {
+    setWasRightAnswer(false);
+    setSceneState(2);
+  }
+
   return (
-    <div className="bg-white w-fit">
-      <button
-        type="button"
-        onClick={() => setCurrentAladinProps((prev) => prev + 1)}
-      >
-        Clique para continuar
-      </button>
-    </div>
+    <>
+      {sceneState == 0 && (
+        <div className="bg-white w-fit">
+          <button type="button" onClick={() => onClickNext()}>
+            Clique para continuar
+          </button>
+        </div>
+      )}
+      {sceneState == 1 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <h2 style={{ marginBottom: "10px", backgroundColor: "white" }}>
+            Qual tipo de galáxia é este?
+          </h2>
+          <button
+            type="button"
+            onClick={() => onClickWrongAnswer()}
+            style={{ backgroundColor: "white" }}
+          >
+            Galáxia Espiral
+          </button>
+          <button
+            type="button"
+            onClick={() => onClickRightAnswer()}
+            style={{ backgroundColor: "white" }}
+          >
+            Galáxia Espiral Barrada
+          </button>
+          <button
+            type="button"
+            onClick={() => onClickWrongAnswer()}
+            style={{ backgroundColor: "white" }}
+          >
+            Galáxia Elíptica
+          </button>
+          <button
+            type="button"
+            onClick={() => onClickWrongAnswer()}
+            style={{ backgroundColor: "white" }}
+          >
+            Galáxia Irregulare
+          </button>
+          <button
+            type="button"
+            onClick={() => onClickWrongAnswer()}
+            style={{ backgroundColor: "white" }}
+          >
+            Galáxia Lenticular
+          </button>
+        </div>
+      )}
+      {sceneState == 2 && wasRightAnswer && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <h2 style={{ marginBottom: "10px", backgroundColor: "white" }}>
+            Resposta correta!
+          </h2>
+          <div className="bg-white w-fit">
+            <button type="button" onClick={() => onClickNext()}>
+              Clique para continuar
+            </button>
+          </div>
+        </div>
+      )}
+      {sceneState == 2 && !wasRightAnswer && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <h2 style={{ marginBottom: "10px", backgroundColor: "white" }}>
+            Resposta errada!
+          </h2>
+          <div className="bg-white w-fit">
+            <button type="button" onClick={() => onClickNext()}>
+              Clique para continuar
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
