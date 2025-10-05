@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import type { EyeNode, ZoomTutorialNode } from './SceneNode'
+import type { ZoomTutorialNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MissionTracker from '../../MissionTracker'
@@ -17,7 +17,7 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
   onNext,
 }) => {
   const [zoomIn, setZoomIn] = useState(true)
-  const [missionCompleted, setMissionCompleted] = useState(false)
+  const [missionCompleted] = useState(false)
   useEffect(() => {
     // cria o <link> para o CSS
     const link = document.createElement('link')

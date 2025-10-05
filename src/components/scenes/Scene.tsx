@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Dialog from './nodes/Dialog'
 import FindMission from './nodes/FindMission'
 import Quizz from './nodes/Quizz'
-import CompleteConstellationMission from './nodes/CompleteConstellationMission'
 import type {
   SceneNode,
   DialogNode,
   FindPosNode,
-  CompleteConstellationNode,
   EyeNode,
   ZoomTutorialNode,
   PlayMusicNode,
@@ -173,14 +171,6 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return (
         <FindMission
           node={currentNode as FindPosNode}
-          aladinInstance={aladinInstance}
-          onNext={handleNextNode}
-        />
-      )
-    case 'constellation':
-      return (
-        <CompleteConstellationMission
-          node={currentNode as CompleteConstellationNode}
           aladinInstance={aladinInstance}
           onNext={handleNextNode}
         />

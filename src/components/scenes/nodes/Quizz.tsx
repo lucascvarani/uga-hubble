@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import MissionTracker from '../../MissionTracker'
 import Dialog from './Dialog'
 import type { QuizzNode } from './SceneNode'
