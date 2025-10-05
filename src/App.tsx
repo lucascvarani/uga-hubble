@@ -70,6 +70,7 @@ function App() {
           >
             <div style={{ pointerEvents: 'auto' }}>
               {(() => {
+                console.log('scene number:', sceneNumber)
                 switch (sceneNumber) {
                   case 0:
                     return (
