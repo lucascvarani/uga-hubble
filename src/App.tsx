@@ -9,6 +9,7 @@ import { ugaNodes } from './components/scenes/S1Uga'
 import Telescope, { type TelescopeHandle } from './components/Telescope'
 import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
 import { medievalNodes } from './components/scenes/S3Medieval'
+import { galaxiesNodes } from './components/scenes/S3Galaxies'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -99,6 +100,17 @@ function App() {
                       <Scene
                         aladinInstance={aladinInstance}
                         nodes={medievalNodes}
+                        onSceneEnd={() =>
+                          setSceneNumber((previous) => previous + 1)
+                        }
+                      />
+                    )
+                  case 3:
+                    telescopeRef.current?.show()
+                    return (
+                      <Scene
+                        aladinInstance={aladinInstance}
+                        nodes={galaxiesNodes}
                         onSceneEnd={() =>
                           setSceneNumber((previous) => previous + 1)
                         }
