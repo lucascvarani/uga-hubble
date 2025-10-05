@@ -24,7 +24,7 @@ export const galaxiesNodes: SceneNode[] = [
   } as DialogNode,
   {
     type: 'zoom_mission',
-    fovThreshold: 1,
+    fovThreshold: 3,
     misionTitle: 'Zoom into Andromeda',
     missionDescription:
       'Use the zoom feature to get a closer look at the Andromeda',
@@ -63,7 +63,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 13.1583333,
       dec: -72.8002777,
       shouldSnap: false,
-      fov: 10,
+      fov: 5,
     },
   } as DialogNode,
   {
@@ -77,7 +77,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 187.705931,
       dec: 12.3911232,
       shouldSnap: false,
-      fov: 10,
+      fov: 1,
     },
   } as DialogNode,
   {
@@ -89,7 +89,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 80.8941667,
       dec: -69.756111,
       shouldSnap: false,
-      fov: 10,
+      fov: 5,
     },
   } as DialogNode,
   {
