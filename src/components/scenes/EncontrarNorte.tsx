@@ -79,6 +79,7 @@ export default function EncontrarNorte({
           <Dialog
             text={dialogs1[currentDialogIndex]}
             onNext={handleNextDialog}
+            newDialog={currentDialogIndex === 0}
           />
         </div>
       )}
@@ -87,6 +88,7 @@ export default function EncontrarNorte({
           <Dialog
             text={dialogs2[currentDialogIndex]}
             onNext={handleNextDialog}
+            newDialog={currentDialogIndex === 0}
           />
         </div>
       )}

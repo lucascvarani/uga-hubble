@@ -1,47 +1,80 @@
-import React, { useState, useEffect } from "react";
-import DiamondLine from "./structure/DiamondLine";
+import React, { useState, useEffect } from 'react'
+import DiamondLine from './structure/DiamondLine'
 
 interface DialogUIProps {
-  text: string;
-  onNext: () => void;
-  typingSpeed?: number;
+  text: string
+  onNext: () => void
+  typingSpeed?: number
+  newDialog?: boolean
 }
 
 const Dialog: React.FC<DialogUIProps> = ({
   text,
   onNext,
   typingSpeed = 50,
+  newDialog = false,
 }) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [displayedText, setDisplayedText] = useState('')
+  const [isTypingComplete, setIsTypingComplete] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [showDiamond, setShowDiamond] = useState(false)
+  const [startTyping, setStartTyping] = useState(false)
 
   useEffect(() => {
-    setDisplayedText("");
-    setIsTypingComplete(false);
+    // Reset all states when text changes
+    setDisplayedText('')
+    setIsTypingComplete(false)
 
-    let currentIndex = 0;
+    if (newDialog) {
+      // Animation sequence for new dialogs
+      setIsVisible(false)
+      setShowDiamond(false)
+      setStartTyping(false)
+
+      const visibilityTimer = setTimeout(() => setIsVisible(true), 50)
+      const diamondTimer = setTimeout(() => setShowDiamond(true), 350)
+      const typingStartTimer = setTimeout(() => setStartTyping(true), 650)
+
+      return () => {
+        clearTimeout(visibilityTimer)
+        clearTimeout(diamondTimer)
+        clearTimeout(typingStartTimer)
+      }
+    } else {
+      // No animation - show everything immediately
+      setIsVisible(true)
+      setShowDiamond(true)
+      setStartTyping(true)
+    }
+  }, [text, newDialog])
+
+  // Separate effect for typing animation
+  useEffect(() => {
+    if (!startTyping) return
+
+    let currentIndex = 0
     const timer = setInterval(() => {
       if (currentIndex <= text.length) {
-        setDisplayedText(text.slice(0, currentIndex));
-        currentIndex++;
+        setDisplayedText(text.slice(0, currentIndex))
+        currentIndex++
       } else {
-        setIsTypingComplete(true);
-        clearInterval(timer);
+        setIsTypingComplete(true)
+        clearInterval(timer)
       }
-    }, typingSpeed);
+    }, typingSpeed)
 
-    return () => clearInterval(timer);
-  }, [text, typingSpeed]);
+    return () => clearInterval(timer)
+  }, [startTyping, text, typingSpeed])
 
   const handleClick = () => {
     if (isTypingComplete) {
-      onNext();
-    } else {
+      onNext()
+    } else if (startTyping) {
       // Instantly complete the text if clicked during typing
-      setDisplayedText(text);
-      setIsTypingComplete(true);
+      setDisplayedText(text)
+      setIsTypingComplete(true)
     }
-  };
+  }
 
   return (
     // We add a className to target this element reliably with CSS
@@ -50,29 +83,62 @@ const Dialog: React.FC<DialogUIProps> = ({
         className="dialog-container"
         onClick={handleClick}
         style={{
-          position: "fixed",
+          position: 'fixed',
           bottom: 0,
           left: 0,
-          width: "100%",
-          padding: "40px",
-          paddingTop: "30px", // Less padding on top to make room for the line
-          backgroundColor: "rgba(0, 0, 0, 0.75)",
-          color: "white",
-          textAlign: "center",
-          fontSize: "1.1rem",
+          width: '100%',
+          padding: '40px',
+          paddingTop: '30px', // Less padding on top to make room for the line
+          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '1.1rem',
           zIndex: 1000,
-          cursor: "pointer",
-          boxSizing: "border-box",
+          cursor: 'pointer',
+          boxSizing: 'border-box',
+          // Opening animation styles
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
+          transformOrigin: 'center',
+          transition: newDialog
+            ? 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            : 'none',
+          clipPath: isVisible
+            ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+            : 'polygon(45% 0, 55% 0, 55% 100%, 45% 100%)',
         }}
       >
-        <DiamondLine />
-        <span>
+        <div
+          style={{
+            opacity: showDiamond ? 1 : 0,
+            transform: showDiamond ? 'scaleX(1)' : 'scaleX(0)',
+            transition: newDialog
+              ? 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+              : 'none',
+            transformOrigin: 'center',
+          }}
+        >
+          <DiamondLine />
+        </div>
+        <span
+          style={{
+            display: 'inline-block',
+            opacity: startTyping ? 1 : 0,
+            transform: startTyping
+              ? 'scaleX(1) scaleY(1)'
+              : 'scaleX(0.3) scaleY(0.8)',
+            transition: newDialog
+              ? 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+              : 'none',
+            transformOrigin: 'center',
+          }}
+        >
           {displayedText}
-          {!isTypingComplete && (
+          {!isTypingComplete && startTyping && (
             <span
               style={{
-                animation: "blink 1s infinite",
-                marginLeft: "2px",
+                animation: 'blink 1s infinite',
+                marginLeft: '2px',
               }}
             >
               |
@@ -95,7 +161,7 @@ const Dialog: React.FC<DialogUIProps> = ({
         </style>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dialog;
+export default Dialog
