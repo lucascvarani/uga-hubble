@@ -15,10 +15,16 @@ export const ugaNodes: SceneNode[] = [
   } as PlayMusicNode,
   {
     type: 'eye',
-    startingCoords: { ra: 306.376181, dec: 41.6192349, fov: 25, shouldSnap: true },
+    startingCoords: {
+      ra: 306.376181,
+      dec: 41.6192349,
+      fov: 25,
+      shouldSnap: true,
+    },
   } as EyeNode,
   {
     type: 'dialog',
+    title: 'A New Beginning',
     text: [
       'Hey… you’re finally awake. The air feels different, doesn’t it?\nWelcome to an age where stone meets spark, the dawn of humankind.',
       'No more screens, no deadlines, no spreadsheets to haunt your dreams.\nYour only notifications now come from thunder, rivers, and hungry stomachs.',
@@ -32,7 +38,12 @@ export const ugaNodes: SceneNode[] = [
     description:
       '- Drag the screen to search for a bright star\n- The light will guide you to the star',
     targetCoords: { ra: 37.9545607, dec: 89.264109 },
-    startingCoords: { ra: 332.809397, dec: 83.3547890, fov: 25, shouldSnap: false },
+    startingCoords: {
+      ra: 332.809397,
+      dec: 83.354789,
+      fov: 25,
+      shouldSnap: false,
+    },
     tolerance: 1.5,
   } as FindPosNode,
   {

@@ -19,6 +19,7 @@ export interface SceneNode {
 export interface DialogNode extends SceneNode {
   type: 'dialog'
   text: string[]
+  title?: string
 }
 
 export interface EyeNode extends SceneNode {

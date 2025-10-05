@@ -131,7 +131,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec && currentFov) {
         if (nodes[nextIndex].startingCoords.shouldSnap) {
-          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov);
+          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov)
           aladinInstance?.gotoRaDec(
             nodes[nextIndex].startingCoords.ra,
             nodes[nextIndex].startingCoords.dec
@@ -167,6 +167,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return (
         <Dialog
           text={(currentNode as DialogNode).text}
+          title={(currentNode as DialogNode).title}
           onFinish={handleNextNode}
         />
       )
