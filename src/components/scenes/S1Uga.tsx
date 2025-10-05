@@ -31,9 +31,9 @@ export const ugaNodes: SceneNode[] = [
     description:
       '- Drag the screen to search for a bright star\n- The light will guide you to the star',
     targetCoords: { ra: 37.9545607, dec: 89.264109 },
-    startingCoords: { ra: 0.87, dec: 88.74, shouldSnap: true },
-    tolerance: 0.5,
-    fov: 3,
+    startingCoords: { ra: 332.809397, dec: 83.3547890, shouldSnap: true },
+    tolerance: 1.5,
+    fov: 25,
   } as FindPosNode,
   {
     type: 'music',
