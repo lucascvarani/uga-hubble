@@ -2,16 +2,16 @@ import { useState, useRef } from 'react'
 import './App.css'
 import Aladin from './components/Aladin'
 import Scene from './components/scenes/Scene'
-import { medievalNodes } from './NodesConfig'
 import FireMenu from './screens/Intro'
 import SoundWarning from './screens/SoundWarning'
 import Galaxies from './components/scenes/Galaxies'
 import { ugaNodes } from './components/scenes/S1Uga'
 import Telescope, { type TelescopeHandle } from './components/Telescope'
+import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
-  const [sceneNumber, setSceneNumber] = useState<number>(1)
+  const [sceneNumber, setSceneNumber] = useState<number>(0)
   const [showSoundWarning, setShowSoundWarning] = useState(true)
   const [showIntro, setShowIntro] = useState(true)
   const telescopeRef = useRef<TelescopeHandle>(null)
@@ -85,7 +85,7 @@ function App() {
                     return (
                       <Scene
                         aladinInstance={aladinInstance}
-                        nodes={medievalNodes}
+                        nodes={wakeMedievalNodes}
                         onSceneEnd={() =>
                           setSceneNumber((previous) => previous + 1)
                         }

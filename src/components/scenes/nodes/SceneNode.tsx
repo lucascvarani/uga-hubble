@@ -1,4 +1,9 @@
-export type SceneNodeType = 'dialog' | 'find' | 'constellation' | 'eye' // add more types later
+export type SceneNodeType =
+  | 'dialog'
+  | 'find'
+  | 'constellation'
+  | 'eye'
+  | 'use_telescope' // add more types later
 
 export interface SceneNode {
   type: SceneNodeType
@@ -23,6 +28,10 @@ export interface FindPosNode extends SceneNode {
   survey?: string // e.g. "P/DSS2/color" or "P/2MASS/color"
   tolerance: number
   fov: number
+}
+
+export interface UseTelescopeNode extends SceneNode {
+  type: 'use_telescope'
 }
 
 interface Star {
