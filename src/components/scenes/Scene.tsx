@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Dialog from "./Dialog";
-import FindMission from "./FindMission";
-import type { SceneNode, DialogNode, FindPosNode } from "./SceneNode";
-import type { AladinInstance } from "./Aladin";
+import Dialog from "../Dialog";
+import FindMission from "./nodes/FindMission";
+import type { SceneNode, DialogNode, FindPosNode } from "./nodes/SceneNode";
+import type { AladinInstance } from "../Aladin";
 
 interface SceneProps {
   nodes: SceneNode[];

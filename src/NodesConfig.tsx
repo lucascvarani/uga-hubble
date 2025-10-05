@@ -1,4 +1,4 @@
-import type { SceneNode, DialogNode, FindPosNode } from "./SceneNode";
+import type { SceneNode, DialogNode, FindPosNode } from "./components/scenes/nodes/SceneNode";
 
 export const medievalNodes: SceneNode[] = [
   {

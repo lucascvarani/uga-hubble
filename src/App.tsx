@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Aladin from './components/Aladin'
 import EncontrarNorte from './components/scenes/EncontrarNorte'
-import Scene from './components/Scene'
+import Scene from './components/scenes/Scene'
 import { medievalNodes } from './NodesConfig'
 
 function App() {
