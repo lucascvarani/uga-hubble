@@ -18,6 +18,7 @@ export interface FindPosNode extends SceneNode {
   survey?: string; // e.g. "P/DSS2/color" or "P/2MASS/color"
   tolerance: number;
   fov: number;
+  interpolationDuration?: number;
 }
 
 interface Star {
