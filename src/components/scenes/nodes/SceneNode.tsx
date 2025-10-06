@@ -9,6 +9,7 @@ export type SceneNodeType =
   | 'quizz' // add more types later
   | 'fade_out'
   | 'zoom_mission'
+  | 'free_explore'
 
 export interface SceneNode {
   type: SceneNodeType

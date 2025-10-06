@@ -20,6 +20,7 @@ import ZoomTutorial from './nodes/ZoomTutorial'
 import ZoomMission from './nodes/ZoomMission'
 import PlayMusic from './nodes/PlayMusic'
 import FadeOut from './nodes/FadeOut'
+import FreeExplore from './nodes/FreeExplore'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -131,7 +132,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec && currentFov) {
         if (nodes[nextIndex].startingCoords.shouldSnap) {
-          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov);
+          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov)
           aladinInstance?.gotoRaDec(
             nodes[nextIndex].startingCoords.ra,
             nodes[nextIndex].startingCoords.dec
@@ -220,6 +221,10 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
           duration={(currentNode as FadeOutNode).duration}
         />
+      )
+    case 'free_explore':
+      return (
+        <FreeExplore onClose={handleNextNode} aladinInstance={aladinInstance} />
       )
     default:
       return null
