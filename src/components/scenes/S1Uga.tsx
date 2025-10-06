@@ -44,7 +44,7 @@ export const ugaNodes: SceneNode[] = [
     title: 'Find the white star',
     description:
       '- Drag the screen to search for a bright star\n- The light will guide you to the star',
-    targetCoords: { ra: 37.9545607, dec: 89.264109 },
+    targetCoords: { ra: 37.9571870, dec: 89.2640660 },
     startingCoords: {
       ra: 332.809397,
       dec: 83.354789,

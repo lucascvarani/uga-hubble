@@ -41,6 +41,7 @@ function animateToTarget(
     aladin.gotoRaDec(ra, dec)
 
     if (t >= 1) {
+      aladin.gotoRaDec(targetRa, targetDec)
       clearInterval(timer)
       if (container) container.style.pointerEvents = 'auto' // re-enable interaction
       onComplete?.()

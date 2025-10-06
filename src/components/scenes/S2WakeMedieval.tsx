@@ -15,8 +15,8 @@ export const wakeMedievalNodes: SceneNode[] = [
   {
     type: 'eye',
     startingCoords: {
-      ra: 56.896634,
-      dec: +24.1448011,
+      ra: 312.933490,
+      dec: +30.7839599,
       shouldSnap: true,
     },
   } as EyeNode,
