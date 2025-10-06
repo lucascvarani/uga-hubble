@@ -18,6 +18,7 @@ export const wakeMedievalNodes: SceneNode[] = [
       ra: 56.896634,
       dec: +24.1448011,
       shouldSnap: true,
+      fov: 25,
     },
   } as EyeNode,
   {
