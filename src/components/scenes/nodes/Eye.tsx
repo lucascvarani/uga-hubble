@@ -3,6 +3,7 @@ import type { EyeNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MusicManager from '../../../utils/MusicManager'
+import SmokeText from '../../SmokeText'
 
 interface EyeProps {
   node: EyeNode
@@ -13,7 +14,7 @@ interface EyeProps {
 const Eye: React.FC<EyeProps> = ({ onNext, node }) => {
   const [animationFinished] = useState(false)
 
-  const [showingTitleEra, setShowingTitleEra] = useState(false)
+  const [showingTitleEra, setShowingTitleEra] = useState(true)
 
   useEffect(() => {
     // cria o <link> para o CSS
@@ -52,14 +53,14 @@ const Eye: React.FC<EyeProps> = ({ onNext, node }) => {
       {!animationFinished && (
         <>
           <div
-            className="absolute top-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-b-none animate-top-lid z-50"
+            className="absolute top-0 left-0 w-full h-1/2 bg-black backdrop-blur-sm rounded-b-none animate-top-lid z-50"
             onAnimationEnd={() => showTitleEra()}
           ></div>
-          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-tr-none animate-bottom-lid z-50"></div>
+          <div className="absolute bottom-0 left-0 w-full h-1/2 bg-black backdrop-blur-sm rounded-tr-none animate-bottom-lid z-50"></div>
         </>
       )}
       {showingTitleEra && (
-        <div className="text-white absolute items-center justify-center flex w-full h-full flex-col">
+        <div className="text-[#B0ADAD] absolute items-center justify-center flex w-full h-full flex-col text-shadow-gray-600">
           <p className="text-8xl mb-12">{node.title}</p>
           <p className="text-7xl">{node.time}</p>
         </div>
