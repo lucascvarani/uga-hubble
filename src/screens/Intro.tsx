@@ -102,7 +102,10 @@ const FireMenu: React.FC<FireMenuProps> = ({
   return (
     <div className="w-full h-screen overflow-hidden bg-black">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-
+      <img
+        src="initial_image.jpeg"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-[0_0_20px_rgba(255,140,0,0.5)] mb-4">
           Eyes to the Sky
