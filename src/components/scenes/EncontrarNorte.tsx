@@ -2,10 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Dialog from './nodes/Dialog'
 import MissionTracker from '../MissionTracker'
 import MusicManager from '../../utils/MusicManager'
-
-interface AladinInstance {
-  on: (event: string, callback: (...args: unknown[]) => void) => void
-}
+import type { AladinInstance } from '../Aladin'
 
 interface EncontrarNorteProps {
   aladinInstance: AladinInstance | null
@@ -108,12 +105,20 @@ export default function EncontrarNorte({
       {/* Dialog positioned in center bottom */}
       {sceneState === 0 && (
         <div>
-          <Dialog text={dialogs1} onFinish={handleDialogFinish} />
+          <Dialog
+            aladinInstance={aladinInstance}
+            text={dialogs1}
+            onFinish={handleDialogFinish}
+          />
         </div>
       )}
       {sceneState === 1 && (
         <div>
-          <Dialog text={dialogs2} onFinish={handleDialogFinish} />
+          <Dialog
+            aladinInstance={aladinInstance}
+            text={dialogs2}
+            onFinish={handleDialogFinish}
+          />
         </div>
       )}
     </div>

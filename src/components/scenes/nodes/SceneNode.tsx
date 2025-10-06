@@ -22,6 +22,7 @@ export interface DialogNode extends SceneNode {
   text: string[]
   audios?: string[]
   title?: string
+  shouldAnimate?: boolean
 }
 
 export interface EyeNode extends SceneNode {
