@@ -25,6 +25,19 @@ export default function FadeOut({ onNext, duration }: FadeOutProps) {
     }
   }, [duration, onNext])
 
+  useEffect(() => {
+    // Dynamically inject CSS
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/FadeOut.css'
+    link.id = 'fade-out-css'
+    document.head.appendChild(link)
+
+    return () => {
+      document.head.removeChild(link)
+    }
+  }, [])
+
   return (
     <div
       className={`fade-out ${isFading ? 'fade-out-active' : ''}`}
