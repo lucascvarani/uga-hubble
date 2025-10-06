@@ -34,6 +34,7 @@ export const wakeMedievalNodes: SceneNode[] = [
       'audio/memos/medieval_awake/3.m4a',
       'audio/memos/medieval_awake/4.m4a',
     ],
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'use_telescope',

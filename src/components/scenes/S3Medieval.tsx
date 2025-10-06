@@ -15,6 +15,7 @@ export const medievalNodes: SceneNode[] = [
       "Great! It fits perfectly. Now, let's take a closer look at the stars. Use the zoom feature on the telescope to get a better view of the night sky.",
     ],
     audios: ['audio/memos/medieval/1.m4a'],
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'zoom_tutorial',
