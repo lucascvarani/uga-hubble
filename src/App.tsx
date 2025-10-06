@@ -107,13 +107,14 @@ function App() {
                       />
                     )
                   case 3:
+                    telescopeRef.current?.hide()
                     return (
                       <Scene
                         aladinInstance={aladinInstance}
                         nodes={galaxiesNodes}
                         onSceneEnd={() => {
-                          setSceneNumber(0)
-                          setShowIntro(true)
+                          setSceneNumber((previous) => previous + 1)
+                          // setShowIntro(true)
                         }}
                       />
                     )
