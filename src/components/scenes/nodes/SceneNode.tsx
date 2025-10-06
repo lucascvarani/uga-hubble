@@ -9,6 +9,7 @@ export type SceneNodeType =
   | 'quizz' // add more types later
   | 'fade_out'
   | 'zoom_mission'
+  | 'free_explore'
 
 export interface SceneNode {
   type: SceneNodeType
@@ -19,6 +20,9 @@ export interface SceneNode {
 export interface DialogNode extends SceneNode {
   type: 'dialog'
   text: string[]
+  audios?: string[]
+  title?: string
+  shouldAnimate?: boolean
 }
 
 export interface EyeNode extends SceneNode {
@@ -50,6 +54,7 @@ export interface PlayMusicNode extends SceneNode {
   type: 'music'
   audio: string
   volume: number
+  soundEffect: boolean
 }
 
 export interface UseTelescopeNode extends SceneNode {

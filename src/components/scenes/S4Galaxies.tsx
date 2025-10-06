@@ -20,7 +20,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 10.6847083,
       dec: 41.26875,
       shouldSnap: false,
-      fov: 30,
+      fov: 100,
     },
   } as DialogNode,
   {
@@ -34,7 +34,6 @@ export const galaxiesNodes: SceneNode[] = [
   {
     type: 'dialog',
     text: [
-      'This unique point of light is in fact an entire galaxy, with millions of stars!',
       'This is Andromeda, our neighbour spiral galaxy located about 2.5 million light-years away from us.',
       'A spiral galaxy is a type of galaxy shaped like a flat, rotating disk with a bright center and arms that spiral outward.',
       'These arms are made of stars, gas, and dust, where new stars are often born.',
@@ -89,6 +88,7 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 0.5,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'dialog',
@@ -115,8 +115,9 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 187.705931,
       dec: 12.3911232,
       shouldSnap: false,
-      fov: 1,
+      fov: 0.01,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'dialog',
@@ -129,6 +130,7 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 5,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'quizz',

@@ -5,7 +5,7 @@
 
 /* UI do viewer */
 #aladin-viewer {
-  visibility: visible !important;
+  visibility: hidden !important;
 }
 
 /* UI da localização RaDec */

@@ -3,6 +3,7 @@ import type { FindPosNode } from './SceneNode'
 import type { AladinInstance } from '../../Aladin'
 import MissionTracker from '../../MissionTracker'
 import Compass from '../../Compass'
+import MusicManager from '../../../utils/MusicManager'
 
 interface FindMissionProps {
   node: FindPosNode
@@ -58,28 +59,33 @@ const FindMission: React.FC<FindMissionProps> = ({
   }>({ ra: 0, dec: 0 })
 
   function degToRad(deg: number) {
-    return deg * (Math.PI / 180);
+    return deg * (Math.PI / 180)
   }
 
-  function angularDistanceInArcSeconds(ra1: number, dec1: number, ra2: number, dec2: number): number {
+  function angularDistanceInArcSeconds(
+    ra1: number,
+    dec1: number,
+    ra2: number,
+    dec2: number
+  ): number {
     // Convert to radians
-    const ra1Rad = degToRad(ra1);
-    const dec1Rad = degToRad(dec1);
-    const ra2Rad = degToRad(ra2);
-    const dec2Rad = degToRad(dec2);
+    const ra1Rad = degToRad(ra1)
+    const dec1Rad = degToRad(dec1)
+    const ra2Rad = degToRad(ra2)
+    const dec2Rad = degToRad(dec2)
 
     // Spherical distance formula
-    const sinDec1 = Math.sin(dec1Rad);
-    const sinDec2 = Math.sin(dec2Rad);
-    const cosDec1 = Math.cos(dec1Rad);
-    const cosDec2 = Math.cos(dec2Rad);
-    const deltaRA = ra2Rad - ra1Rad;
-    const cosDeltaRA = Math.cos(deltaRA);
+    const sinDec1 = Math.sin(dec1Rad)
+    const sinDec2 = Math.sin(dec2Rad)
+    const cosDec1 = Math.cos(dec1Rad)
+    const cosDec2 = Math.cos(dec2Rad)
+    const deltaRA = ra2Rad - ra1Rad
+    const cosDeltaRA = Math.cos(deltaRA)
 
-    const angle = Math.acos(sinDec1 * sinDec2 + cosDec1 * cosDec2 * cosDeltaRA);
+    const angle = Math.acos(sinDec1 * sinDec2 + cosDec1 * cosDec2 * cosDeltaRA)
 
     // Convert back to degrees
-    return angle * (180 / Math.PI);
+    return angle * (180 / Math.PI)
   }
 
   const isNearTarget = (
@@ -88,7 +94,10 @@ const FindMission: React.FC<FindMissionProps> = ({
     target: { ra: number; dec: number },
     toleranceDeg: number
   ) => {
-    return angularDistanceInArcSeconds(raClick, decClick, target.ra, target.dec) <= toleranceDeg;
+    return (
+      angularDistanceInArcSeconds(raClick, decClick, target.ra, target.dec) <=
+      toleranceDeg
+    )
   }
 
   useEffect(() => {
@@ -112,6 +121,7 @@ const FindMission: React.FC<FindMissionProps> = ({
       setCurrentCoords({ ra, dec })
       if (isNearTarget(ra, dec, node.targetCoords, node.tolerance)) {
         completed = true
+        MusicManager.getInstance().playSoundEffect('/audio/correct.mp3', 0.8)
 
         animateToTarget(
           aladinInstance!,
@@ -126,7 +136,6 @@ const FindMission: React.FC<FindMissionProps> = ({
           }
         )
       }
-      console.log('positionChanged', ra, dec)
     })
 
     return () => {}

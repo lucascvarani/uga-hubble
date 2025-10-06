@@ -4,6 +4,7 @@ import type { AladinInstance } from '../../Aladin'
 import './EyeOpen.css' // CSS com keyframes
 import MissionTracker from '../../MissionTracker'
 import Fireworks from '../../Fireworks/Fireworks'
+import MusicManager from '../../../utils/MusicManager'
 
 interface ZoomTutorialProps {
   node: ZoomTutorialNode
@@ -59,11 +60,18 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
       const currentFov = aladinInstance.getFov()
       console.log({ currentFov: currentFov && currentFov[0] })
       if (currentFov && currentFov[0] < 5) {
+        if (zoomIn) {
+          MusicManager.getInstance().playSoundEffect(
+            '/audio/correct-zoom.mp3',
+            0.8
+          )
+        }
         setZoomIn(false)
       }
 
       if (!zoomIn && currentFov && currentFov[0] >= 25) {
         console.log('Should call onNext')
+        MusicManager.getInstance().playSoundEffect('/audio/correct.mp3', 0.8)
         onNext()
       }
     }

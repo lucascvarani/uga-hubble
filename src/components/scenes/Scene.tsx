@@ -20,6 +20,7 @@ import ZoomTutorial from './nodes/ZoomTutorial'
 import ZoomMission from './nodes/ZoomMission'
 import PlayMusic from './nodes/PlayMusic'
 import FadeOut from './nodes/FadeOut'
+import FreeExplore from './nodes/FreeExplore'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -131,7 +132,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       const nextIndex = currentIndex + 1
       if (nodes[nextIndex].startingCoords && currentRaDec && currentFov) {
         if (nodes[nextIndex].startingCoords.shouldSnap) {
-          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov);
+          aladinInstance?.setFov(nodes[nextIndex].startingCoords.fov)
           aladinInstance?.gotoRaDec(
             nodes[nextIndex].startingCoords.ra,
             nodes[nextIndex].startingCoords.dec
@@ -166,8 +167,12 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
     case 'dialog':
       return (
         <Dialog
+          shouldAnimate={(currentNode as DialogNode).shouldAnimate}
+          aladinInstance={aladinInstance}
           text={(currentNode as DialogNode).text}
+          title={(currentNode as DialogNode).title}
           onFinish={handleNextNode}
+          audios={(currentNode as DialogNode).audios || []}
         />
       )
     case 'find':
@@ -187,7 +192,13 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         />
       )
     case 'quizz':
-      return <Quizz node={currentNode as QuizzNode} onNext={handleNextNode} />
+      return (
+        <Quizz
+          aladinInstance={aladinInstance}
+          node={currentNode as QuizzNode}
+          onNext={handleNextNode}
+        />
+      )
     case 'use_telescope':
       return <UseTelescope onNext={handleNextNode} />
 
@@ -220,6 +231,10 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
           duration={(currentNode as FadeOutNode).duration}
         />
+      )
+    case 'free_explore':
+      return (
+        <FreeExplore onClose={handleNextNode} aladinInstance={aladinInstance} />
       )
     default:
       return null
