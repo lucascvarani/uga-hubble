@@ -20,33 +20,40 @@ function animateToTarget(
   duration = 1000, // total duration in ms
   onComplete?: () => void
 ) {
-  if (!aladin) return
+  if (!aladin) return;
 
-  const container = document.getElementById('aladin-lite-div')
-  if (container) container.style.pointerEvents = 'none' // disable interaction
+  const container = document.getElementById('aladin-lite-div');
+  if (container) container.style.pointerEvents = 'none'; // disable interaction
 
-  const startTime = Date.now()
-  const intervalMs = 30
+  const startTime = Date.now();
+  const intervalMs = 30;
+
+  // compute shortest angular distance for RA (wrap around 0/360)
+  let deltaRa = targetRa - fromRa;
+  if (deltaRa > 180) deltaRa -= 360;
+  else if (deltaRa < -180) deltaRa += 360;
+
+  const deltaDec = targetDec - fromDec;
 
   const timer = setInterval(() => {
-    const elapsed = Date.now() - startTime
-    let t = Math.max(0, Math.min(elapsed / duration, 1))
+    const elapsed = Date.now() - startTime;
+    let t = Math.max(0, Math.min(elapsed / duration, 1));
 
     // ease-in-out
-    const ease = 0.5 - 0.5 * Math.cos(Math.PI * t)
+    const ease = 0.5 - 0.5 * Math.cos(Math.PI * t);
 
-    const ra = fromRa + (targetRa - fromRa) * ease
-    const dec = fromDec + (targetDec - fromDec) * ease
+    const ra = (fromRa + deltaRa * ease + 360) % 360; // ensure 0-360
+    const dec = fromDec + deltaDec * ease;
 
-    aladin.gotoRaDec(ra, dec)
+    aladin.gotoRaDec(ra, dec);
 
     if (t >= 1) {
-      aladin.gotoRaDec(targetRa, targetDec)
-      clearInterval(timer)
-      if (container) container.style.pointerEvents = 'auto' // re-enable interaction
-      onComplete?.()
+      aladin.gotoRaDec(targetRa, targetDec);
+      clearInterval(timer);
+      if (container) container.style.pointerEvents = 'auto'; // re-enable interaction
+      onComplete?.();
     }
-  }, intervalMs)
+  }, intervalMs);
 }
 
 const FindMission: React.FC<FindMissionProps> = ({
