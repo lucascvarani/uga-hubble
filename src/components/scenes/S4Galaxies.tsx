@@ -6,7 +6,7 @@ import type {
   PlayMusicNode,
   FadeOutNode,
   FindPosNode,
-  EyeNode
+  EyeNode,
 } from './nodes/SceneNode'
 
 export const galaxiesNodes: SceneNode[] = [
@@ -17,7 +17,7 @@ export const galaxiesNodes: SceneNode[] = [
       dec: 41.26875,
       shouldSnap: true,
       fov: 100,
-    }
+    },
   } as EyeNode,
   {
     type: 'dialog',
@@ -58,17 +58,16 @@ export const galaxiesNodes: SceneNode[] = [
   {
     type: 'dialog',
     text: [
-      'Now its time to search for the Great Barred Spiral Galaxy — a stunning swirl of blue arms around a golden core! Lets look for it.',
+      'Now its time to search for the Great Barred Spiral Galaxy! Lets look for it.',
     ],
     startingCoords: {
-      fov: 50
-    }
+      fov: 50,
+    },
   } as DialogNode,
   {
     type: 'find',
-    title: 'Find The Great Barred Spiral Galaxy',
-    description:
-      'Locate the general region of the Great Barred Spiral Galaxy',
+    title: 'Find the Great Barred Spiral Galaxy',
+    description: 'Locate the general region of the Great Barred Spiral Galaxy',
     targetCoords: {
       ra: 51.0948329,
       dec: -36.8205547,
@@ -77,9 +76,9 @@ export const galaxiesNodes: SceneNode[] = [
   } as FindPosNode,
   {
     type: 'find',
-    title: 'Find The Great Barred Spiral Galaxy',
+    title: 'Focus on the Great Barred Spiral Galaxy',
     description:
-      'You can now see the galaxy',
+      'Pinpoint the exact location of the Great Barred Spiral Galaxy',
     targetCoords: {
       ra: 53.4019083,
       dec: -36.1406582,
@@ -88,7 +87,7 @@ export const galaxiesNodes: SceneNode[] = [
       ra: 51.0948329,
       dec: -36.8205547,
       shouldSnap: false,
-      fov: 5
+      fov: 5,
     },
     tolerance: 0.5,
   } as FindPosNode,
@@ -112,34 +111,32 @@ export const galaxiesNodes: SceneNode[] = [
       'Now its time to search for the Great Barred Spiral Galaxy — a stunning swirl of blue arms around a golden core! Lets look for it.',
     ],
     startingCoords: {
-      fov: 50
-    }
+      fov: 50,
+    },
   } as DialogNode,
   {
     type: 'find',
-    title: 'Find The Small Magellanic Cloud',
-    description:
-      'Locate the general region of The Small Magellanic Cloud',
+    title: 'Find the Small Magellanic Cloud',
+    description: 'Locate the general region of The Small Magellanic Cloud',
     targetCoords: {
       ra: 3.50816886,
-      dec: -67.8325040,
+      dec: -67.832504,
     },
     tolerance: 10,
   } as FindPosNode,
   {
     type: 'find',
-    title: 'Find The Small Magellanic Cloud',
-    description:
-      'You can now see the SMC',
+    title: 'Focus on the Small Magellanic Cloud',
+    description: 'Pinpoint the exact location of the Small Magellanic Cloud',
     targetCoords: {
       ra: 13.1583333,
       dec: -72.8002777,
     },
     startingCoords: {
       ra: 3.50816886,
-      dec: -67.8325040,
+      dec: -67.832504,
       shouldSnap: false,
-      fov: 15
+      fov: 15,
     },
     tolerance: 1,
   } as FindPosNode,
