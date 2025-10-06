@@ -130,7 +130,7 @@ const FindMission: React.FC<FindMissionProps> = ({
     })
 
     return () => {}
-  }, [])
+  }, [node])
 
   return (
     <>

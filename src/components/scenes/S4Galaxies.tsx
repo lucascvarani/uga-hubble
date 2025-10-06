@@ -5,6 +5,7 @@ import type {
   ZoomMissionNode,
   PlayMusicNode,
   FadeOutNode,
+  FindPosNode
 } from './nodes/SceneNode'
 
 export const galaxiesNodes: SceneNode[] = [
@@ -39,6 +40,43 @@ export const galaxiesNodes: SceneNode[] = [
       'These arms are made of stars, gas, and dust, where new stars are often born.',
     ],
   } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Now its time to search for the Great Barred Spiral Galaxy — a stunning swirl of blue arms around a golden core! Lets look for it.',
+    ],
+    startingCoords: {
+      fov: 50
+    }
+  } as DialogNode,
+  {
+    type: 'find',
+    title: 'Find The Great Barred Spiral Galaxy',
+    description:
+      'Locate the general region of the Great Barred Spiral Galaxy',
+    targetCoords: {
+      ra: 51.0948329,
+      dec: -36.8205547,
+    },
+    tolerance: 10,
+  } as FindPosNode,
+  {
+    type: 'find',
+    title: 'Find The Great Barred Spiral Galaxy',
+    description:
+      'You can now see the galaxy',
+    targetCoords: {
+      ra: 53.4019083,
+      dec: -36.1406582,
+    },
+    startingCoords: {
+      ra: 51.0948329,
+      dec: -36.8205547,
+      shouldSnap: false,
+      fov: 5
+    },
+    tolerance: 0.5,
+  } as FindPosNode,
   {
     type: 'dialog',
     text: [
