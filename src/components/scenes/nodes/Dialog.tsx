@@ -73,7 +73,13 @@ const Dialog: React.FC<DialogUIProps> = ({
     console.log('Audio effect for text index:', currentTextIndex)
     console.log('Available audios:', audios)
     if (currentTextIndex < 0 || currentTextIndex >= audios.length) return
-    MusicManager.getInstance().playSoundEffect(audios[currentTextIndex], 3.0)
+    MusicManager.getInstance().playSoundEffect(
+      audios[currentTextIndex],
+      3.0,
+      false,
+      currentTextIndex !== 0,
+      1
+    )
   }, [currentTextIndex, audios])
 
   const handleClick = () => {
@@ -89,6 +95,7 @@ const Dialog: React.FC<DialogUIProps> = ({
         // Restart typing after a small delay
         setTimeout(() => setStartTyping(true), 100)
       } else {
+        MusicManager.getInstance().stopAllSoundEffects()
         onFinish()
         setCurrentTextIndex(0)
       }
