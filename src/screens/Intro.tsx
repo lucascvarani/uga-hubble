@@ -113,14 +113,14 @@ const FireMenu: React.FC<FireMenuProps> = ({
         <p className="text-gray-300 mb-10">An adventure on the time.</p>
         <button
           onClick={onStart}
-          className="px-10 py-3 bg-orange-500/80 hover:bg-orange-600 text-white font-semibold rounded-lg text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-400/50 animate-pulse focus:outline-none"
+          className="px-10 py-3 bg-transparent border hover:border-none hover:bg-white hover:text-black text-white font-semibold rounded-lg text-lg transition-all shadow-lg  animate-pulse focus:outline-none"
         >
-          Start
+          Start your Journey!
         </button>
         {gameFinished && (
           <button
             onClick={goToFreeExploration}
-            className="mt-5 px-10 py-3 bg-orange-500/80 hover:bg-orange-600 text-white font-semibold rounded-lg text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-400/50 animate-pulse focus:outline-none"
+            className="mt-5 px-10 py-3 bg-transparent border hover:border-none hover:bg-white hover:text-black text-white font-semibold rounded-lg text-lg transition-all shadow-lg  animate-pulse focus:outline-none"
           >
             Free Exploration
           </button>
