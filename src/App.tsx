@@ -18,6 +18,7 @@ function App() {
   const [showSoundWarning, setShowSoundWarning] = useState(true)
   const [showIntro, setShowIntro] = useState(true)
   const telescopeRef = useRef<TelescopeHandle>(null)
+  const [gameFinished, setGameFinished] = useState(false)
 
   // Show sound warning first
   if (showSoundWarning) {
@@ -42,7 +43,14 @@ function App() {
       </div>
 
       {showIntro ? (
-        <FireMenu onStart={() => setShowIntro(false)} />
+        <FireMenu
+          onStart={() => setShowIntro(false)}
+          gameFinished={gameFinished}
+          goToFreeExploration={() => {
+            setSceneNumber(4)
+            setShowIntro(false)
+          }}
+        />
       ) : (
         /* Telescope Overlay - positioned above Aladin but below UI */
         <>
@@ -113,8 +121,10 @@ function App() {
                         aladinInstance={aladinInstance}
                         nodes={galaxiesNodes}
                         onSceneEnd={() => {
-                          setSceneNumber((previous) => previous + 1)
-                          // setShowIntro(true)
+                          // setSceneNumber((previous) => previous + 1)
+                          setSceneNumber(0)
+                          setGameFinished(true)
+                          setShowIntro(true)
                         }}
                       />
                     )

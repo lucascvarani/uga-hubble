@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useCallback } from 'react'
 
 type FireMenuProps = {
   onStart?: () => void
+  gameFinished?: boolean
+  goToFreeExploration?: () => void
 }
 
 type Particle = {
@@ -17,7 +19,11 @@ type Particle = {
   swirl: number
 }
 
-const FireMenu: React.FC<FireMenuProps> = ({ onStart }) => {
+const FireMenu: React.FC<FireMenuProps> = ({
+  onStart,
+  gameFinished,
+  goToFreeExploration,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const particlesRef = useRef<Particle[]>([])
   const rafRef = useRef<number | undefined>(undefined)
@@ -108,6 +114,14 @@ const FireMenu: React.FC<FireMenuProps> = ({ onStart }) => {
         >
           Start
         </button>
+        {gameFinished && (
+          <button
+            onClick={goToFreeExploration}
+            className="mt-5 px-10 py-3 bg-orange-500/80 hover:bg-orange-600 text-white font-semibold rounded-lg text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-400/50 animate-pulse focus:outline-none"
+          >
+            Free Exploration
+          </button>
+        )}
       </div>
     </div>
   )
