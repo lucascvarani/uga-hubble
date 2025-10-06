@@ -6,12 +6,14 @@ import MusicManager from '../../../utils/MusicManager'
 interface DialogUIProps {
   text: string[]
   audios: string[]
+  title?: string
   onFinish: () => void
   typingSpeed?: number
 }
 
 const Dialog: React.FC<DialogUIProps> = ({
   text,
+  title,
   onFinish,
   typingSpeed = 50,
   audios = [],
@@ -113,13 +115,17 @@ const Dialog: React.FC<DialogUIProps> = ({
 
   return (
     <div className="dialog-wrapper w-full h-screen" onClick={handleClick}>
+      <div className="flex justify-center text-white mt-5 text-3xl font-medium">
+        <SmokeText>{title}</SmokeText>
+      </div>
+
       <div
         className="
           dialog-container
           fixed bottom-0 left-1/2 -translate-x-1/2 
           w-1/2
           p-10 pt-8
-           text-white text-center text-lg
+           text-white text-center
           cursor-pointer
           z-[1000]
           box-border
@@ -157,7 +163,8 @@ const Dialog: React.FC<DialogUIProps> = ({
                 : 'scaleX(0.3) scaleY(0.8)',
               transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
               transformOrigin: 'center',
-              fontSize: '24px',
+              fontSize: '21px',
+              fontWeight: 100,
             }}
           >
             {displayedText}
@@ -166,7 +173,8 @@ const Dialog: React.FC<DialogUIProps> = ({
                 style={{
                   animation: 'blink 1s infinite',
                   marginLeft: '2px',
-                  fontSize: '24px',
+                  fontSize: '21px',
+                  fontWeight: 100,
                 }}
               >
                 |

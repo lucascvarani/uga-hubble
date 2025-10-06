@@ -167,6 +167,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       return (
         <Dialog
           text={(currentNode as DialogNode).text}
+          title={(currentNode as DialogNode).title}
           onFinish={handleNextNode}
           audios={(currentNode as DialogNode).audios || []}
         />
