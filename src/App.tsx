@@ -10,6 +10,7 @@ import Telescope, { type TelescopeHandle } from './components/Telescope'
 import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
 import { medievalNodes } from './components/scenes/S3Medieval'
 import { galaxiesNodes } from './components/scenes/S4Galaxies'
+import { freeExploreNodes } from './components/scenes/S5FreeExplore'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -110,6 +111,17 @@ function App() {
                       <Scene
                         aladinInstance={aladinInstance}
                         nodes={galaxiesNodes}
+                        onSceneEnd={() => {
+                          setSceneNumber(0)
+                          setShowIntro(true)
+                        }}
+                      />
+                    )
+                  case 4:
+                    return (
+                      <Scene
+                        aladinInstance={aladinInstance}
+                        nodes={freeExploreNodes}
                         onSceneEnd={() => {
                           setSceneNumber(0)
                           setShowIntro(true)

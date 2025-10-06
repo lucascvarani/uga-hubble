@@ -20,6 +20,7 @@ import ZoomTutorial from './nodes/ZoomTutorial'
 import ZoomMission from './nodes/ZoomMission'
 import PlayMusic from './nodes/PlayMusic'
 import FadeOut from './nodes/FadeOut'
+import FreeExplore from './nodes/FreeExplore'
 
 interface SceneProps {
   nodes: SceneNode[]
@@ -222,6 +223,10 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           onNext={handleNextNode}
           duration={(currentNode as FadeOutNode).duration}
         />
+      )
+    case 'free_explore':
+      return (
+        <FreeExplore onClose={handleNextNode} aladinInstance={aladinInstance} />
       )
     default:
       return null

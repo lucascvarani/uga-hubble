@@ -131,7 +131,7 @@ const Dialog: React.FC<DialogUIProps> = ({
           dialog-container
           fixed bottom-0 left-1/2 -translate-x-1/2 
           w-1/2
-          p-10 pt-8
+          p-10 pt-8 pb-12
            text-white text-center
           cursor-pointer
           z-[1000]
