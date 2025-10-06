@@ -26,7 +26,18 @@ export const galaxiesNodes: SceneNode[] = [
       'Now you hold machines that can see galaxies, and tools that can listen to the birth of stars.',
       'Let’s explore some galaxies together!',
     ],
-    shouldAnimate: false
+    shouldAnimate: false,
+    audios: [
+      'audio/memos/modern/1.m4a',
+      'audio/memos/modern/2.m4a',
+      'audio/memos/modern/3.m4a',
+    ],
+    startingCoords: {
+      ra: 10.6847083,
+      dec: 41.26875,
+      shouldSnap: false,
+      fov: 100,
+    },
   } as DialogNode,
   {
     type: 'zoom_mission',
@@ -204,7 +215,15 @@ export const galaxiesNodes: SceneNode[] = [
       'So take the tools of this age, aim them toward the unknown, and make it yours.',
       'The next chapter of humanity is waiting for you to write it.',
     ],
-  },
+    audios: [
+      'audio/memos/modern/4.m4a',
+      'audio/memos/modern/5.m4a',
+      'audio/memos/modern/6.m4a',
+      'audio/memos/modern/7.m4a',
+      'audio/memos/modern/8.m4a',
+      'audio/memos/modern/9.m4a',
+    ],
+  } as DialogNode,
   {
     type: 'music',
     audio: 'audio/andromeda-space-adventure-403080.mp3',
