@@ -19,11 +19,11 @@ export const wakeMedievalNodes: SceneNode[] = [
       dec: +24.1448011,
       shouldSnap: true,
     },
+    title: 'BROADEN YOUR HORIZONS',
+    time: '1600 AD',
   } as EyeNode,
   {
     type: 'dialog',
-    title: 'Broaden Your Horizons',
-    subtitle: '1600 AD',
     text: [
       'Hey, look who’s awake. Quite the upgrade, huh? No more caves or mammoth hunts — you’ve landed in the age of knights and thinkers. Welcome to the medieval era!',
       'You’d be amazed how much the world has changed. The world is starting to ask why — and that’s when everything begins to change.',
