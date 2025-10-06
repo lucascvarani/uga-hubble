@@ -8,6 +8,7 @@ interface DialogUIProps {
   text: string[]
   audios: string[]
   title?: string
+  subtitle?: string
   onFinish: () => void
   typingSpeed?: number
   aladinInstance: AladinInstance | null
@@ -17,6 +18,7 @@ interface DialogUIProps {
 const Dialog: React.FC<DialogUIProps> = ({
   text,
   title,
+  subtitle,
   onFinish,
   aladinInstance,
   typingSpeed = 50,
@@ -171,8 +173,9 @@ const Dialog: React.FC<DialogUIProps> = ({
 
   return (
     <div className="dialog-wrapper w-full h-screen" onClick={handleClick}>
-      <div className="flex justify-center text-white mt-5 text-3xl font-medium">
+      <div className="flex gap-2 justify-center items-center text-white mt-10 text-3xl font-medium flex-col">
         <SmokeText>{title}</SmokeText>
+        <SmokeText className="font-light">{subtitle}</SmokeText>
       </div>
 
       <div

@@ -21,6 +21,8 @@ export const galaxiesNodes: SceneNode[] = [
   } as EyeNode,
   {
     type: 'dialog',
+    title: 'Embiggen Your Eyes',
+    subtitle: '2025 AD',
     text: [
       'You’re awake — finally, in your own time.',
       'Now you hold machines that can see galaxies, and tools that can listen to the birth of stars.',
@@ -116,7 +118,7 @@ export const galaxiesNodes: SceneNode[] = [
   } as DialogNode,
   {
     type: 'find',
-    title: 'Find the Small Magellanic Cloud',
+    title: 'Find The Small Magellanic Cloud',
     description: 'Locate the general region of The Small Magellanic Cloud',
     targetCoords: {
       ra: 3.50816886,
