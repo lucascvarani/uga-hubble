@@ -184,10 +184,9 @@ export const galaxiesNodes: SceneNode[] = [
   } as DialogNode,
   {
     type: 'quizz',
-    title: 'Desvendando galáxias',
-    description:
-      'Ajude Aladim a descobrir qual é o tipo da galáxia de Andrômeda!',
-    question: 'Qual tipo de galáxia é este?',
+    title: 'Guess the Galaxy!',
+    description: 'Can you identify the type of this galaxy?',
+    question: 'What is the type of this galaxy?',
     options: [
       'Spiral galaxy',
       'Barred spiral galaxy',
