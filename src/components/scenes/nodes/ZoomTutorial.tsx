@@ -69,7 +69,7 @@ const ZoomTutorial: React.FC<ZoomTutorialProps> = ({
         setZoomIn(false)
       }
 
-      if (!zoomIn && currentFov && currentFov[0] >= 25) {
+      if (!zoomIn) {
         console.log('Should call onNext')
         MusicManager.getInstance().playSoundEffect('/audio/correct.mp3', 0.8)
         onNext()

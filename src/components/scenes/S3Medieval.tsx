@@ -26,14 +26,24 @@ export const medievalNodes: SceneNode[] = [
     type: 'dialog',
     text: [
       "Amazing, isn't it? With the telescope, you can see details that are invisible to the naked eye.",
+    ],
+    audios: [
+      'audio/memos/medieval/2.m4a',
+    ],
+  } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
       'See that faint, milky stain stretching across the sky? It’s been there forever, but no one really knows what it is.',
       'Let’s take a closer look — maybe this time, we’ll finally find out.',
     ],
     audios: [
-      'audio/memos/medieval/2.m4a',
       'audio/memos/medieval/3.m4a',
       'audio/memos/medieval/4.m4a',
     ],
+    startingCoords: {
+      fov: 25
+    }
   } as DialogNode,
   {
     type: 'find',
