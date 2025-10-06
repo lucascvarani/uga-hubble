@@ -136,7 +136,6 @@ const FindMission: React.FC<FindMissionProps> = ({
           }
         )
       }
-      console.log('positionChanged', ra, dec)
     })
 
     return () => {}

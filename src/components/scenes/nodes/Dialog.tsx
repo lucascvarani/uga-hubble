@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import DiamondLine from '../../structure/DiamondLine'
 import SmokeText from '../../SmokeText'
 import MusicManager from '../../../utils/MusicManager'
+import type { AladinInstance } from '../../Aladin'
 
 interface DialogUIProps {
   text: string[]
@@ -9,14 +10,18 @@ interface DialogUIProps {
   title?: string
   onFinish: () => void
   typingSpeed?: number
+  aladinInstance: AladinInstance | null
+  shouldAnimate?: boolean
 }
 
 const Dialog: React.FC<DialogUIProps> = ({
   text,
   title,
   onFinish,
+  aladinInstance,
   typingSpeed = 50,
   audios = [],
+  shouldAnimate = true,
 }) => {
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
@@ -27,6 +32,7 @@ const Dialog: React.FC<DialogUIProps> = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const typingIntervalRef = useRef<any>(null)
+  let completed = false
 
   useEffect(() => {
     // Reset all states when text changes
@@ -96,6 +102,7 @@ const Dialog: React.FC<DialogUIProps> = ({
         setTimeout(() => setStartTyping(true), 100)
       } else {
         MusicManager.getInstance().stopAllSoundEffects()
+        completed = true
         onFinish()
         setCurrentTextIndex(0)
       }
@@ -119,6 +126,48 @@ const Dialog: React.FC<DialogUIProps> = ({
       document.head.removeChild(link)
     }
   }, [])
+
+  // inside useEffect
+  useEffect(() => {
+    if (!shouldAnimate) return
+
+    if (!aladinInstance || completed) return
+
+    const originCoords = aladinInstance.getRaDec()
+    if (!originCoords) return
+
+    const [originRa, originDec] = originCoords
+
+    let frameId: number
+    const startTime = performance.now()
+
+    const animate = (time: number) => {
+      const elapsed = (time - startTime) / 1000 // seconds
+
+      // Get zoom (field of view in degrees)
+      const fov = aladinInstance.getFov()
+      // Default fallback if fov is null or weird
+      const zoom = fov ? fov[0] : 60
+
+      // Scale offsets proportionally to zoom
+      // At larger zoom (small FOV), movements feel slower
+      const scale = zoom / 60 // 60 chosen as "baseline" FOV
+
+      // Independent sine waves with slightly different frequencies
+      const offsetRa =
+        (Math.sin(elapsed * 0.3) * 1.2 + Math.sin(elapsed * 0.07) * 0.6) * scale
+      const offsetDec =
+        (Math.cos(elapsed * 0.2) * 0.8 + Math.sin(elapsed * 0.11) * 0.4) * scale
+
+      aladinInstance.gotoRaDec(originRa + offsetRa, originDec + offsetDec)
+
+      frameId = requestAnimationFrame(animate)
+    }
+
+    frameId = requestAnimationFrame(animate)
+
+    return () => cancelAnimationFrame(frameId)
+  }, [aladinInstance, completed, shouldAnimate])
 
   return (
     <div className="dialog-wrapper w-full h-screen" onClick={handleClick}>

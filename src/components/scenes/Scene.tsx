@@ -167,6 +167,8 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
     case 'dialog':
       return (
         <Dialog
+          shouldAnimate={(currentNode as DialogNode).shouldAnimate}
+          aladinInstance={aladinInstance}
           text={(currentNode as DialogNode).text}
           title={(currentNode as DialogNode).title}
           onFinish={handleNextNode}
@@ -190,7 +192,13 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
         />
       )
     case 'quizz':
-      return <Quizz node={currentNode as QuizzNode} onNext={handleNextNode} />
+      return (
+        <Quizz
+          aladinInstance={aladinInstance}
+          node={currentNode as QuizzNode}
+          onNext={handleNextNode}
+        />
+      )
     case 'use_telescope':
       return <UseTelescope onNext={handleNextNode} />
 

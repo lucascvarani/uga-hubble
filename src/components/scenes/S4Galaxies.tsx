@@ -50,6 +50,7 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 0.5,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'dialog',
@@ -78,6 +79,7 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 0.01,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'dialog',
@@ -90,6 +92,7 @@ export const galaxiesNodes: SceneNode[] = [
       shouldSnap: false,
       fov: 5,
     },
+    shouldAnimate: false,
   } as DialogNode,
   {
     type: 'quizz',

@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import MissionTracker from '../../MissionTracker'
 import Dialog from './Dialog'
 import type { QuizzNode } from './SceneNode'
+import type { AladinInstance } from '../../Aladin'
 
 interface QuizzUIProps {
   node: QuizzNode
   onNext: () => void
+  aladinInstance: AladinInstance | null
 }
 
-const Quizz: React.FC<QuizzUIProps> = ({ node, onNext }) => {
+const Quizz: React.FC<QuizzUIProps> = ({ node, onNext, aladinInstance }) => {
   const [sceneState, setSceneState] = useState(0)
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [wasRightAnswer, setWasRightAnswer] = useState(false)
@@ -67,6 +69,8 @@ const Quizz: React.FC<QuizzUIProps> = ({ node, onNext }) => {
       {sceneState === 1 && (
         <div>
           <Dialog
+            shouldAnimate={false}
+            aladinInstance={aladinInstance}
             text={wasRightAnswer ? node.textRightOption : node.textWrongOption}
             onFinish={onNext}
           />
