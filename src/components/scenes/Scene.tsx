@@ -169,6 +169,7 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
           text={(currentNode as DialogNode).text}
           title={(currentNode as DialogNode).title}
           onFinish={handleNextNode}
+          audios={(currentNode as DialogNode).audios || []}
         />
       )
     case 'find':

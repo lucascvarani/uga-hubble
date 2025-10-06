@@ -31,6 +31,12 @@ export const ugaNodes: SceneNode[] = [
       'Your people are waiting. The wind grows colder, and the herds have already moved on.\nIt’s time to lead them - across unknown lands, through nights filled with stories and stars.',
       'Somewhere above, a white flame shines steady, never fading, never wandering.\nThey say it watches over those who seek their path. Let’s try to find it. It might just lead us where we need to go.',
     ],
+    audios: [
+      'audio/memos/uga/1.m4a',
+      'audio/memos/uga/2.m4a',
+      'audio/memos/uga/3.m4a',
+      'audio/memos/uga/4.m4a',
+    ],
   } as DialogNode,
   {
     type: 'find',

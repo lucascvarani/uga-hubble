@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import DiamondLine from '../../structure/DiamondLine'
 import SmokeText from '../../SmokeText'
+import MusicManager from '../../../utils/MusicManager'
 
 interface DialogUIProps {
   text: string[]
+  audios: string[]
   title?: string
   onFinish: () => void
   typingSpeed?: number
@@ -14,6 +16,7 @@ const Dialog: React.FC<DialogUIProps> = ({
   title,
   onFinish,
   typingSpeed = 50,
+  audios = [],
 }) => {
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
@@ -65,6 +68,13 @@ const Dialog: React.FC<DialogUIProps> = ({
       if (typingIntervalRef.current) clearInterval(typingIntervalRef.current)
     }
   }, [currentTextIndex, startTyping, text, typingSpeed])
+
+  useEffect(() => {
+    console.log('Audio effect for text index:', currentTextIndex)
+    console.log('Available audios:', audios)
+    if (currentTextIndex < 0 || currentTextIndex >= audios.length) return
+    MusicManager.getInstance().playSoundEffect(audios[currentTextIndex], 3.0)
+  }, [currentTextIndex, audios])
 
   const handleClick = () => {
     if (isTypingComplete) {
