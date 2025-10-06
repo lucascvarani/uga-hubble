@@ -4,9 +4,17 @@ import SmokeText from './SmokeText'
 interface QuestDisplayProps {
   title: string
   description: string
+  catalogList?: { name: string; coords: number[]; fov: number }[]
+  gotoRaDec?: (ra: number, dec: number) => void
 }
 
-const QuestDisplay: React.FC<QuestDisplayProps> = ({ title, description }) => {
+const QuestDisplay: React.FC<QuestDisplayProps> = ({
+  title,
+  description,
+  catalogList,
+  gotoRaDec,
+}) => {
+  console.log({ catalogList })
   const [showTitle, setShowTitle] = useState(false)
   const [showDivider, setShowDivider] = useState(false)
   const [showDescription, setShowDescription] = useState(false)
@@ -43,16 +51,37 @@ const QuestDisplay: React.FC<QuestDisplayProps> = ({ title, description }) => {
             transition: 'width 0.8s ease-out',
           }}
         ></div>
-        <p
-          style={{
-            ...styles.questDescription,
-            opacity: showDescription ? 1 : 0,
-            transform: showDescription ? 'translateY(0)' : 'translateY(10px)',
-            transition: 'all 0.6s ease-out',
-          }}
-        >
-          {description}
-        </p>
+        {description && (
+          <p
+            style={{
+              ...styles.questDescription,
+              opacity: showDescription ? 1 : 0,
+              transform: showDescription ? 'translateY(0)' : 'translateY(10px)',
+              transition: 'all 0.6s ease-out',
+            }}
+          >
+            {description}
+          </p>
+        )}
+        {catalogList &&
+          catalogList.map((item, index) => {
+            return (
+              <div
+                key={index}
+                onClick={() =>
+                  gotoRaDec && gotoRaDec(item.coords[0], item.coords[1])
+                }
+                className={`group cursor-pointer px-3 rounded-md flex items-center text-base opacity-70 transition-colors hover:opacity-100`}
+              >
+                {/* Diamante muda no hover */}
+                <span className="text-white mr-2">
+                  <span className="invisible group-hover:hidden">◆</span>
+                  <span className="hidden group-hover:block">◆</span>
+                </span>
+                {item.name}
+              </div>
+            )
+          })}
       </SmokeText>
     </div>
   )
@@ -62,6 +91,8 @@ const QuestDisplay: React.FC<QuestDisplayProps> = ({ title, description }) => {
 const MissionTracker: React.FC<QuestDisplayProps> = ({
   title,
   description,
+  catalogList,
+  gotoRaDec,
 }) => {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -85,9 +116,12 @@ const MissionTracker: React.FC<QuestDisplayProps> = ({
           : 'translateY(-20px) scale(0.95)',
       }}
     >
-      {/* <div className="bg-black w-fit opacity-50 rounded-lg blur-lg"> */}
-      <QuestDisplay title={title} description={description} />
-      {/* </div> */}
+      <QuestDisplay
+        title={title}
+        description={description}
+        catalogList={catalogList}
+        gotoRaDec={gotoRaDec}
+      />
     </div>
   )
 }

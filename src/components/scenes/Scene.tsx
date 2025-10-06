@@ -234,7 +234,11 @@ const Scene: React.FC<SceneProps> = ({ nodes, aladinInstance, onSceneEnd }) => {
       )
     case 'free_explore':
       return (
-        <FreeExplore onClose={handleNextNode} aladinInstance={aladinInstance} />
+        <FreeExplore
+          onClose={handleNextNode}
+          aladinInstance={aladinInstance}
+          node={currentNode as SceneNode}
+        />
       )
     default:
       return null
