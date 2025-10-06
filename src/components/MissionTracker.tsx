@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import SmokeText from './SmokeText'
 
 interface QuestDisplayProps {
   title: string
@@ -24,33 +25,35 @@ const QuestDisplay: React.FC<QuestDisplayProps> = ({ title, description }) => {
 
   return (
     <div style={styles.questContainer}>
-      <h2
-        style={{
-          ...styles.questTitle,
-          opacity: showTitle ? 1 : 0,
-          transform: showTitle ? 'translateX(0)' : 'translateX(-30px)',
-          transition: 'all 0.6s ease-out',
-        }}
-      >
-        {title}
-      </h2>
-      <div
-        style={{
-          ...styles.divider,
-          width: showDivider ? '100%' : '0%',
-          transition: 'width 0.8s ease-out',
-        }}
-      ></div>
-      <p
-        style={{
-          ...styles.questDescription,
-          opacity: showDescription ? 1 : 0,
-          transform: showDescription ? 'translateY(0)' : 'translateY(10px)',
-          transition: 'all 0.6s ease-out',
-        }}
-      >
-        {description}
-      </p>
+      <SmokeText>
+        <h2
+          style={{
+            ...styles.questTitle,
+            opacity: showTitle ? 1 : 0,
+            transform: showTitle ? 'translateX(0)' : 'translateX(-30px)',
+            transition: 'all 0.6s ease-out',
+          }}
+        >
+          {title}
+        </h2>
+        <div
+          style={{
+            ...styles.divider,
+            width: showDivider ? '100%' : '0%',
+            transition: 'width 0.8s ease-out',
+          }}
+        ></div>
+        <p
+          style={{
+            ...styles.questDescription,
+            opacity: showDescription ? 1 : 0,
+            transform: showDescription ? 'translateY(0)' : 'translateY(10px)',
+            transition: 'all 0.6s ease-out',
+          }}
+        >
+          {description}
+        </p>
+      </SmokeText>
     </div>
   )
 }
@@ -82,7 +85,9 @@ const MissionTracker: React.FC<QuestDisplayProps> = ({
           : 'translateY(-20px) scale(0.95)',
       }}
     >
+      {/* <div className="bg-black w-fit opacity-50 rounded-lg blur-lg"> */}
       <QuestDisplay title={title} description={description} />
+      {/* </div> */}
     </div>
   )
 }

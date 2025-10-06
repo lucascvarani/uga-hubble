@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
 import DiamondLine from '../../structure/DiamondLine'
+import SmokeText from '../../SmokeText'
+import MusicManager from '../../../utils/MusicManager'
 
 interface DialogUIProps {
   text: string[]
+  audios: string[]
+  title?: string
   onFinish: () => void
   typingSpeed?: number
 }
 
 const Dialog: React.FC<DialogUIProps> = ({
   text,
+  title,
   onFinish,
   typingSpeed = 50,
+  audios = [],
 }) => {
   const [displayedText, setDisplayedText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
@@ -63,6 +69,13 @@ const Dialog: React.FC<DialogUIProps> = ({
     }
   }, [currentTextIndex, startTyping, text, typingSpeed])
 
+  useEffect(() => {
+    console.log('Audio effect for text index:', currentTextIndex)
+    console.log('Available audios:', audios)
+    if (currentTextIndex < 0 || currentTextIndex >= audios.length) return
+    MusicManager.getInstance().playSoundEffect(audios[currentTextIndex], 3.0)
+  }, [currentTextIndex, audios])
+
   const handleClick = () => {
     if (isTypingComplete) {
       // Move to next text
@@ -102,13 +115,17 @@ const Dialog: React.FC<DialogUIProps> = ({
 
   return (
     <div className="dialog-wrapper w-full h-screen" onClick={handleClick}>
+      <div className="flex justify-center text-white mt-5 text-3xl font-medium">
+        <SmokeText>{title}</SmokeText>
+      </div>
+
       <div
         className="
           dialog-container
           fixed bottom-0 left-1/2 -translate-x-1/2 
           w-1/2
-          p-10 pt-8
-          bg-black/75 text-white text-center text-lg
+          p-10 pt-8 pb-12
+           text-white text-center
           cursor-pointer
           z-[1000]
           box-border
@@ -125,42 +142,46 @@ const Dialog: React.FC<DialogUIProps> = ({
             : 'polygon(45% 0, 55% 0, 55% 100%, 45% 100%)',
         }}
       >
-        <div
-          style={{
-            opacity: showDiamond ? 1 : 0,
-            transform: showDiamond ? 'scaleX(1)' : 'scaleX(0)',
-            transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-            transformOrigin: 'center',
-          }}
-        >
-          <DiamondLine />
-        </div>
+        <SmokeText>
+          <div
+            style={{
+              opacity: showDiamond ? 1 : 0,
+              transform: showDiamond ? 'scaleX(1)' : 'scaleX(0)',
+              transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              transformOrigin: 'center',
+            }}
+          >
+            <DiamondLine />
+          </div>
 
-        <span
-          style={{
-            display: 'inline-block',
-            opacity: startTyping ? 1 : 0,
-            transform: startTyping
-              ? 'scaleX(1) scaleY(1)'
-              : 'scaleX(0.3) scaleY(0.8)',
-            transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-            transformOrigin: 'center',
-            fontSize: '24px',
-          }}
-        >
-          {displayedText}
-          {!isTypingComplete && startTyping && (
-            <span
-              style={{
-                animation: 'blink 1s infinite',
-                marginLeft: '2px',
-                fontSize: '24px',
-              }}
-            >
-              |
-            </span>
-          )}
-        </span>
+          <span
+            style={{
+              display: 'inline-block',
+              opacity: startTyping ? 1 : 0,
+              transform: startTyping
+                ? 'scaleX(1) scaleY(1)'
+                : 'scaleX(0.3) scaleY(0.8)',
+              transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              transformOrigin: 'center',
+              fontSize: '21px',
+              fontWeight: 100,
+            }}
+          >
+            {displayedText}
+            {!isTypingComplete && startTyping && (
+              <span
+                style={{
+                  animation: 'blink 1s infinite',
+                  marginLeft: '2px',
+                  fontSize: '21px',
+                  fontWeight: 100,
+                }}
+              >
+                |
+              </span>
+            )}
+          </span>
+        </SmokeText>
 
         <style>
           {`
