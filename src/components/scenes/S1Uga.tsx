@@ -64,6 +64,11 @@ export const ugaNodes: SceneNode[] = [
       'One day, people will call it Polaris — the North Star. It’ll lead sailors, travelers, and dreamers for thousands of years.',
       'Your people are safe. Rest — the stars will take it from here.',
     ],
+    audios: [
+      'audio/memos/uga/5.m4a',
+      'audio/memos/uga/6.m4a',
+      'audio/memos/uga/7.m4a',
+    ],
   } as DialogNode,
   {
     type: 'fade_out',

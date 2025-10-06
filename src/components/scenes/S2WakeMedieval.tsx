@@ -28,6 +28,12 @@ export const wakeMedievalNodes: SceneNode[] = [
       'Everybody is talking about a strange tool that can make faraway things look close. Glass and metal — nothing fancy, but somehow it lets you see what no one ever could.',
       'Go on, pick up the telescope. Point it at the sky. Trust me — once you look through it, you’ll never see the world the same way again.',
     ],
+    audios: [
+      'audio/memos/medieval_awake/1.m4a',
+      'audio/memos/medieval_awake/2.m4a',
+      'audio/memos/medieval_awake/3.m4a',
+      'audio/memos/medieval_awake/4.m4a',
+    ],
   } as DialogNode,
   {
     type: 'use_telescope',

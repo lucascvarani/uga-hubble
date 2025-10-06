@@ -14,6 +14,7 @@ export const medievalNodes: SceneNode[] = [
     text: [
       "Great! It fits perfectly. Now, let's take a closer look at the stars. Use the zoom feature on the telescope to get a better view of the night sky.",
     ],
+    audios: ['audio/memos/medieval/1.m4a'],
   } as DialogNode,
   {
     type: 'zoom_tutorial',
@@ -26,6 +27,11 @@ export const medievalNodes: SceneNode[] = [
       "Amazing, isn't it? With the telescope, you can see details that are invisible to the naked eye.",
       'See that faint, milky stain stretching across the sky? It’s been there forever, but no one really knows what it is.',
       'Let’s take a closer look — maybe this time, we’ll finally find out.',
+    ],
+    audios: [
+      'audio/memos/medieval/2.m4a',
+      'audio/memos/medieval/3.m4a',
+      'audio/memos/medieval/4.m4a',
     ],
   } as DialogNode,
   {
@@ -56,6 +62,12 @@ export const medievalNodes: SceneNode[] = [
       'This changes everything! If the sky holds more worlds than we can count, then maybe we’re not the center of it all',
       'From this moment on, people will question, imagine, and explore. Science will seek proof. Philosophy will seek meaning.',
       'And humanity will never look at the night the same way again.',
+    ],
+    audios: [
+      'audio/memos/medieval/5.m4a',
+      'audio/memos/medieval/6.m4a',
+      'audio/memos/medieval/7.m4a',
+      'audio/memos/medieval/8.m4a',
     ],
   } as DialogNode,
   {
