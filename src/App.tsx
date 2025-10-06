@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Aladin from './components/Aladin'
 import Scene from './components/scenes/Scene'
@@ -11,6 +11,7 @@ import { wakeMedievalNodes } from './components/scenes/S2WakeMedieval'
 import { medievalNodes } from './components/scenes/S3Medieval'
 import { galaxiesNodes } from './components/scenes/S4Galaxies'
 import { freeExploreNodes } from './components/scenes/S5FreeExplore'
+import { preloadAssets } from './lib/utils'
 
 function App() {
   const [aladinInstance, setAladinInstance] = useState(null)
@@ -19,6 +20,33 @@ function App() {
   const [showIntro, setShowIntro] = useState(true)
   const telescopeRef = useRef<TelescopeHandle>(null)
   const [gameFinished, setGameFinished] = useState(false)
+
+  useEffect(() => {
+    preloadAssets(
+      [
+        // Images
+        'down-compass.png',
+        'initial_image.jpeg', // Fixed extension - you have .jpeg not .png
+        'lunetaPNG.png',
+        'scroll-zoom2.gif', // This is a GIF, not PNG
+        'up-compass.png',
+        'vite.svg',
+      ],
+      [
+        // Audio files
+        'audio/andromeda-space-adventure-403080.mp3',
+        'audio/anthem-of-victory-111206.mp3',
+        'audio/correct-zoom.mp3',
+        'audio/correct.mp3',
+        'audio/ending-music.mp3',
+        'audio/equip.mp3',
+        'audio/evening-sound-effect-in-village-348670.mp3',
+        'audio/history-piano.mp3',
+        'audio/medieval.mp3',
+        'audio/yawn.mp3',
+      ]
+    )
+  }, [])
 
   // Show sound warning first
   if (showSoundWarning) {
