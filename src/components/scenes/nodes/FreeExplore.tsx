@@ -14,16 +14,15 @@ interface FreeExploreProps {
 const title = 'Catalog'
 
 const catalogList = [
-  { name: 'Andromeda', coords: [10.6847083, 41.2690659], fov: 80 },
-  { name: 'Sombrero Galaxy', coords: [10.4107, -11.6608], fov: 80 },
-  { name: 'Whirlpool Galaxy', coords: [13.2286, 47.1955], fov: 80 },
-  { name: 'Pinwheel Galaxy', coords: [14.0372, 54.3482], fov: 80 },
-  { name: 'Centaurus A', coords: [13.211, -43.0205], fov: 80 },
-  { name: 'Messier 87', coords: [12.3912, 12.3912], fov: 80 },
-  { name: 'Triangulum Galaxy', coords: [23.4622, 30.6602], fov: 80 },
-  { name: 'Black Eye Galaxy', coords: [13.625, 42.5], fov: 80 },
-  { name: 'Cigar Galaxy', coords: [14.0372, 54.3482], fov: 80 },
-  { name: 'Sculptor Galaxy', coords: [23.4622, -25.295], fov: 80 },
+  { name: 'Andromeda', coords: [10.6847083, 41.2690659], fov: 10 },
+  { name: 'Sombrero Galaxy', coords: [189.997633, -11.6230544], fov: 10 },
+  { name: 'Whirlpool Galaxy', coords: [202.469575, 47.1952583], fov: 10 },
+  { name: 'Pinwheel Galaxy', coords: [210.802429, 54.34875], fov: 10 },
+  { name: 'Centaurus A', coords: [201.365063, -43.0191124], fov: 10 },
+  { name: 'Messier 87', coords: [187.705931, 12.3911232], fov: 10 },
+  { name: 'Triangulum Galaxy', coords: [23.4620691, 30.6601751], fov: 10 },
+  { name: 'Black Eye Galaxy', coords: [194.182067, 21.6826583], fov: 10 },
+  { name: 'Cigar Galaxy', coords: [148.968458, 69.6797028], fov: 10 },
 ]
 
 const FreeExplore: React.FC<FreeExploreProps> = ({ aladinInstance, node }) => {

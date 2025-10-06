@@ -10,8 +10,10 @@ interface EyeProps {
   onNext: () => void
 }
 
-const Eye: React.FC<EyeProps> = ({ onNext }) => {
+const Eye: React.FC<EyeProps> = ({ onNext, node }) => {
   const [animationFinished] = useState(false)
+
+  const [showingTitleEra, setShowingTitleEra] = useState(false)
 
   useEffect(() => {
     // cria o <link> para o CSS
@@ -29,6 +31,14 @@ const Eye: React.FC<EyeProps> = ({ onNext }) => {
     }
   }, [])
 
+  function showTitleEra() {
+    setShowingTitleEra(true)
+    setTimeout(() => {
+      setShowingTitleEra(false)
+      onNext()
+    }, 3000)
+  }
+
   return (
     <div className="relative w-full h-screen bg-transparent overflow-hidden">
       {/* Conteúdo por trás */}
@@ -43,10 +53,16 @@ const Eye: React.FC<EyeProps> = ({ onNext }) => {
         <>
           <div
             className="absolute top-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-b-none animate-top-lid z-50"
-            onAnimationEnd={() => onNext()}
+            onAnimationEnd={() => showTitleEra()}
           ></div>
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gray-700/80 backdrop-blur-sm rounded-tr-none animate-bottom-lid z-50"></div>
         </>
+      )}
+      {showingTitleEra && (
+        <div className="text-white absolute items-center justify-center flex w-full h-full flex-col">
+          <p className="text-8xl mb-12">{node.title}</p>
+          <p className="text-7xl">{node.time}</p>
+        </div>
       )}
     </div>
   )

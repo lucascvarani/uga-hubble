@@ -28,6 +28,8 @@ export interface DialogNode extends SceneNode {
 
 export interface EyeNode extends SceneNode {
   type: 'eye'
+  title: string
+  time: string
 }
 
 export interface QuizzNode extends SceneNode {

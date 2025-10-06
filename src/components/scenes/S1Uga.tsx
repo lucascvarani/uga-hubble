@@ -21,11 +21,11 @@ export const ugaNodes: SceneNode[] = [
       fov: 25,
       shouldSnap: true,
     },
+    title: 'LOOK AT THE SKY',
+    time: '1000 BC',
   } as EyeNode,
   {
     type: 'dialog',
-    title: 'Look At The Sky',
-    subtitle: '1000 BC',
     text: [
       'Hey… you’re finally awake. The air feels different, doesn’t it?\nWelcome to an age where stone meets spark, the dawn of humankind.',
       'No more screens, no deadlines, no spreadsheets to haunt your dreams.\nYour only notifications now come from thunder, rivers, and hungry stomachs.',
