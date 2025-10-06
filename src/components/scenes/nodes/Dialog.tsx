@@ -73,7 +73,7 @@ const Dialog: React.FC<DialogUIProps> = ({
     console.log('Audio effect for text index:', currentTextIndex)
     console.log('Available audios:', audios)
     if (currentTextIndex < 0 || currentTextIndex >= audios.length) return
-    MusicManager.getInstance().playSoundEffect(audios[currentTextIndex], 1.5)
+    MusicManager.getInstance().playSoundEffect(audios[currentTextIndex], 3.0)
   }, [currentTextIndex, audios])
 
   const handleClick = () => {
