@@ -5,10 +5,20 @@ import type {
   ZoomMissionNode,
   PlayMusicNode,
   FadeOutNode,
-  FindPosNode
+  FindPosNode,
+  EyeNode
 } from './nodes/SceneNode'
 
 export const galaxiesNodes: SceneNode[] = [
+  {
+    type: 'eye',
+    startingCoords: {
+      ra: 10.6847083,
+      dec: 41.26875,
+      shouldSnap: true,
+      fov: 100,
+    }
+  } as EyeNode,
   {
     type: 'dialog',
     text: [
@@ -16,12 +26,7 @@ export const galaxiesNodes: SceneNode[] = [
       'Now you hold machines that can see galaxies, and tools that can listen to the birth of stars.',
       'Let’s explore some galaxies together!',
     ],
-    startingCoords: {
-      ra: 10.6847083,
-      dec: 41.26875,
-      shouldSnap: false,
-      fov: 100,
-    },
+    shouldAnimate: false
   } as DialogNode,
   {
     type: 'zoom_mission',
@@ -90,6 +95,43 @@ export const galaxiesNodes: SceneNode[] = [
     },
     shouldAnimate: false,
   } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Now its time to search for the Great Barred Spiral Galaxy — a stunning swirl of blue arms around a golden core! Lets look for it.',
+    ],
+    startingCoords: {
+      fov: 50
+    }
+  } as DialogNode,
+  {
+    type: 'find',
+    title: 'Find The Small Magellanic Cloud',
+    description:
+      'Locate the general region of The Small Magellanic Cloud',
+    targetCoords: {
+      ra: 3.50816886,
+      dec: -67.8325040,
+    },
+    tolerance: 10,
+  } as FindPosNode,
+  {
+    type: 'find',
+    title: 'Find The Small Magellanic Cloud',
+    description:
+      'You can now see the SMC',
+    targetCoords: {
+      ra: 13.1583333,
+      dec: -72.8002777,
+    },
+    startingCoords: {
+      ra: 3.50816886,
+      dec: -67.8325040,
+      shouldSnap: false,
+      fov: 15
+    },
+    tolerance: 1,
+  } as FindPosNode,
   {
     type: 'dialog',
     text: [
