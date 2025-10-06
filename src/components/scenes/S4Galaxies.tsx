@@ -21,6 +21,8 @@ export const galaxiesNodes: SceneNode[] = [
   } as EyeNode,
   {
     type: 'dialog',
+    title: 'Embiggen Your Eyes',
+    subtitle: '2025 AD',
     text: [
       'You’re awake — finally, in your own time.',
       'Now you hold machines that can see galaxies, and tools that can listen to the birth of stars.',
@@ -55,10 +57,59 @@ export const galaxiesNodes: SceneNode[] = [
       'These arms are made of stars, gas, and dust, where new stars are often born.',
     ],
   } as DialogNode,
+    {
+    type: 'dialog',
+    text: [
+      'Now its time to search for the Small Magellanic Cloud — a dwarf galaxy with hints of blue star clusters.',
+    ],
+    startingCoords: {
+      fov: 100,
+    },
+  } as DialogNode,
+  {
+    type: 'find',
+    title: 'Find the Small Magellanic Cloud',
+    description: 'Locate the general region of The Small Magellanic Cloud',
+    targetCoords: {
+      ra: 3.50816886,
+      dec: -67.832504,
+    },
+    tolerance: 10,
+  } as FindPosNode,
+  {
+    type: 'find',
+    title: 'Focus on the Small Magellanic Cloud',
+    description: 'Pinpoint the exact location of the Small Magellanic Cloud',
+    targetCoords: {
+      ra: 13.1583333,
+      dec: -72.8002777,
+    },
+    startingCoords: {
+      ra: 3.50816886,
+      dec: -67.832504,
+      shouldSnap: false,
+      fov: 15,
+    },
+    tolerance: 1,
+  } as FindPosNode,
   {
     type: 'dialog',
     text: [
-      'Now its time to search for the Great Barred Spiral Galaxy! Lets look for it.',
+      'The Small Magellanic Cloud (SMC) is a nearby irregular galaxy and a companion of the Milky Way, located about 200,000 light-years away.',
+      'Irregular galaxies have no defined shape, appearing as a patchy, chaotic collection of stars, gas, and dust.',
+      'The SMC is rich in star-forming regions, making it a fascinating place to study how new stars are born.',
+    ],
+    startingCoords: {
+      ra: 13.1583333,
+      dec: -72.8002777,
+      shouldSnap: false,
+      fov: 5,
+    },
+  } as DialogNode,
+  {
+    type: 'dialog',
+    text: [
+      'Now its time to search for the nearby Great Barred Spiral Galaxy! Lets look for it.',
     ],
     startingCoords: {
       fov: 50,
@@ -108,66 +159,11 @@ export const galaxiesNodes: SceneNode[] = [
   {
     type: 'dialog',
     text: [
-      'Now its time to search for the Great Barred Spiral Galaxy — a stunning swirl of blue arms around a golden core! Lets look for it.',
+      "Now let's test your knowledge! We'll visit a galaxy and see how well you can apply what you've learned."
     ],
     startingCoords: {
-      fov: 50,
-    },
-  } as DialogNode,
-  {
-    type: 'find',
-    title: 'Find the Small Magellanic Cloud',
-    description: 'Locate the general region of The Small Magellanic Cloud',
-    targetCoords: {
-      ra: 3.50816886,
-      dec: -67.832504,
-    },
-    tolerance: 10,
-  } as FindPosNode,
-  {
-    type: 'find',
-    title: 'Focus on the Small Magellanic Cloud',
-    description: 'Pinpoint the exact location of the Small Magellanic Cloud',
-    targetCoords: {
-      ra: 13.1583333,
-      dec: -72.8002777,
-    },
-    startingCoords: {
-      ra: 3.50816886,
-      dec: -67.832504,
-      shouldSnap: false,
-      fov: 15,
-    },
-    tolerance: 1,
-  } as FindPosNode,
-  {
-    type: 'dialog',
-    text: [
-      'The Small Magellanic Cloud (SMC) is a nearby irregular galaxy and a companion of the Milky Way, located about 200,000 light-years away.',
-      'Irregular galaxies have no defined shape, appearing as a patchy, chaotic collection of stars, gas, and dust.',
-      'The SMC is rich in star-forming regions, making it a fascinating place to study how new stars are born.',
-    ],
-    startingCoords: {
-      ra: 13.1583333,
-      dec: -72.8002777,
-      shouldSnap: false,
-      fov: 5,
-    },
-  } as DialogNode,
-  {
-    type: 'dialog',
-    text: [
-      'Messier 87, is a giant elliptical galaxy about 55 million light-years away in the Virgo Cluster.',
-      'Unlike spiral galaxies, it has a smooth, rounded shape with mostly older stars and very little gas or dust.',
-      'M87 is famous for its supermassive black hole at the center, which was the first black hole ever photographed.',
-    ],
-    startingCoords: {
-      ra: 187.705931,
-      dec: 12.3911232,
-      shouldSnap: false,
-      fov: 0.01,
-    },
-    shouldAnimate: false,
+      fov: 50
+    }
   } as DialogNode,
   {
     type: 'dialog',
@@ -189,11 +185,11 @@ export const galaxiesNodes: SceneNode[] = [
     question: 'What is the type of this galaxy?',
     options: [
       'Spiral galaxy',
-      'Barred spiral galaxy',
       'Irregular galaxy',
+      'Barred spiral galaxy',
       'Elliptical galaxy',
     ],
-    rightOption: 2,
+    rightOption: 1,
     textRightOption: [
       'Great job! You correctly identified the Large Magellanic Cloud.',
     ],
