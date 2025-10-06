@@ -12,3 +12,7 @@
 #aladin-lite-div .aladin-location {
   visibility: hidden !important;
 }
+
+#reticle {
+  visibility: hidden !important;
+}
