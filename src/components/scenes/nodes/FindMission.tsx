@@ -143,7 +143,7 @@ const FindMission: React.FC<FindMissionProps> = ({
 
   return (
     <>
-      <div className="absolute right-0 bottom-0">
+      <div className="absolute right-10 bottom-10">
         <Compass
           aladinInstance={aladinInstance}
           current_x={currentCoords.ra}
